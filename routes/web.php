@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminSubCategoryController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Frontend\FrontPostController;
+use App\Http\Controllers\FrontSignUpController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +36,8 @@ Route::get('admin/dashboard', [AdminDashboardController::class, 'dashboard'])->n
 Route::get('admin/login', [AdminLoginController::class, 'login'])->name('admin_login');
 Route::post('admin/login/submit', [AdminLoginController::class, 'login_submit'])->name('admin_login_submit');
 Route::get('admin/logout', [AdminLoginController::class, 'logout'])->name('admin_logout');
+Route::get('admin/forget', [AdminLoginController::class, 'forget'])->name('admin_forget');
+Route::get('admin/forget/submit', [AdminLoginController::class, 'forget_submit'])->name('admin_forget_submit');
 //end admin login
 
 //admin post
@@ -66,3 +70,13 @@ Route::get('admin/users/edit/{id}', [AdminUserController::class, 'edit'])->name(
 Route::post('admin/users/update/{id}', [AdminUserController::class, 'update'])->name('admin_user_update')->middleware('admin:admin');
 Route::get('admin/users/delete/{id}', [AdminUserController::class, 'delete'])->name('admin_user_delete')->middleware('admin:admin');
 //end admin users
+
+//front post
+Route::get('posts/show', [FrontPostController::class, 'show'])->name('post_show');
+Route::get('posts/create', [FrontPostController::class, 'create'])->name('post_create');
+Route::post('posts/store', [FrontPostController::class, 'store'])->name('post_store');
+//end front post
+
+//front signup
+Route::get('signup', [FrontSignUpController::class, 'signup'])->name('user_signup');
+//end front signup

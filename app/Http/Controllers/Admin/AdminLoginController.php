@@ -37,4 +37,14 @@ class AdminLoginController extends Controller
         Auth::guard('admin')->logout();
         return redirect()->route('admin_login');
     }
+
+    public function forget()
+    {
+        return view('admin.login.forget');
+    }
+
+    public function forget_submit(Request $request)
+    {
+        //
+    }
 }
