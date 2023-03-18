@@ -27,27 +27,7 @@
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-            @if ($errors->any())
-                @foreach ($errors->all() as $error)
-                    <script>
-                        iziToast.error({
-                            title: '',
-                            position: 'topRight',
-                            message: '{{ $error }}',
-                        });
-                    </script>
-                @endforeach
 
-            @endif
-            @if (session()->get('success'))
-                <script>
-                    iziToast.success({
-                        title: '',
-                        position: 'topRight',
-                        message: '{{ session()->get('success') }}',
-                    });
-                </script>
-            @endif
             <!-- Topbar -->
             @include('admin.layouts.topbar')
             <!-- End of Topbar -->

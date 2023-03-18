@@ -20,13 +20,13 @@
                 <li class="nav-item dropdown fs-5">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <i class="bi bi-person-circle"></i>
+                        <i class="bi bi-person-circle"></i>{{ Auth::guard()->user()->name }}
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">My Profile</a></li>
                         <li><a class="dropdown-item" href="{{ route('post_show') }}">My Media</a></li>
                         <li><a class="dropdown-item" href="{{ route('post_create') }}">Upload</a></li>
-                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                        <li><a class="dropdown-item" href="{{ route('user_logout') }}">Logout</a></li>
                     </ul>
                 </li>
             </ul>

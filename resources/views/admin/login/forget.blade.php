@@ -10,9 +10,14 @@
 
 <body>
     <div class="container">
+        @if (session()->get('berhasil'))
+            <div class="alert alert-success">{{ session()->get('berhasil') }}</div>
+        @elseif (session()->get('error'))
+            <div class="alert alert-danger">{{ session()->get('error') }}</div>
+        @endif
         <div class="row justify-content-center mt-5">
             <div class="col col-6 pt-5">
-                <form action="{{ route('admin_login_submit') }}" method="post">
+                <form action="{{ route('admin_forget_submit') }}" method="post">
                     @csrf
                     <div class="text-center my-3">
                         <img src="{{ asset('dist_frontend/img/logo UNP Asset.svg') }}" alt="" class="img-fluid">
@@ -25,6 +30,9 @@
                                 <label class="form-label">Email address</label>
                                 <input type="email" class="form-control" name='email' id="email"
                                     aria-describedby="emailHelp">
+                                @error('email')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="d-flex justify-content-center mb-3">
                                 <button type="submit" class="btn btn-success px-auto">Send Password Reset Link</button>

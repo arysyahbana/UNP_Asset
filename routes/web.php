@@ -7,8 +7,9 @@ use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminSubCategoryController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Frontend\FrontLoginControler;
 use App\Http\Controllers\Frontend\FrontPostController;
-use App\Http\Controllers\FrontSignUpController;
+use App\Http\Controllers\Frontend\FrontSignUpController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,7 @@ use App\Http\Controllers\FrontSignUpController;
 
 Route::get('/', function () {
     return view('frontend.home');
-});
+})->name('home');
 Route::get('/about', function () {
     return view('frontend.about');
 });
@@ -37,7 +38,9 @@ Route::get('admin/login', [AdminLoginController::class, 'login'])->name('admin_l
 Route::post('admin/login/submit', [AdminLoginController::class, 'login_submit'])->name('admin_login_submit');
 Route::get('admin/logout', [AdminLoginController::class, 'logout'])->name('admin_logout');
 Route::get('admin/forget', [AdminLoginController::class, 'forget'])->name('admin_forget');
-Route::get('admin/forget/submit', [AdminLoginController::class, 'forget_submit'])->name('admin_forget_submit');
+Route::post('admin/forget/submit', [AdminLoginController::class, 'forget_submit'])->name('admin_forget_submit');
+Route::get('admin/reset-password/{token}/{email}', [AdminLoginController::class, 'reset_password'])->name('admin_reset_password');
+Route::post('admin/reset-submit', [AdminLoginController::class, 'reset_submit'])->name('admin_reset_submit');
 //end admin login
 
 //admin post
@@ -72,11 +75,18 @@ Route::get('admin/users/delete/{id}', [AdminUserController::class, 'delete'])->n
 //end admin users
 
 //front post
-Route::get('posts/show', [FrontPostController::class, 'show'])->name('post_show');
-Route::get('posts/create', [FrontPostController::class, 'create'])->name('post_create');
-Route::post('posts/store', [FrontPostController::class, 'store'])->name('post_store');
+Route::get('posts/show', [FrontPostController::class, 'show'])->name('post_show')->middleware('auth');
+Route::get('posts/create', [FrontPostController::class, 'create'])->name('post_create')->middleware('auth');
+Route::post('posts/store', [FrontPostController::class, 'store'])->name('post_store')->middleware('auth');
 //end front post
 
 //front signup
 Route::get('signup', [FrontSignUpController::class, 'signup'])->name('user_signup');
+Route::post('signup_submit', [FrontSignUpController::class, 'store'])->name('signup_submit');
+Route::get('signup/verification/{token}/{email}', [FrontSignUpController::class, 'verif'])->name('user_verif');
 //end front signup
+
+//front login
+Route::post('user/login/submit', [FrontLoginControler::class, 'login_submit'])->name('user_login_submit');
+Route::get('user/logout', [FrontLoginControler::class, 'logout'])->name('user_logout');
+//end front login

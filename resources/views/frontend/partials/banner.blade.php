@@ -5,10 +5,15 @@
             <img src="{{ asset('dist_frontend/img/logo UNP Asset.svg') }}" alt="">
         </div>
         <div class="col col-12 col-md-6 col-lg-6 d-flex justify-content-end">
-            <a href="#" class="btn btn-outline-success rounded-pill px-4" data-bs-toggle="modal"
-                data-bs-target="#order">Log in</a>
-            <a href="{{ route('user_signup') }}" class="btn btn-outline-danger rounded-pill px-4 ms-4">Sign up</a>
-            <a href="{{ route('post_create') }}" class="btn btn-danger rounded-pill px-4 mx-4">unggah</a>
+            @auth
+                <p>{{ Auth::guard()->user()->name }}</p>
+                <a href="{{ route('post_create') }}" class="btn btn-danger rounded-pill px-4 mx-4">unggah</a>
+            @else
+                <a href="{{ route('post_create') }}" class="btn btn-danger rounded-pill px-4 mx-4">unggah</a>
+                <a href="#" class="btn btn-outline-success rounded-pill px-4" data-bs-toggle="modal"
+                    data-bs-target="#order">Log in</a>
+                <a href="{{ route('user_signup') }}" class="btn btn-outline-danger rounded-pill px-4 ms-4">Sign up</a>
+            @endauth
         </div>
     </div>
     <div class="row justify-content-center pt-5">
@@ -44,7 +49,7 @@
                         </div>
                     </div>
 
-                    <form action="{{ route('admin_login_submit') }}" method="post">
+                    <form action="{{ route('user_login_submit') }}" method="post">
                         @csrf
                         <div class="py-3">
                             <label class="form-label">Email address</label>
@@ -55,14 +60,13 @@
                             <label class="form-label">Password</label>
                             <input type="password" class="form-control" name='password' id="password">
                         </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-success form-control" value="Login">
+                            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                        </div>
                     </form>
 
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-bs-dismiss="modal"><a href="purchasedetail.html"
-                        class="text-decoration-none text-light">Login</a></button>
-                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
             </div>
         </div>
     </div>
