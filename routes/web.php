@@ -7,9 +7,12 @@ use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminSubCategoryController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Frontend\FrontHomeController;
 use App\Http\Controllers\Frontend\FrontLoginControler;
 use App\Http\Controllers\Frontend\FrontPostController;
 use App\Http\Controllers\Frontend\FrontSignUpController;
+use App\Http\Controllers\Frontend\FrontProfileController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,12 +25,13 @@ use App\Http\Controllers\Frontend\FrontSignUpController;
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.home');
-})->name('home');
-Route::get('/about', function () {
-    return view('frontend.about');
-});
+Route::get('/', [FrontHomeController::class, 'index'])->name('home');
+Route::get('/photo', [FrontHomeController::class, 'photo'])->name('photo');
+Route::get('/video', [FrontHomeController::class, 'video'])->name('video');
+Route::get('/audio', [FrontHomeController::class, 'audio'])->name('audio');
+Route::get('/detail/{id}/{nama}', [FrontHomeController::class, 'detail'])->name('detail');
+Route::get('/download/{file}', [FrontHomeController::class, 'download'])->name('download');
+Route::get('/search', [FrontHomeController::class, 'search'])->name('search');
 
 //admin dashboard
 Route::get('admin/dashboard', [AdminDashboardController::class, 'dashboard'])->name('admin_dashboard')->middleware('admin:admin');
@@ -74,10 +78,16 @@ Route::post('admin/users/update/{id}', [AdminUserController::class, 'update'])->
 Route::get('admin/users/delete/{id}', [AdminUserController::class, 'delete'])->name('admin_user_delete')->middleware('admin:admin');
 //end admin users
 
+
 //front post
-Route::get('posts/show', [FrontPostController::class, 'show'])->name('post_show')->middleware('auth');
-Route::get('posts/create', [FrontPostController::class, 'create'])->name('post_create')->middleware('auth');
+Route::get('posts/show/{id}/{name}', [FrontPostController::class, 'show'])->name('post_show')->middleware('auth');
+Route::get('posts/create/{id}/{name}', [FrontPostController::class, 'create'])->name('post_create')->middleware('auth');
 Route::post('posts/store', [FrontPostController::class, 'store'])->name('post_store')->middleware('auth');
+Route::get('posts/delete/{id}', [FrontPostController::class, 'delete'])->name('post_delete')->middleware('auth');
+Route::get('posts/view/{id}/{name}', [FrontPostController::class, 'view'])->name('post_view')->middleware('auth');
+Route::get('posts/edit/{id}', [FrontPostController::class, 'edit'])->name('post_edit')->middleware('auth');
+Route::post('posts/update/{id}', [FrontPostController::class, 'update'])->name('post_update')->middleware('auth');
+
 //end front post
 
 //front signup
@@ -89,4 +99,13 @@ Route::get('signup/verification/{token}/{email}', [FrontSignUpController::class,
 //front login
 Route::post('user/login/submit', [FrontLoginControler::class, 'login_submit'])->name('user_login_submit');
 Route::get('user/logout', [FrontLoginControler::class, 'logout'])->name('user_logout');
+Route::get('user/forget', [FrontLoginControler::class, 'forget'])->name('user_forget');
+Route::get('user/reset-password/{token}/{email}', [FrontLoginController::class, 'reset_password'])->name('user_reset_password');
+Route::post('user/forget/submit', [FrontLoginControler::class, 'forget_submit'])->name('user_forget_submit');
+Route::get('user/reset-password/{token}/{email}', [FrontLoginControler::class, 'reset_password'])->name('user_reset_password');
+Route::post('user/reset-submit', [FrontLoginControler::class, 'reset_submit'])->name('user_reset_submit');
 //end front login
+
+//front profile
+Route::get('profile/{id}', [FrontProfileController::class, 'show'])->name('profile_show');
+//end front profile

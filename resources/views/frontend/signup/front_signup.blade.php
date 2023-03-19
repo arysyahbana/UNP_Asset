@@ -40,7 +40,7 @@
                                 <input type="password" class="form-control" name='password_confirmation'
                                     id="password_confirmation">
                             </div>
-                            <button type="submit" class="btn btn-success px-4">Submit</button>
+                            <button type="submit" class="btn btn-success px-4 form-control">Submit</button>
                         </div>
                     </div>
                 </form>

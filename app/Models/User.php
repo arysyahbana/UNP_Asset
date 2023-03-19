@@ -44,6 +44,6 @@ class User extends Authenticatable
 
     public function rPost()
     {
-        return $this->hasMany(Category::class);
+        return $this->hasMany(Post::class);
     }
 }
