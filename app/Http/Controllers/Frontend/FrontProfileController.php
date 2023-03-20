@@ -5,12 +5,34 @@ namespace App\Http\Controllers\Frontend;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class FrontProfileController extends Controller
 {
-    public function show($id)
+    public function edit($id)
     {
-        $user = User::where('id', $id)->first();
-        return view('frontend.profile.profile_show', compact('user'));
+        $edit = User::where('id', $id)->first();
+        return view('frontend.profile.profile_show', compact('edit'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email'
+        ]);
+
+        $update = User::where('id', $id)->first();
+        $update->name = $request->name;
+        $update->email = $request->email;
+
+        if ($request->password != '') {
+            $request->validate([
+                'password' => 'required|confirmed'
+            ]);
+            $update->password = Hash::make($request->new_password);
+        }
+        $update->update();
+        return redirect()->back()->with('success', 'profile berhasil diubah');
     }
 }

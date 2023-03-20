@@ -27,15 +27,36 @@
                 <p class="display-5 fw-bold mt-5 text-center">Stock Photo Gratis dari Orang Berbakat Universitas Negeri
                     Padang </p>
             </div>
+            <div class="col col-12 col-lg-6 text-center mt-3" data-aos="zoom-in-up" data-aos-duration="1200">
+                <form action="{{ route('search_photo') }}">
+                    <input type="text" name="search_photo" class="form-control rounded-pill py-3"
+                        placeholder="Searchasd...">
+                    <input type="submit" value="search">
+                </form>
+            </div>
         @elseif (Request::path() == 'video')
             <div class="col col-12 col-lg-8 d-flex justify-content-center mt-5" data-aos="zoom-in-down"
                 data-aos-duration="1200">
                 <p class="display-5 fw-bold mt-5 text-center">Rekaman & Stok Video Gratis dari Orang Berbakat </p>
             </div>
+            <div class="col col-12 col-lg-6 text-center mt-3" data-aos="zoom-in-up" data-aos-duration="1200">
+                <form action="{{ route('search_video') }}">
+                    <input type="text" name="search_video" class="form-control rounded-pill py-3"
+                        placeholder="Searchasd...">
+                    <input type="submit" value="search">
+                </form>
+            </div>
         @elseif (Request::path() == 'audio')
             <div class="col col-12 col-lg-8 d-flex justify-content-center mt-5" data-aos="zoom-in-down"
                 data-aos-duration="1200">
                 <p class="display-5 fw-bold mt-5 text-center">Rekomendasi Musik Gratis dari Orang Berbakat </p>
+            </div>
+            <div class="col col-12 col-lg-6 text-center mt-3" data-aos="zoom-in-up" data-aos-duration="1200">
+                <form action="{{ route('search_audio') }}">
+                    <input type="text" name="search_audio" class="form-control rounded-pill py-3"
+                        placeholder="Searchasd...">
+                    <input type="submit" value="search">
+                </form>
             </div>
         @else
             <div class="col col-12 col-lg-8 d-flex justify-content-center mt-5" data-aos="zoom-in-down"
@@ -43,16 +64,18 @@
                 <p class="display-5 fw-bold mt-5 text-center">Temukan Hal Yang Menakjubkan di Sekitar Universitas Negeri
                     Padang</p>
             </div>
+            <div class="col col-12 col-lg-6 text-center mt-3" data-aos="zoom-in-up" data-aos-duration="1200">
+                <form action="{{ route('search') }}">
+                    <input type="text" name="search" class="form-control rounded-pill py-3"
+                        placeholder="Searchasd...">
+                    <input type="submit" value="search">
+                </form>
+            </div>
         @endif
         {{-- <div class="col col-12 col-lg-7" data-aos="zoom-in-left" data-aos-duration="1300">
             <hr class="border border-light bg-light border-2 opacity-100">
         </div> --}}
-        <div class="col col-12 col-lg-6 text-center mt-3" data-aos="zoom-in-up" data-aos-duration="1200">
-            <form action="{{ route('search') }}">
-                <input type="text" name="search" class="form-control rounded-pill py-3" placeholder="Searchasd...">
-                <input type="submit" value="search">
-            </form>
-        </div>
+
     </div>
 </div>
 <!-- Akhir Banner -->

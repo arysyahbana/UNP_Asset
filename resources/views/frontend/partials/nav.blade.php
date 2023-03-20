@@ -26,7 +26,7 @@
                             {{ Auth::guard()->user()->name }}
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('profile_show', Auth::guard()->user()->id) }}"><i
+                            <li><a class="dropdown-item" href="{{ route('profile_edit', Auth::guard()->user()->id) }}"><i
                                         class="bi bi-file-text"></i>
                                     My Profile</a></li>
                             {{-- <li><a class="dropdown-item" href="{{ route('post_show') }}">My Media</a></li>

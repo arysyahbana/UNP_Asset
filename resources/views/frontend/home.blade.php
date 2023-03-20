@@ -95,7 +95,7 @@
                         <div class="col col-12 col-md-6 col-lg-3 my-2">
                             <a href="{{ route('detail', [$item->id, $item->name]) }}">
                                 <div class="card shadow">
-                                    <img src="{{ $path_photo }}" alt="" class="card-img-top img-fluid">
+                                    <img src="{{ $path_photo }} " alt="" class="card-img-top img-fluid">
                                     <div class="card-body">
                                         <p class="card-text">{{ $item->body }}</p>
                                     </div>

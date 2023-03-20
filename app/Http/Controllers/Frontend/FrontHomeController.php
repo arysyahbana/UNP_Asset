@@ -63,7 +63,32 @@ class FrontHomeController extends Controller
     public function search(Request $request)
     {
         $search = $request->search;
-        $post = Post::where('name', 'like', '%' . $search . '%')->paginate(4);
+        $post = Post::where('name', 'like', '%' . $search . '%')->get();
+        return view('frontend.home', compact('post'));
+    }
+
+    public function search_photo(Request $request)
+    {
+        $search = $request->search_photo;
+        $pattern = 'photo';
+        $post = Post::where('name', 'like', '%' . $search . '%')->Where('file', 'like', '%' . $pattern . '%')->get();
+        return view('frontend.home', compact('post'));
+        // return redirect()->route('photo')->with(compact('post'));
+    }
+
+    public function search_video(Request $request)
+    {
+        $search = $request->search_video;
+        $pattern = 'video';
+        $post = Post::where('name', 'like', '%' . $search . '%')->Where('file', 'like', '%' . $pattern . '%')->get();
+        return view('frontend.home', compact('post'));
+    }
+
+    public function search_audio(Request $request)
+    {
+        $search = $request->search_audio;
+        $pattern = 'audio';
+        $post = Post::where('name', 'like', '%' . $search . '%')->Where('file', 'like', '%' . $pattern . '%')->get();
         return view('frontend.home', compact('post'));
     }
 }

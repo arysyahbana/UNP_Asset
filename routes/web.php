@@ -27,8 +27,11 @@ use App\Models\User;
 
 Route::get('/', [FrontHomeController::class, 'index'])->name('home');
 Route::get('/photo', [FrontHomeController::class, 'photo'])->name('photo');
+Route::get('/photo/search', [FrontHomeController::class, 'search_photo'])->name('search_photo');
 Route::get('/video', [FrontHomeController::class, 'video'])->name('video');
+Route::get('/video/search', [FrontHomeController::class, 'search_video'])->name('search_video');
 Route::get('/audio', [FrontHomeController::class, 'audio'])->name('audio');
+Route::get('/audio/search', [FrontHomeController::class, 'search_audio'])->name('search_audio');
 Route::get('/detail/{id}/{nama}', [FrontHomeController::class, 'detail'])->name('detail');
 Route::get('/download/{file}', [FrontHomeController::class, 'download'])->name('download');
 Route::get('/search', [FrontHomeController::class, 'search'])->name('search');
@@ -107,5 +110,6 @@ Route::post('user/reset-submit', [FrontLoginControler::class, 'reset_submit'])->
 //end front login
 
 //front profile
-Route::get('profile/{id}', [FrontProfileController::class, 'show'])->name('profile_show');
+Route::get('profile/{id}', [FrontProfileController::class, 'edit'])->name('profile_edit')->middleware('auth');
+Route::post('profile/update/{id}', [FrontProfileController::class, 'update'])->name('profile_update')->middleware('auth');
 //end front profile
