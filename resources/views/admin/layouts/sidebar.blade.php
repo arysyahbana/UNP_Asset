@@ -5,7 +5,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+        <div class="sidebar-brand-text mx-3">UNP Asset</div>
     </a>
 
     <!-- Divider -->
@@ -13,7 +13,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="{{ route('admin_dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -37,11 +37,11 @@
             <i class="fa fa-file"></i>
             <span>Category</span></a>
     </li>
-    <li class="nav-item active">
+    {{-- <li class="nav-item active">
         <a class="nav-link" href="{{ route('admin_subCategory_show') }}">
             <i class="fa fa-file"></i>
             <span>Sub Category</span></a>
-    </li>
+    </li> --}}
     <li class="nav-item active">
         <a class="nav-link" href="{{ route('admin_user_show') }}">
             <i class="fas fa-users fa-cog"></i>

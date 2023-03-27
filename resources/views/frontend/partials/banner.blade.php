@@ -29,9 +29,12 @@
             </div>
             <div class="col col-12 col-lg-6 text-center mt-3" data-aos="zoom-in-up" data-aos-duration="1200">
                 <form action="{{ route('search_photo') }}">
-                    <input type="text" name="search_photo" class="form-control rounded-pill py-3"
-                        placeholder="Searchasd...">
-                    <input type="submit" value="search">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control py-3 rounded-start-pill" placeholder="Search.."
+                            name="search_photo" value="{{ request('search') }}">
+                        <button class="btn warna_search rounded-end-pill" type="submit"><i
+                                class="bi bi-search"></i></button>
+                    </div>
                 </form>
             </div>
         @elseif (Request::path() == 'video')
@@ -41,9 +44,12 @@
             </div>
             <div class="col col-12 col-lg-6 text-center mt-3" data-aos="zoom-in-up" data-aos-duration="1200">
                 <form action="{{ route('search_video') }}">
-                    <input type="text" name="search_video" class="form-control rounded-pill py-3"
-                        placeholder="Searchasd...">
-                    <input type="submit" value="search">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control py-3 rounded-start-pill" placeholder="Search.."
+                            name="search_video" value="{{ request('search') }}">
+                        <button class="btn warna_search rounded-end-pill" type="submit"><i
+                                class="bi bi-search"></i></button>
+                    </div>
                 </form>
             </div>
         @elseif (Request::path() == 'audio')
@@ -53,9 +59,12 @@
             </div>
             <div class="col col-12 col-lg-6 text-center mt-3" data-aos="zoom-in-up" data-aos-duration="1200">
                 <form action="{{ route('search_audio') }}">
-                    <input type="text" name="search_audio" class="form-control rounded-pill py-3"
-                        placeholder="Searchasd...">
-                    <input type="submit" value="search">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control py-3 rounded-start-pill" placeholder="Search.."
+                            name="search_audio" value="{{ request('search') }}">
+                        <button class="btn warna_search rounded-end-pill" type="submit"><i
+                                class="bi bi-search"></i></button>
+                    </div>
                 </form>
             </div>
         @else
@@ -66,9 +75,12 @@
             </div>
             <div class="col col-12 col-lg-6 text-center mt-3" data-aos="zoom-in-up" data-aos-duration="1200">
                 <form action="{{ route('search') }}">
-                    <input type="text" name="search" class="form-control rounded-pill py-3"
-                        placeholder="Searchasd...">
-                    <input type="submit" value="search">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control py-3 rounded-start-pill" placeholder="Search.."
+                            name="search" value="{{ request('search') }}">
+                        <button class="btn warna_search rounded-end-pill" type="submit"><i
+                                class="bi bi-search"></i></button>
+                    </div>
                 </form>
             </div>
         @endif

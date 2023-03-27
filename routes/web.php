@@ -37,7 +37,7 @@ Route::get('/download/{file}', [FrontHomeController::class, 'download'])->name('
 Route::get('/search', [FrontHomeController::class, 'search'])->name('search');
 
 //admin dashboard
-Route::get('admin/dashboard', [AdminDashboardController::class, 'dashboard'])->name('admin_dashboard')->middleware('admin:admin');
+Route::get('admin/', [AdminDashboardController::class, 'dashboard'])->name('admin_dashboard')->middleware('admin:admin');
 //end admin dashboard
 
 //admin login

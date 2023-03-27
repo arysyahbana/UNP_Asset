@@ -23,7 +23,7 @@
 
     @include('frontend.partials.footer1')
 
-    @include('frontend.partials.footer2')
+    {{-- @include('frontend.partials.footer2') --}}
 
 </body>
 {{-- js footer --}}

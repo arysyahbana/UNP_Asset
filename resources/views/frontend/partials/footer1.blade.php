@@ -3,7 +3,8 @@
         <div class="row justify-content-center">
             <div class="col col-4">
                 <img src="{{ asset('dist_frontend/img/logo UNP Asset.svg') }}" alt="">
-                <p class="fs-5 mt-3">Disini adalah solusi terbaik untuk kamu yang ingin mencari info seputar Asset UNP
+                <p class="fs-5 mt-3">Disini adalah solusi terbaik untuk kamu yang ingin mencari info seputar Asset
+                    UNP
                 </p>
             </div>
             <div class="col col-2"></div>
@@ -15,4 +16,7 @@
             </div>
         </div>
     </div>
+</div>
+<div class="container-fluid bg-light text-center py-1">
+    <p>Copyright &copy UNP Asset 2023 All rights reserved</p>
 </div>

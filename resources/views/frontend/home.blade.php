@@ -13,10 +13,12 @@
                     @endphp
                     @if ($extphoto == 'jpg' || $extphoto == 'png' || $extphoto == 'jpeg')
                         <div class="col col-12 col-md-6 col-lg-3 my-2">
-                            <a href="{{ route('detail', [$item->id, $item->name]) }}">
+                            <a href="{{ route('detail', [$item->id, $item->name]) }}" class="text-decoration-none text-dark">
                                 <div class="card shadow">
+                                    <p class="card-text text-center fs-5 fw-bold pt-4">{{ $item->name }}</p>
                                     <img src="{{ $path_photo }}" alt="" class="card-img-top img-fluid">
                                     <div class="card-body">
+                                        <p class="text-success">Deskripsi :</p>
                                         <p class="card-text">{{ $item->body }}</p>
                                     </div>
                                 </div>
@@ -30,8 +32,10 @@
                     @endphp
                     @if ($extvideo == 'mp4' || $extvideo == 'mkv' || $extvideo == 'webm')
                         <div class="col col-12 col-md-6 col-lg-3 my-2">
-                            <a href="{{ route('detail', [$item->id, $item->name]) }}">
+                            <a href="{{ route('detail', [$item->id, $item->name]) }}"
+                                class="text-decoration-none text-dark">
                                 <div class="card shadow">
+                                    <p class="card-text text-center fs-5 fw-bold pt-4">{{ $item->name }}</p>
                                     <video controls>
                                         @if ($extvideo == 'mp4')
                                             <source src="{{ $path_video }}" alt="" class="card-img-top img-fluid"
@@ -47,6 +51,7 @@
                                         @endif
                                     </video>
                                     <div class="card-body">
+                                        <p class="text-success">Deskripsi :</p>
                                         <p class="card-text">{{ $item->body }}</p>
                                     </div>
                                 </div>
@@ -60,8 +65,10 @@
                     @endphp
                     @if ($extaudio == 'mp3' || $extaudio == 'm4a')
                         <div class="col col-12 col-md-6 col-lg-3 my-2">
-                            <a href="{{ route('detail', [$item->id, $item->name]) }}">
+                            <a href="{{ route('detail', [$item->id, $item->name]) }}"
+                                class="text-decoration-none text-dark">
                                 <div class="card shadow">
+                                    <p class="card-text text-center fs-5 fw-bold pt-4">{{ $item->name }}</p>
                                     <audio controls>
                                         @if ($extaudio == 'mp3')
                                             <source src="{{ $path_audio }}" alt="" class="card-img-top img-fluid"
@@ -73,6 +80,7 @@
                                         @endif
                                     </audio>
                                     <div class="card-body">
+                                        <p class="text-success">Deskripsi :</p>
                                         <p class="card-text">{{ $item->body }}</p>
                                     </div>
                                 </div>
@@ -93,10 +101,14 @@
                     @endphp
                     @if ($extphoto == 'jpg' || $extphoto == 'png' || $extphoto == 'jpeg')
                         <div class="col col-12 col-md-6 col-lg-3 my-2">
-                            <a href="{{ route('detail', [$item->id, $item->name]) }}">
+                            <a href="{{ route('detail', [$item->id, $item->name]) }}"
+                                class="text-decoration-none text-dark">
                                 <div class="card shadow">
+                                    <p class="card-text text-center fs-5 fw-bold pt-4">{{ $item->name }}</p>
+                                    {{-- <hr class="border border-dark bg-dark border-1 opacity-90"> --}}
                                     <img src="{{ $path_photo }} " alt="" class="card-img-top img-fluid">
                                     <div class="card-body">
+                                        <p class="text-success">Deskripsi :</p>
                                         <p class="card-text">{{ $item->body }}</p>
                                     </div>
                                 </div>
@@ -105,8 +117,11 @@
                     @endif
                     @if ($extvideo == 'mp4' || $extvideo == 'mkv' || $extvideo == 'webm')
                         <div class="col col-12 col-md-6 col-lg-3 my-2">
-                            <a href="{{ route('detail', [$item->id, $item->name]) }}">
+                            <a href="{{ route('detail', [$item->id, $item->name]) }}"
+                                class="text-decoration-none text-dark">
                                 <div class="card shadow">
+                                    <p class="card-text text-center fs-5 fw-bold pt-4">{{ $item->name }}</p>
+                                    {{-- <hr class="border border-dark bg-dark border-1 opacity-90"> --}}
                                     <video controls>
                                         @if ($extvideo == 'mp4')
                                             <source src="{{ $path_video }}" alt="" class="card-img-top img-fluid"
@@ -122,6 +137,7 @@
                                         @endif
                                     </video>
                                     <div class="card-body">
+                                        <p class="text-success">Deskripsi :</p>
                                         <p class="card-text">{{ $item->body }}</p>
                                     </div>
                                 </div>
@@ -130,8 +146,11 @@
                     @endif
                     @if ($extaudio == 'mp3' || $extaudio == 'm4a')
                         <div class="col col-12 col-md-6 col-lg-3 my-2">
-                            <a href="{{ route('detail', [$item->id, $item->name]) }}">
+                            <a href="{{ route('detail', [$item->id, $item->name]) }}"
+                                class="text-decoration-none text-dark">
                                 <div class="card shadow">
+                                    <p class="card-text text-center fs-5 fw-bold pt-4">{{ $item->name }}</p>
+                                    {{-- <hr class="border border-dark bg-dark border-1 opacity-90"> --}}
                                     <audio controls>
                                         @if ($extaudio == 'mp3')
                                             <source src="{{ $path_audio }}" alt="" class="card-img-top img-fluid"
@@ -143,6 +162,7 @@
                                         @endif
                                     </audio>
                                     <div class="card-body">
+                                        <p class="text-success">Deskripsi :</p>
                                         <p class="card-text">{{ $item->body }}</p>
                                     </div>
                                 </div>

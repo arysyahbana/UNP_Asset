@@ -21,10 +21,11 @@
                     <div class="col col-12 col-md-6 col-lg-3 my-2">
                         <div class="card shadow">
                             <div class="card-header">
-                                <p class="card-text">{{ $item->name }}</p>
+                                <p class="card-text text-center fs-5 fw-bold">{{ $item->name }}</p>
                             </div>
                             <img src="{{ $path_photo }}" alt="" class="card-img-top img-fluid">
                             <div class="card-body">
+                                <p class="text-success">Deskripsi :</p>
                                 <p class="card-text">{{ $item->body }}</p>
                                 <a href="{{ route('detail', [$item->id, $item->name]) }}" class="btn btn-info">View</a>
                                 <a href="{{ route('post_edit', $item->id) }}" class="btn btn-warning">Edit</a>
@@ -38,7 +39,7 @@
                     <div class="col col-12 col-md-6 col-lg-3 my-2">
                         <div class="card shadow">
                             <div class="card-header">
-                                <p class="card-text">{{ $item->name }}</p>
+                                <p class="card-text text-center fs-5 fw-bold">{{ $item->name }}</p>
                             </div>
                             <video controls>
                                 @if ($extvideo == 'mp4')
@@ -55,6 +56,7 @@
                                 @endif
                             </video>
                             <div class="card-body">
+                                <p class="text-success">Deskripsi :</p>
                                 <p class="card-text">{{ $item->body }}</p>
                                 <a href="{{ route('detail', [$item->id, $item->name]) }}" class="btn btn-info">View</a>
                                 <a href="{{ route('post_edit', $item->id) }}" class="btn btn-warning">Edit</a>
@@ -68,7 +70,7 @@
                     <div class="col col-12 col-md-6 col-lg-3 my-2">
                         <div class="card shadow">
                             <div class="card-header">
-                                <p class="card-text">{{ $item->name }}</p>
+                                <p class="card-text text-center fs-5 fw-bold">{{ $item->name }}</p>
                             </div>
                             <audio controls>
                                 @if ($extaudio == 'mp3')
@@ -81,6 +83,7 @@
                                 @endif
                             </audio>
                             <div class="card-body">
+                                <p class="text-success">Deskripsi :</p>
                                 <p class="card-text">{{ $item->body }}</p>
                                 <a href="{{ route('detail', [$item->id, $item->name]) }}" class="btn btn-info">View</a>
                                 <a href="{{ route('post_edit', $item->id) }}" class="btn btn-warning">Edit</a>
