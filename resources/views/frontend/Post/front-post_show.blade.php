@@ -18,7 +18,7 @@
                     
                 @endphp
                 @if ($extphoto == 'jpg' || $extphoto == 'png' || $extphoto == 'jpeg')
-                    <div class="col col-12 col-md-6 col-lg-3 my-2">
+                    <div class="col col-12 col-md-6 col-lg-3 my-2" data-aos="fade-up" data-aos-duration="1200">
                         <div class="card shadow">
                             <div class="card-header">
                                 <p class="card-text text-center fs-5 fw-bold">{{ $item->name }}</p>
@@ -36,7 +36,7 @@
                     </div>
                 @endif
                 @if ($extvideo == 'mp4' || $extvideo == 'mkv' || $extvideo == 'webm')
-                    <div class="col col-12 col-md-6 col-lg-3 my-2">
+                    <div class="col col-12 col-md-6 col-lg-3 my-2" data-aos="fade-up" data-aos-duration="1200">
                         <div class="card shadow">
                             <div class="card-header">
                                 <p class="card-text text-center fs-5 fw-bold">{{ $item->name }}</p>
@@ -67,7 +67,7 @@
                     </div>
                 @endif
                 @if ($extaudio == 'mp3' || $extaudio == 'm4a')
-                    <div class="col col-12 col-md-6 col-lg-3 my-2">
+                    <div class="col col-12 col-md-6 col-lg-3 my-2" data-aos="fade-up" data-aos-duration="1200">
                         <div class="card shadow">
                             <div class="card-header">
                                 <p class="card-text text-center fs-5 fw-bold">{{ $item->name }}</p>

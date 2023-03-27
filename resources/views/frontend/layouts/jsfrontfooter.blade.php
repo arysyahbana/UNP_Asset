@@ -22,3 +22,13 @@
         });
     </script>
 @endif
+
+{{-- js aos --}}
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+{{-- end js aos --}}
+
+{{-- initialize aos --}}
+<script>
+    AOS.init();
+</script>
+{{-- end initialize aos --}}

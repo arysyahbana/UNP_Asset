@@ -27,7 +27,7 @@
                 <p class="display-5 fw-bold mt-5 text-center">Stock Photo Gratis dari Orang Berbakat Universitas Negeri
                     Padang </p>
             </div>
-            <div class="col col-12 col-lg-6 text-center mt-3" data-aos="zoom-in-up" data-aos-duration="1200">
+            <div class="col col-12 col-lg-6 text-center mt-3">
                 <form action="{{ route('search_photo') }}">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control py-3 rounded-start-pill" placeholder="Search.."
@@ -42,7 +42,7 @@
                 data-aos-duration="1200">
                 <p class="display-5 fw-bold mt-5 text-center">Rekaman & Stok Video Gratis dari Orang Berbakat </p>
             </div>
-            <div class="col col-12 col-lg-6 text-center mt-3" data-aos="zoom-in-up" data-aos-duration="1200">
+            <div class="col col-12 col-lg-6 text-center mt-3">
                 <form action="{{ route('search_video') }}">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control py-3 rounded-start-pill" placeholder="Search.."
@@ -57,7 +57,7 @@
                 data-aos-duration="1200">
                 <p class="display-5 fw-bold mt-5 text-center">Rekomendasi Musik Gratis dari Orang Berbakat </p>
             </div>
-            <div class="col col-12 col-lg-6 text-center mt-3" data-aos="zoom-in-up" data-aos-duration="1200">
+            <div class="col col-12 col-lg-6 text-center mt-3">
                 <form action="{{ route('search_audio') }}">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control py-3 rounded-start-pill" placeholder="Search.."
@@ -73,7 +73,7 @@
                 <p class="display-5 fw-bold mt-5 text-center">Temukan Hal Yang Menakjubkan di Sekitar Universitas Negeri
                     Padang</p>
             </div>
-            <div class="col col-12 col-lg-6 text-center mt-3" data-aos="zoom-in-up" data-aos-duration="1200">
+            <div class="col col-12 col-lg-6 text-center mt-3">
                 <form action="{{ route('search') }}">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control py-3 rounded-start-pill" placeholder="Search.."

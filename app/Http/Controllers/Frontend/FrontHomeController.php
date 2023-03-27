@@ -33,6 +33,7 @@ class FrontHomeController extends Controller
     public function detail($id, $nama)
     {
         $post = Post::with('rUser')->where('id', $id)->first();
+        // $post2 = Post::with('rCategory')->where('id', $id)->first();
         return view('frontend.detailhome', compact('post'));
     }
 

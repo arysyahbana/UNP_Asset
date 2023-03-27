@@ -16,7 +16,7 @@
                 $extaudio = pathinfo($path_audio, PATHINFO_EXTENSION);
                 
             @endphp
-            <div class="col col-6">
+            <div class="col col-6" data-aos="fade-up" data-aos-duration="1200">
                 @if ($extphoto == 'jpg' || $extphoto == 'png' || $extphoto == 'jpeg')
                     <div class="card">
                         <div class="car-body text-center">
@@ -58,10 +58,11 @@
                 @endif
             </div>
 
-            <div class="col col-4">
+            <div class="col col-4" data-aos="fade-down" data-aos-duration="1200">
                 <div class="card">
                     <div class="card-body">
                         <h3><i class="bi bi-person-circle"></i> {{ $post->rUser->name }}</h3>
+                        {{-- <h3><i class="bi bi-person-circle"></i> {{ $post2->rCategory->name }}</h3> --}}
                         <h5>{{ $post->body }}</h5>
                         <a href="{{ route('download', $post->file) }}" class="btn btn-success form-control" download>Free
                             Download</a>

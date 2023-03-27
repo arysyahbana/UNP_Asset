@@ -12,7 +12,7 @@
                         $extphoto = pathinfo($path_photo, PATHINFO_EXTENSION);
                     @endphp
                     @if ($extphoto == 'jpg' || $extphoto == 'png' || $extphoto == 'jpeg')
-                        <div class="col col-12 col-md-6 col-lg-3 my-2">
+                        <div class="col col-12 col-md-6 col-lg-3 my-2" data-aos="fade-up" data-aos-duration="1200">
                             <a href="{{ route('detail', [$item->id, $item->name]) }}" class="text-decoration-none text-dark">
                                 <div class="card shadow">
                                     <p class="card-text text-center fs-5 fw-bold pt-4">{{ $item->name }}</p>
@@ -31,7 +31,7 @@
                         $extvideo = pathinfo($path_video, PATHINFO_EXTENSION);
                     @endphp
                     @if ($extvideo == 'mp4' || $extvideo == 'mkv' || $extvideo == 'webm')
-                        <div class="col col-12 col-md-6 col-lg-3 my-2">
+                        <div class="col col-12 col-md-6 col-lg-3 my-2" data-aos="fade-up" data-aos-duration="1200">
                             <a href="{{ route('detail', [$item->id, $item->name]) }}"
                                 class="text-decoration-none text-dark">
                                 <div class="card shadow">
@@ -64,7 +64,7 @@
                         $extaudio = pathinfo($path_audio, PATHINFO_EXTENSION);
                     @endphp
                     @if ($extaudio == 'mp3' || $extaudio == 'm4a')
-                        <div class="col col-12 col-md-6 col-lg-3 my-2">
+                        <div class="col col-12 col-md-6 col-lg-3 my-2" data-aos="fade-up" data-aos-duration="1200">
                             <a href="{{ route('detail', [$item->id, $item->name]) }}"
                                 class="text-decoration-none text-dark">
                                 <div class="card shadow">
@@ -100,7 +100,7 @@
                         
                     @endphp
                     @if ($extphoto == 'jpg' || $extphoto == 'png' || $extphoto == 'jpeg')
-                        <div class="col col-12 col-md-6 col-lg-3 my-2">
+                        <div class="col col-12 col-md-6 col-lg-3 my-2" data-aos="fade-up" data-aos-duration="1200">
                             <a href="{{ route('detail', [$item->id, $item->name]) }}"
                                 class="text-decoration-none text-dark">
                                 <div class="card shadow">
@@ -116,7 +116,7 @@
                         </div>
                     @endif
                     @if ($extvideo == 'mp4' || $extvideo == 'mkv' || $extvideo == 'webm')
-                        <div class="col col-12 col-md-6 col-lg-3 my-2">
+                        <div class="col col-12 col-md-6 col-lg-3 my-2" data-aos="fade-up" data-aos-duration="1200">
                             <a href="{{ route('detail', [$item->id, $item->name]) }}"
                                 class="text-decoration-none text-dark">
                                 <div class="card shadow">
@@ -145,7 +145,7 @@
                         </div>
                     @endif
                     @if ($extaudio == 'mp3' || $extaudio == 'm4a')
-                        <div class="col col-12 col-md-6 col-lg-3 my-2">
+                        <div class="col col-12 col-md-6 col-lg-3 my-2" data-aos="fade-up" data-aos-duration="1200">
                             <a href="{{ route('detail', [$item->id, $item->name]) }}"
                                 class="text-decoration-none text-dark">
                                 <div class="card shadow">
@@ -157,8 +157,8 @@
                                                 type="audio/mp3">
                                         @endif
                                         @if ($extaudio == 'm4a')
-                                            <source src="{{ $path_audio }}" alt="" class="card-img-top img-fluid"
-                                                type="audio/m4a">
+                                            <source src="{{ $path_audio }}" alt=""
+                                                class="card-img-top img-fluid" type="audio/m4a">
                                         @endif
                                     </audio>
                                     <div class="card-body">
