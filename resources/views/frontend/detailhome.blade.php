@@ -62,7 +62,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h3><i class="bi bi-person-circle"></i> {{ $post->rUser->name }}</h3>
-                        {{-- <h3><i class="bi bi-person-circle"></i> {{ $post2->rCategory->name }}</h3> --}}
+                        <h5>Kategori : {{ $post->rCategory->name }}</h5>
                         <h5>{{ $post->body }}</h5>
                         <a href="{{ route('download', $post->file) }}" class="btn btn-success form-control" download>Free
                             Download</a>

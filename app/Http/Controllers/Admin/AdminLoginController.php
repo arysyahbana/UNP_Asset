@@ -70,7 +70,7 @@ class AdminLoginController extends Controller
 
     public function reset_password($token, $email)
     {
-        $reset = Admin::where('token', $token)->where('email', $email);
+        $reset = Admin::where('token', $token)->where('email', $email)->first();
         if (!$reset) {
             return redirect()->route('admin_login')->with('error', 'gagal');
         }

@@ -28,7 +28,7 @@
                     Padang </p>
             </div>
             <div class="col col-12 col-lg-6 text-center mt-3">
-                <form action="{{ route('search_photo') }}">
+                <form action="{{ route('search_photo') }}" method="GET">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control py-3 rounded-start-pill" placeholder="Search.."
                             name="search_photo" value="{{ request('search') }}">
@@ -43,7 +43,7 @@
                 <p class="display-5 fw-bold mt-5 text-center">Rekaman & Stok Video Gratis dari Orang Berbakat </p>
             </div>
             <div class="col col-12 col-lg-6 text-center mt-3">
-                <form action="{{ route('search_video') }}">
+                <form action="{{ route('search_video') }}" method="GET">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control py-3 rounded-start-pill" placeholder="Search.."
                             name="search_video" value="{{ request('search') }}">
@@ -58,7 +58,7 @@
                 <p class="display-5 fw-bold mt-5 text-center">Rekomendasi Musik Gratis dari Orang Berbakat </p>
             </div>
             <div class="col col-12 col-lg-6 text-center mt-3">
-                <form action="{{ route('search_audio') }}">
+                <form action="{{ route('search_audio') }}" method="GET">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control py-3 rounded-start-pill" placeholder="Search.."
                             name="search_audio" value="{{ request('search') }}">
@@ -74,7 +74,7 @@
                     Padang</p>
             </div>
             <div class="col col-12 col-lg-6 text-center mt-3">
-                <form action="{{ route('search') }}">
+                <form action="{{ route('search') }}" method="GET">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control py-3 rounded-start-pill" placeholder="Search.."
                             name="search" value="{{ request('search') }}">
