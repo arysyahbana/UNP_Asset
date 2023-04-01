@@ -11,16 +11,16 @@
                 <a href="{{ route('post_create', [Auth::guard()->user()->id, Auth::guard()->user()->name]) }}"
                     class="btn btn-danger rounded-pill px-4 mx-4"><i class="bi bi-upload"></i> Unggah</a>
             @else
-                <a href="#" class="btn btn-outline-success rounded-pill px-4" data-bs-toggle="modal"
+                <a href="#" class="btn btn-outline-success rounded-pill px-lg-4" data-bs-toggle="modal"
                     data-bs-target="#order"><i class="bi bi-box-arrow-in-right"></i> Log in</a>
-                <a href="{{ route('user_signup') }}" class="btn btn-outline-danger rounded-pill px-4 ms-4"><i
+                <a href="{{ route('user_signup') }}" class="btn btn-outline-danger rounded-pill px-lg-4 ms-4"><i
                         class="bi bi-plus-square"></i> Sign up</a>
-                <a href="{{ route('post_create', ['ads', 'asd']) }}" class="btn btn-danger rounded-pill px-4 mx-4"><i
+                <a href="{{ route('post_create', ['ads', 'asd']) }}" class="btn btn-danger rounded-pill px-lg-4 mx-4"><i
                         class="bi bi-upload"></i> Unggah</a>
             @endauth
         </div>
     </div>
-    <div class="row justify-content-center pt-5">
+    <div class="row justify-content-center pt-lg-5">
         @if (Request::path() == 'photo')
             <div class="col col-12 col-lg-8 d-flex justify-content-center mt-5" data-aos="zoom-in-down"
                 data-aos-duration="1200">
@@ -28,7 +28,7 @@
                     Padang </p>
             </div>
             <div class="col col-12 col-lg-6 text-center mt-3">
-                <form action="{{ route('search_photo') }}" method="GET">
+                <form action="{{ route('photo') }}" method="GET">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control py-3 rounded-start-pill" placeholder="Search.."
                             name="search_photo" value="{{ request('search') }}">
@@ -43,7 +43,7 @@
                 <p class="display-5 fw-bold mt-5 text-center">Rekaman & Stok Video Gratis dari Orang Berbakat </p>
             </div>
             <div class="col col-12 col-lg-6 text-center mt-3">
-                <form action="{{ route('search_video') }}" method="GET">
+                <form action="{{ route('video') }}" method="GET">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control py-3 rounded-start-pill" placeholder="Search.."
                             name="search_video" value="{{ request('search') }}">
@@ -58,7 +58,7 @@
                 <p class="display-5 fw-bold mt-5 text-center">Rekomendasi Musik Gratis dari Orang Berbakat </p>
             </div>
             <div class="col col-12 col-lg-6 text-center mt-3">
-                <form action="{{ route('search_audio') }}" method="GET">
+                <form action="{{ route('audio') }}" method="GET">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control py-3 rounded-start-pill" placeholder="Search.."
                             name="search_audio" value="{{ request('search') }}">
@@ -74,7 +74,7 @@
                     Padang</p>
             </div>
             <div class="col col-12 col-lg-6 text-center mt-3">
-                <form action="{{ route('search') }}" method="GET">
+                <form action="{{ route('home') }}" method="GET">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control py-3 rounded-start-pill" placeholder="Search.."
                             name="search" value="{{ request('search') }}">

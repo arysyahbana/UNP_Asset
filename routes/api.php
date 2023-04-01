@@ -26,6 +26,7 @@ use App\Http\Controllers\Api\ApiAuthenticationController;
 //     dd('test api');
 // });
 
+//user show
 Route::get('/user/index', [ApiPostController::class, 'index']);
 Route::get('/user/show/{id}', [ApiPostController::class, 'show']);
 

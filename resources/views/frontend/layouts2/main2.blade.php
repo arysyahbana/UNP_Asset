@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{{ asset('dist_frontend/img/logo asset.png') }}" type="image/png">
     <title>@yield('title')</title>
     {{-- css bootstrap --}}
     @include('frontend.layouts.cssfront')

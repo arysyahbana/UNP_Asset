@@ -16,34 +16,31 @@
                 $extaudio = pathinfo($path_audio, PATHINFO_EXTENSION);
                 
             @endphp
-            <div class="col col-6" data-aos="fade-up" data-aos-duration="1200">
+            <div class="col col-12 col-lg-6" data-aos="fade-up" data-aos-duration="1200">
                 @if ($extphoto == 'jpg' || $extphoto == 'png' || $extphoto == 'jpeg')
-                    <div class="card">
+                    <div class="card shadow">
                         <div class="car-body text-center">
-                            <img src="{{ asset($path_photo) }}" class="img-fluid rounded-start" alt="..."
-                                style="max-width: 30rem">
+                            <img src="{{ asset($path_photo) }}" class="img-fluid rounded-start" alt="...">
                         </div>
                     </div>
                 @endif
                 @if ($extvideo == 'mp4' || $extvideo == 'mkv' || $extvideo == 'webm')
-                    <div class="card">
-                        <div class="card-body">
-                            <video width="600" controls>
-                                @if ($extvideo == 'mp4')
-                                    <source src="{{ $path_video }}" alt="" type="video/mp4">
-                                @endif
-                                @if ($extvideo == 'mkv')
-                                    <source src="{{ $path_video }}" alt="" type="video/mkv">
-                                @endif
-                                @if ($extvideo == 'webm')
-                                    <source src="{{ $path_video }}" alt="" type="video/webm">
-                                @endif
-                            </video>
-                        </div>
+                    <div class="card shadow">
+                        <video class="object-fit-contain" controls>
+                            @if ($extvideo == 'mp4')
+                                <source src="{{ $path_video }}" alt="" type="video/mp4">
+                            @endif
+                            @if ($extvideo == 'mkv')
+                                <source src="{{ $path_video }}" alt="" type="video/mkv">
+                            @endif
+                            @if ($extvideo == 'webm')
+                                <source src="{{ $path_video }}" alt="" type="video/webm">
+                            @endif
+                        </video>
                     </div>
                 @endif
                 @if ($extaudio == 'mp3' || $extaudio == 'm4a')
-                    <div class="card">
+                    <div class="card shadow">
                         <div class="card-body text-center">
                             <audio controls>
                                 @if ($extaudio == 'mp3')
@@ -58,8 +55,8 @@
                 @endif
             </div>
 
-            <div class="col col-4" data-aos="fade-down" data-aos-duration="1200">
-                <div class="card">
+            <div class="col col-12 col-lg-4" data-aos="fade-down" data-aos-duration="1200">
+                <div class="card shadow">
                     <div class="card-body">
                         <h3><i class="bi bi-person-circle"></i> {{ $post->rUser->name }}</h3>
                         <h5>Kategori : {{ $post->rCategory->name }}</h5>

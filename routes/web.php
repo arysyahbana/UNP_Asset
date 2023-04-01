@@ -27,14 +27,14 @@ use App\Models\User;
 
 Route::get('/', [FrontHomeController::class, 'index'])->name('home');
 Route::get('/photo', [FrontHomeController::class, 'photo'])->name('photo');
-Route::get('/photo/search', [FrontHomeController::class, 'search_photo'])->name('search_photo');
+// Route::get('/photo/search', [FrontHomeController::class, 'search_photo'])->name('search_photo');
 Route::get('/video', [FrontHomeController::class, 'video'])->name('video');
-Route::get('/video/search', [FrontHomeController::class, 'search_video'])->name('search_video');
+// Route::get('/video/search', [FrontHomeController::class, 'search_video'])->name('search_video');
 Route::get('/audio', [FrontHomeController::class, 'audio'])->name('audio');
-Route::get('/audio/search', [FrontHomeController::class, 'search_audio'])->name('search_audio');
+// Route::get('/audio/search', [FrontHomeController::class, 'search_audio'])->name('search_audio');
 Route::get('/detail/{id}/{nama}', [FrontHomeController::class, 'detail'])->name('detail');
 Route::get('/download/{file}', [FrontHomeController::class, 'download'])->name('download');
-Route::get('/search', [FrontHomeController::class, 'search'])->name('search');
+// Route::get('/search', [FrontHomeController::class, 'search'])->name('search');
 
 //admin dashboard
 Route::get('admin/', [AdminDashboardController::class, 'dashboard'])->name('admin_dashboard')->middleware('admin:admin');
