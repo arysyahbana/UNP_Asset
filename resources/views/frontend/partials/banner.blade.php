@@ -15,8 +15,8 @@
                     data-bs-target="#order"><i class="bi bi-box-arrow-in-right"></i> Log in</a>
                 <a href="{{ route('user_signup') }}" class="btn btn-outline-danger rounded-pill px-lg-4 ms-4"><i
                         class="bi bi-plus-square"></i> Sign up</a>
-                <a href="{{ route('post_create', ['ads', 'asd']) }}" class="btn btn-danger rounded-pill px-lg-4 mx-4"><i
-                        class="bi bi-upload"></i> Unggah</a>
+                <a href="{{ route('post_create', ['ads', 'asd']) }}" class="btn btn-danger rounded-pill px-lg-4 mx-4"
+                    onclick="return alert('Anda tidak login')"><i class="bi bi-upload"></i> Unggah</a>
             @endauth
         </div>
     </div>

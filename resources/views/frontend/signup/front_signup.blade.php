@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login</title>
+    <link rel="shortcut icon" href="{{ asset('dist_frontend/img/logo asset.png') }}" type="image/png">
+    <title>SignUp</title>
     @include('admin.layouts.styles')
     @include('admin.layouts.js_header')
 </head>
@@ -12,7 +13,7 @@
 <body>
     <div class="container">
         <div class="row justify-content-center mt-5">
-            <div class="col col-6 pt-5">
+            <div class="col col-12 col-lg-6 pt-5">
                 <form action="{{ route('signup_submit') }}" method="post">
                     @csrf
                     <div class="text-center my-3">

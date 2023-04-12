@@ -25,17 +25,6 @@ use App\Models\User;
 |
 */
 
-Route::get('/', [FrontHomeController::class, 'index'])->name('home');
-Route::get('/photo', [FrontHomeController::class, 'photo'])->name('photo');
-// Route::get('/photo/search', [FrontHomeController::class, 'search_photo'])->name('search_photo');
-Route::get('/video', [FrontHomeController::class, 'video'])->name('video');
-// Route::get('/video/search', [FrontHomeController::class, 'search_video'])->name('search_video');
-Route::get('/audio', [FrontHomeController::class, 'audio'])->name('audio');
-// Route::get('/audio/search', [FrontHomeController::class, 'search_audio'])->name('search_audio');
-Route::get('/detail/{id}/{nama}', [FrontHomeController::class, 'detail'])->name('detail');
-Route::get('/download/{file}', [FrontHomeController::class, 'download'])->name('download');
-// Route::get('/search', [FrontHomeController::class, 'search'])->name('search');
-
 //admin dashboard
 Route::get('admin/', [AdminDashboardController::class, 'dashboard'])->name('admin_dashboard')->middleware('admin:admin');
 //end admin dashboard
@@ -63,7 +52,7 @@ Route::post('admin/category/update/{id}', [AdminCategoryController::class, 'upda
 Route::get('admin/category/delete/{id}', [AdminCategoryController::class, 'delete'])->name('admin_category_delete')->middleware('admin:admin');
 //end admin category
 
-//admin sub category
+//admin sub category (tidak dipakai)
 Route::get('admin/sub-category/show', [AdminSubCategoryController::class, 'show'])->name('admin_subCategory_show')->middleware('admin:admin');
 Route::get('admin/sub-category/create', [AdminSubCategoryController::class, 'create'])->name('admin_subCategory_create')->middleware('admin:admin');
 Route::post('admin/sub-category/store', [AdminSubCategoryController::class, 'store'])->name('admin_subCategory_store')->middleware('admin:admin');
@@ -82,6 +71,15 @@ Route::get('admin/users/delete/{id}', [AdminUserController::class, 'delete'])->n
 //end admin users
 
 
+// Frontend
+Route::get('/', [FrontHomeController::class, 'index'])->name('home');
+Route::get('/photo', [FrontHomeController::class, 'photo'])->name('photo');
+Route::get('/video', [FrontHomeController::class, 'video'])->name('video');
+Route::get('/audio', [FrontHomeController::class, 'audio'])->name('audio');
+Route::get('/detail/{id}/{nama}', [FrontHomeController::class, 'detail'])->name('detail');
+Route::get('/download/{file}', [FrontHomeController::class, 'download'])->name('download');
+// end Frontend
+
 //front post
 Route::get('posts/show/{id}/{name}', [FrontPostController::class, 'show'])->name('post_show')->middleware('auth');
 Route::get('posts/create/{id}/{name}', [FrontPostController::class, 'create'])->name('post_create')->middleware('auth');
@@ -90,7 +88,6 @@ Route::get('posts/delete/{id}', [FrontPostController::class, 'delete'])->name('p
 Route::get('posts/view/{id}/{name}', [FrontPostController::class, 'view'])->name('post_view')->middleware('auth');
 Route::get('posts/edit/{id}', [FrontPostController::class, 'edit'])->name('post_edit')->middleware('auth');
 Route::post('posts/update/{id}', [FrontPostController::class, 'update'])->name('post_update')->middleware('auth');
-
 //end front post
 
 //front signup

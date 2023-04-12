@@ -12,33 +12,34 @@ class FrontHomeController extends Controller
 {
     public function index(Request $request)
     {
-        $post = Post::with('rUser')->get();
+        // $post = Post::with('rUser')->get();
         $search = $request->search;
         $post = Post::where('name', 'like', '%' . $search . '%')->get();
+        $post = Post::latest()->with('rUser')->paginate(8);
         return view('frontend.home', compact('post'));
     }
     public function photo(Request $request)
     {
-        $post = Post::get();
         $search = $request->search_photo;
         $pattern = 'photo';
         $post = Post::where('name', 'like', '%' . $search . '%')->Where('file', 'like', '%' . $pattern . '%')->get();
+        $post = Post::latest()->with('rUser')->paginate(8);
         return view('frontend.home', compact('post'));
     }
     public function video(Request $request)
     {
-        $post = Post::get();
         $search = $request->search_video;
         $pattern = 'video';
         $post = Post::where('name', 'like', '%' . $search . '%')->Where('file', 'like', '%' . $pattern . '%')->get();
+        $post = Post::latest()->paginate(8);
         return view('frontend.home', compact('post'));
     }
     public function audio(Request $request)
     {
-        $post = Post::get();
         $search = $request->search_audio;
         $pattern = 'audio';
         $post = Post::where('name', 'like', '%' . $search . '%')->Where('file', 'like', '%' . $pattern . '%')->get();
+        $post = Post::paginate(8);
         return view('frontend.home', compact('post'));
     }
     public function detail($id, $nama)
@@ -71,36 +72,4 @@ class FrontHomeController extends Controller
             return response()->download($path);
         }
     }
-
-    // public function search(Request $request)
-    // {
-    //     $search = $request->search;
-    //     $post = Post::where('name', 'like', '%' . $search . '%')->get();
-    //     return view('frontend.home', compact('post'));
-    // }
-
-    // public function search_photo(Request $request)
-    // {
-    //     $search = $request->search_photo;
-    //     $pattern = 'photo';
-    //     $post = Post::where('name', 'like', '%' . $search . '%')->Where('file', 'like', '%' . $pattern . '%')->get();
-    //     return view('frontend.home', compact('post'));
-    //     return redirect()->route('photo')->with(compact('post'));
-    // }
-
-    // public function search_video(Request $request)
-    // {
-    //     $search = $request->search_video;
-    //     $pattern = 'video';
-    //     $post = Post::where('name', 'like', '%' . $search . '%')->Where('file', 'like', '%' . $pattern . '%')->get();
-    //     return view('frontend.home', compact('post'));
-    // }
-
-    // public function search_audio(Request $request)
-    // {
-    //     $search = $request->search_audio;
-    //     $pattern = 'audio';
-    //     $post = Post::where('name', 'like', '%' . $search . '%')->Where('file', 'like', '%' . $pattern . '%')->get();
-    //     return view('frontend.home', compact('post'));
-    // }
 }

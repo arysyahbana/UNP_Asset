@@ -1,6 +1,6 @@
 @extends('frontend.layouts.main')
 
-@section('title', 'UNP Asset | Home')
+@section('title', 'UNP Asset')
 
 @section('container')
     <div class="container mt-3">
@@ -171,7 +171,9 @@
                     @endif
                 @endif
             @endforeach
-
+        </div>
+        <div class="mt-5 mb-3">
+            {{ $post->links() }}
         </div>
     </div>
 @endsection

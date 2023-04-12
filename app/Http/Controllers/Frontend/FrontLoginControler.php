@@ -23,16 +23,15 @@ class FrontLoginControler extends Controller
             'password' => $request->password
         ];
         if (Auth::attempt($credentials)) {
-            if (Auth::user()->token == '') {
+            if (Auth::user()->token != '') {
+                Auth::guard()->logout();
+                return redirect()->back()->with('error', 'User not found');
+            } else {
                 return redirect()->route('home');
             }
-            // else {
-            //     // Auth::guard()->logout();
-            //     return redirect()->route('home')->with('succeess', 'Telah logout');
-            // }
         } else {
-            Auth::guard()->logout();
-            return redirect()->back()->with('error', 'User not found');
+            // Auth::guard()->logout();
+            return redirect()->route('home');
         }
     }
     public function logout()

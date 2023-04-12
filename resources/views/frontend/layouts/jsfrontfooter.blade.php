@@ -23,6 +23,16 @@
     </script>
 @endif
 
+@if (session()->get('error'))
+    <script>
+        iziToast.error({
+            title: '',
+            position: 'topRight',
+            message: '{{ session()->get('error') }}',
+        });
+    </script>
+@endif
+
 {{-- js aos --}}
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 {{-- end js aos --}}

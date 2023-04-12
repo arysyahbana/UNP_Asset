@@ -18,7 +18,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="formFile" class="form-label">Input Your File</label>
+                                <label for="" class="form-label">Input Your File</label>
                                 <input class="form-control" type="file" name="file">
                             </div>
 
