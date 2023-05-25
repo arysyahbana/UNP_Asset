@@ -12,7 +12,8 @@ class ApiPostController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
+        // $posts = Post::all();
+        $posts = Post::with('rUser:id,name')->get();
         return PostResource::collection($posts);
     }
 

@@ -22,7 +22,7 @@
                     <input type="hidden" name="token" value="{{ $token }}">
                     <input type="hidden" name="email" value="{{ $email }}">
                     <div class="text-center my-3">
-                        <img src="{{ asset('dist_frontend/img/logo UNP Asset.svg') }}" alt="" class="img-fluid">
+                        <img src="{{ asset('dist_frontend/img/UNP Asset.png') }}" alt="" width="200px">
                     </div>
 
                     <div class="card pb-5 shadow">

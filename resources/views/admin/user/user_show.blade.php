@@ -24,6 +24,7 @@
                                         <th>No</th>
                                         <th>Nama User</th>
                                         <th>Email</th>
+                                        <th>Role</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -33,6 +34,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->email }}</td>
+                                            <td>{{ $item->role }}</td>
                                             <td>
                                                 <a href="{{ route('admin_user_edit', $item->id) }}"
                                                     class="btn btn-success"><i class="fa fa-edit"></i>
@@ -40,14 +42,6 @@
                                                 <a href="{{ route('admin_user_delete', $item->id) }}" class="btn btn-danger"
                                                     onclick="return confirm('are you sure?')"><i class="fa fa-edit"></i>
                                                     Delete</a>
-
-                                                {{-- <form action="{{ route('admin_category_delete', $category->id) }}"
-                                                    method="get">
-                                                    @method('delete')
-                                                    @csrf
-                                                    <button class="btn btn-danger"><i class="fas fa-trash"></i>
-                                                        Delete</button>
-                                                </form> --}}
                                             </td>
                                         </tr>
                                     @endforeach

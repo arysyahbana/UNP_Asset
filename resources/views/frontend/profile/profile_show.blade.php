@@ -26,6 +26,12 @@
                             </div>
 
                             <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">No HP</label>
+                                <input class="form-control form-control-md" type="text"
+                                    aria-label=".form-control-lg example" name="hp" value="{{ $edit->hp }}">
+                            </div>
+
+                            <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Password</label>
                                 <input class="form-control form-control-md" type="password"
                                     aria-label=".form-control-lg example" name="password">

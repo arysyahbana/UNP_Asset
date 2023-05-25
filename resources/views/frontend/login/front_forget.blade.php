@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login</title>
+    <title>Forget</title>
     @include('admin.layouts.styles')
 </head>
 
@@ -20,7 +20,7 @@
                 <form action="{{ route('user_forget_submit') }}" method="post">
                     @csrf
                     <div class="text-center my-3">
-                        <img src="{{ asset('dist_frontend/img/logo UNP Asset.svg') }}" alt="" class="img-fluid">
+                        <img src="{{ asset('dist_frontend/img/UNP Asset.png') }}" alt="" width="200px">
                     </div>
 
                     <div class="card pb-5 shadow">

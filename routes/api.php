@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApiPostController;
 use App\Http\Controllers\Api\ApiUserController;
 use App\Http\Controllers\Api\ApiAuthenticationController;
+use App\Http\Controllers\Api\ApiMediaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/user/store', [ApiPostController::class, 'store']);
     Route::patch('/user/update/{id}', [ApiPostController::class, 'update']);
     Route::delete('/user/delete/{id}', [ApiPostController::class, 'delete']);
+
+    //media
+    Route::get('/user/media/{id}', [ApiMediaController::class, 'show']);
 });
 
 //login dkk

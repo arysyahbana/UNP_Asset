@@ -19,6 +19,13 @@
                         <input type="email" class="form-control" id="email" placeholder="email"
                             value="{{ $edit->email }}" name="email">
                     </div>
+                    {{-- <div class="form-group mb-3">
+                        <label>Role</label>
+                        <select name="role" class="form-control" value="{{ $edit->role }}">
+                            <option>premium</option>
+                            <option>umum</option>
+                        </select>
+                    </div> --}}
                     <div class="mb-3">
                         <label class="form-label text-dark ">New Password</label>
                         <input type="password" class="form-control" id="password" placeholder="Password" name="password">

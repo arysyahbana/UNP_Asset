@@ -18,12 +18,17 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="" class="form-label">Input Your File</label>
+                                <label for="" class="form-label">Masukkan file</label>
                                 <input class="form-control" type="file" name="file">
                             </div>
 
+                            <div class="mb-3">
+                                <label for="" class="form-label">Masukkan file project</label>
+                                <input class="form-control" type="file" name="file2">
+                            </div>
+
                             <div class="form-group mb-3">
-                                <label>Category Menu?</label>
+                                <label>Kategori</label>
                                 <select name="category_menu" class="form-control">
                                     @foreach ($category as $item)
                                         <option value="{{ $item->id }}">
@@ -34,7 +39,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="" class="form-label">Description</label>
+                                <label for="" class="form-label">Deskripsi</label>
                                 <textarea class="form-control" id="" rows="3" name="body"></textarea>
                             </div>
 

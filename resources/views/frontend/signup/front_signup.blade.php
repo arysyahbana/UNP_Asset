@@ -12,12 +12,12 @@
 
 <body>
     <div class="container">
-        <div class="row justify-content-center mt-5">
+        <div class="row justify-content-center">
             <div class="col col-12 col-lg-6 pt-5">
                 <form action="{{ route('signup_submit') }}" method="post">
                     @csrf
                     <div class="text-center my-3">
-                        <img src="{{ asset('dist_frontend/img/logo UNP Asset.svg') }}" alt="" class="img-fluid">
+                        <img src="{{ asset('dist_frontend/img/UNP Asset.png') }}" alt="" width="200px">
                     </div>
 
                     <div class="card pb-5 shadow">
@@ -32,7 +32,11 @@
                                 <input type="email" class="form-control" name='email' id="email"
                                     aria-describedby="emailHelp">
                             </div>
-                            <div class="mb-3">
+                            <div class="py-3">
+                                <label class="form-label">No HP</label>
+                                <input type="text" class="form-control" name='hp' id="hp">
+                            </div>
+                            <div class="py-3">
                                 <label class="form-label">Password</label>
                                 <input type="password" class="form-control" name='password' id="password">
                             </div>

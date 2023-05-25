@@ -24,11 +24,14 @@ class FrontSignUpController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email',
+            'hp' => 'required',
             'password' => 'required|confirmed'
         ]);
 
         $store->name = $request->name;
         $store->email = $request->email;
+        $store->hp = $request->hp;
+        $store->role = 'umum';
         $store->password = Hash::make($request->password);
 
         $verif_link = url('signup/verification/' . $token . '/' . $request->email);

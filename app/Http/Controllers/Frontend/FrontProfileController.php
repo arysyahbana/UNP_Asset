@@ -19,12 +19,14 @@ class FrontProfileController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email'
+            'email' => 'required|email',
+            'hp' => 'required'
         ]);
 
         $update = User::where('id', $id)->first();
         $update->name = $request->name;
         $update->email = $request->email;
+        $update->hp = $request->hp;
 
         if ($request->password != '') {
             $request->validate([

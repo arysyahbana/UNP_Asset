@@ -1,39 +1,373 @@
+body {
+    font-family: 'Mulish', sans-serif;
+}
+
 .banner {
     /* background-color: #1E2E54; */
-    background-image: url(../img/banner.png);
+    background-image: url(../img/banner2.jpg);
     background-size: cover;
     background-position: center;
-    height: 70vh;
+    height: 60vh;
 
     /* background-image: linear-gradient(to bottom, rgba(87, 88, 99, 0.52), rgba(91, 43, 94, 0.859)),; */
 }
 
-/* .menu {
-    height: 8vh;
-} */
+.banner-text {
+    font-family: 'Carter One', cursive;
+}
 
-.warna_footer1{
-    background-color: #d9d9d96c;
+/* warna menu 1 */
+/* .menu-color {
+    background-color: #F6F1F1;
 }
-.warna_footer2{
-    background-color: #D9D9D9;
+
+.white {
+    color: #F6F1F1;
 }
+
+.blue3 {
+    color: #AFD3E2;
+}
+
+.blue2 {
+    color: #19A7CE;
+}
+
+.blue1 {
+    color: #146C94;
+} */
+/* end warna menu 1 */
+
+
+/* warna btn 1 */
+/* .btnblue1 {
+    background-color: #146C94;
+}
+
+.btnblue2 {
+    background-color: #19A7CE;
+}
+
+.btnblue3 {
+    background-color: #AFD3E2;
+}
+
+.btnwhite {
+    background-color: #F6F1F1;
+} */
+/* end warna btn 1 */
+
+/* warna footer */
+.footer1-color {
+    background-color: #3093f0;
+}
+
+.footer2-color {
+    background-color: #2882d6;
+}
+/* end warna footer */
+
+/* warna menu 2 */
+.menu-color2 {
+    background-color: #409ff1;
+}
+
+.white {
+    color: #ffffff;
+}
+
+.blue1 {
+    color: #3acbf8;
+}
+
+.blue2 {
+    color: #409ff1;
+}
+
+.blue3 {
+    color: #3093f0;
+}
+
+.blue4 {
+    color: #89e7ff;
+}
+
+.blue5 {
+    color: #AFD3E2;
+}
+
+.blue6 {
+    color: #146C94;
+}
+/* end warna menu 2 */
+
+/* warna btn 2 */
+.btn-orange {
+    background-color: #FFC93C;
+}
+
+.btn-blue6 {
+    background-color: #146C94;
+}
+
+.btn-blue7 {
+    background-color: #19A7CE;
+}
+/* end warna btn 2 */
 
 .nav_color
 {
-    background-color: #D48166;
+    background-color: #409ff1;
 }
 
 .warna_search {
-    background-color: white;
+    background-color: #3acbf8;
 }
 
-/* .footer {
-    position: fixed;
+.card-body-size {
+    min-block-size: 20rem;
+}
+
+.item-size {
+    max-height: 18rem;
+}
+
+.item-size-video {
+    max-height: 18rem;
+    min-height: 18rem;
+}
+
+/* cooler card photo */
+.card-img {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 320px;
+    height: 300px;
+    background: rgb(255, 255, 255);
+    border-radius: 20px;
+    box-shadow: 0 35px 80px rgba(0, 0, 0, 0.15);
+    transition: 0.5s;
+}
+
+.card-img:hover {
+    height: 300px;
+}
+
+.card-img .imgbox {
+    position: absolute;
+    top: 20px;
+    width: 300px;
+    height: 220px;
+    background: black;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+.card-img:hover .imgbox {
+    top: -100px;
+    scale: 0.75;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 2);
+}
+
+.card-img .imgbox img {
+    position: absolute;
+    top: 0;
     left: 0;
-    bottom: 0;
     width: 100%;
-    background-color: #f5f5f5;
-    color: #333;
-    padding: 10px;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-img .content {
+    position: absolute;
+    top: 245px;
+    width: 100%;
+    padding: 0 30px;
+    height: 35px;
+    overflow: hidden;
+    text-align: center;
+    transition: 0.5s;
+}
+
+.card-img:hover .content {
+    top: 150px;
+    height: 250px;
+}
+/* end cooler card photo */
+
+/* cooler card video */
+.card-vid {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 320px;
+    height: 300px;
+    background: rgb(255, 255, 255);
+    border-radius: 20px;
+    box-shadow: 0 35px 80px rgba(0, 0, 0, 0.15);
+    transition: 0.5s;
+}
+
+.card-vid:hover {
+    height: 380px;
+}
+
+.card-vid .vidbox {
+    position: absolute;
+    top: 20px;
+    width: 295px;
+    height: 220px;
+    background: black;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+.card-vid:hover .vidbox {
+    scale: 0.9;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
+}
+
+.card-vid .contentvid {
+    position: absolute;
+    top: 250px;
+    width: 100%;
+    padding: 0 30px;
+    height: 35px;
+    overflow: hidden;
+    text-align: center;
+    transition: 0.5s;
+}
+
+.card-vid:hover .contentvid {
+    top: 250px;
+    height: 250px;
+}
+/* end cooler card video */
+
+/* cooler card audio */
+.card-audio {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 320px;
+    height: 300px;
+    background: rgb(255, 255, 255);
+    border-radius: 20px;
+    box-shadow: 0 35px 80px rgba(0, 0, 0, 0.15);
+    transition: 0.5s;
+}
+
+.card-audio:hover {
+    height: 450px;
+}
+
+.card-audio .audiobox {
+    position: absolute;
+    top: 5px;
+    width: 295px;
+    height: 220px;
+    background: black;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+.card-audio:hover .audiobox {
+    scale: 0.9;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
+}
+
+.card-audio .audiobox img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-audio .contentaudio {
+    position: absolute;
+    top: 230px;
+    width: 100%;
+    height: 50px;
+    overflow: hidden;
+    text-align: center;
+    transition: 0.5s;
+}
+
+.card-audio:hover .contentaudio {
+    top: 230px;
+    height: 230px;
+}
+
+/* end cooler card audio */
+
+/* background signup */
+/* section{
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: #3586ff;
+  overflow: hidden;
+}
+section .air{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: url(https://1.bp.blogspot.com/-xQUc-TovqDk/XdxogmMqIRI/AAAAAAAACvI/AizpnE509UMGBcTiLJ58BC6iViPYGYQfQCLcBGAsYHQ/s1600/wave.png);
+  background-size: 1000px 100px
+}
+section .air.air1{
+  animation: wave 30s linear infinite;
+  z-index: 1000;
+  opacity: 1;
+  animation-delay: 0s;
+  bottom: 0;
+}
+section .air.air2{
+  animation: wave2 15s linear infinite;
+  z-index: 999;
+  opacity: 0.5;
+  animation-delay: -5s;
+  bottom: 10px;
+}
+section .air.air3{
+  animation: wave 30s linear infinite;
+  z-index: 998;
+  opacity: 0.2;
+  animation-delay: -2s;
+  bottom: 15px;
+}
+section .air.air4{
+  animation: wave2 5s linear infinite;
+  z-index: 997;
+  opacity: 0.7;
+  animation-delay: -5s;
+  bottom: 20px;
+}
+@keyframes wave{
+  0%{
+    background-position-x: 0px;
+  }
+  100%{
+    background-position-x: 1000px;
+  }
+}
+@keyframes wave2{
+  0%{
+    background-position-x: 0px;
+  }
+  100%{
+    background-position-x: -1000px;
+  }
 } */
+/* end background signup */
