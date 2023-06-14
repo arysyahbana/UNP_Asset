@@ -2,10 +2,10 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
+        <div class="sidebar-brand-icon">
+            <img src="{{ asset('dist_frontend/img/CODIAS.png') }}" alt="" width="50px" class="img-fluid py-2">
         </div>
-        <div class="sidebar-brand-text mx-3">UNP Asset</div>
+        <div class="sidebar-brand-text mx-3">CODIAS</div>
     </a>
 
     <!-- Divider -->
@@ -36,6 +36,12 @@
         <a class="nav-link" href="{{ route('admin_category_show') }}">
             <i class="fa fa-file"></i>
             <span>Category</span></a>
+    </li>
+
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ route('admin-post-show') }}">
+            <i class="fa fa-file"></i>
+            <span>Post</span></a>
     </li>
     {{-- <li class="nav-item active">
         <a class="nav-link" href="{{ route('admin_subCategory_show') }}">

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link rel="shortcut icon" href="{{ asset('dist_frontend/img/logo asset.png') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('dist_frontend/img/CODIAS.png') }}" type="image/png">
     <title>@yield('title')</title>
 
     @include('admin.layouts.styles')

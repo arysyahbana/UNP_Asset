@@ -3,16 +3,6 @@
 
 <script src="{{ asset('dist_frontend/js/iziToast.min.js') }}"></script>
 
-{{-- <script>
-    function redirectTo(link1, link2) {
-
-        window.location.href = link1;
-
-        window.location.href = link2;
-
-    }
-</script> --}}
-
 <script>
     $(document).ready(function() {
         $('.download-btn').click(function(e) {
@@ -38,8 +28,7 @@
 </script>
 
 
-
-
+{{-- copy --}}
 <script>
     function copyText() {
         var copyText = document.getElementById("salin");
@@ -48,6 +37,4 @@
         alert("Teks berhasil dicopy");
     }
 </script>
-{{-- copy --}}
-{{-- en copy --}}
-{{-- s --}}
+{{-- end copy --}}

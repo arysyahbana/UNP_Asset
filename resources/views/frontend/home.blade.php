@@ -49,10 +49,10 @@
                                     <img src="{{ $path_photo }}" alt="" class="img-fluid">
                                 </div>
                                 <div class="content">
-                                    <h3 class="blue6">{{ $item->name }}</h3>
+                                    <h5 class="blue6">{{ $item->name }}</h5>
                                     {{-- <p>{{ $item->body }}</p> --}}
                                     <a href="{{ route('detail', [$item->id, $item->name]) }}"
-                                        class="btn btn-primary btn-blue6 mt-4">Detail</a>
+                                        class="btn btn-primary btn-blue6 mt-4 btn-sm">Detail</a>
                                 </div>
                             </div>
                         </div>
@@ -61,31 +61,21 @@
                     {{-- Video --}}
                 @elseif (Request::path() == 'video')
                     @php
-                        $path_video = asset('storage/uploads/video/' . $item->file);
+                        $path_video = asset('storage/uploads/video/thumbnail/' . $item->thumbnail);
                         $extvideo = pathinfo($path_video, PATHINFO_EXTENSION);
                     @endphp
-                    @if ($extvideo == 'mp4' || $extvideo == 'mkv' || $extvideo == 'webm')
+                    @if ($extvideo == 'jpg')
                         <div class="col col-12 col-md-6 col-lg-3 my-2 d-flex justify-content-center" data-aos="fade-up"
                             data-aos-duration="1200">
                             <div class="card-vid">
                                 <div class="vidbox">
-                                    <video controls class='item-size'>
-                                        @if ($extvideo == 'mp4')
-                                            <source src="{{ $path_video }}" alt="" type="video/mp4">
-                                        @endif
-                                        @if ($extvideo == 'mkv')
-                                            <source src="{{ $path_video }}" alt="" type="video/mkv">
-                                        @endif
-                                        @if ($extvideo == 'webm')
-                                            <source src="{{ $path_video }}" alt="" type="video/webm">
-                                        @endif
-                                    </video>
+                                    <img src="{{ $path_video }}" alt="" class="img-fluid">
                                 </div>
                                 <div class="contentvid">
-                                    <h3 class="blue6">{{ $item->name }}</h3>
+                                    <h5 class="blue6">{{ $item->name }}</h5>
                                     {{-- <p>{{ $item->body }}</p> --}}
                                     <a href="{{ route('detail', [$item->id, $item->name]) }}"
-                                        class="btn btn-primary btn-blue6 mt-4">Detail</a>
+                                        class="btn btn-primary btn-blue6 mt-4 btn-sm">Detail</a>
                                 </div>
                             </div>
                         </div>
@@ -102,19 +92,20 @@
                             data-aos-duration="1200">
                             <div class="card-audio">
                                 <div class="audiobox">
-                                    <img src="{{ asset('dist_frontend/img/audiopic.png') }}" alt="">
+                                    <img src="{{ asset('dist_frontend/img/audiopic.png') }}" alt=""
+                                        class="img-fluid">
                                 </div>
-                                <div class="contentaudio">
+                                <div class="contentaudio mt-2">
                                     @if ($extaudio == 'mp3')
                                         <audio src="{{ $path_audio }}" type="audio/mp3" controls></audio>
                                     @endif
                                     @if ($extaudio == 'm4a')
                                         <audio src="{{ $path_audio }}" type="audio/m4a" controls></audio>
                                     @endif
-                                    <h3 class="blue6 mt-4">{{ $item->name }}</h3>
+                                    <h5 class="blue6 mt-2">{{ $item->name }}</h5>
                                     {{-- <p>{{ $item->body }}</p> --}}
                                     <a href="{{ route('detail', [$item->id, $item->name]) }}"
-                                        class="btn btn-primary btn-blue6 mt-4">Detail</a>
+                                        class="btn btn-primary btn-blue6 mt-3 btn-sm">Detail</a>
                                 </div>
                             </div>
                         </div>
@@ -126,7 +117,7 @@
                         $path_photo = asset('storage/uploads/photo/compress/' . $item->file);
                         $extphoto = pathinfo($path_photo, PATHINFO_EXTENSION);
                         
-                        $path_video = asset('storage/uploads/video/' . $item->file);
+                        $path_video = asset('storage/uploads/video/thumbnail/' . $item->thumbnail);
                         $extvideo = pathinfo($path_video, PATHINFO_EXTENSION);
                         
                         $path_audio = asset('storage/uploads/audio/' . $item->file);
@@ -141,36 +132,26 @@
                                     <img src="{{ $path_photo }}" alt="" class="img-fluid">
                                 </div>
                                 <div class="content">
-                                    <h3 class="blue6">{{ $item->name }}</h3>
+                                    <h5 class="blue6">{{ $item->name }}</h5>
                                     {{-- <p>{{ $item->body }}</p> --}}
                                     <a href="{{ route('detail', [$item->id, $item->name]) }}"
-                                        class="btn btn-primary btn-blue6 mt-4 text-light">Detail</a>
+                                        class="btn btn-primary btn-blue6 mt-4 text-light btn-sm">Detail</a>
                                 </div>
                             </div>
                         </div>
                     @endif
-                    @if ($extvideo == 'mp4' || $extvideo == 'mkv' || $extvideo == 'webm')
+                    @if ($extvideo == 'jpg')
                         <div class="col col-12 col-md-6 col-lg-3 my-2 d-flex justify-content-center" data-aos="fade-up"
                             data-aos-duration="1200">
                             <div class="card-vid">
                                 <div class="vidbox">
-                                    <video controls class='item-size'>
-                                        @if ($extvideo == 'mp4')
-                                            <source src="{{ $path_video }}" alt="" type="video/mp4">
-                                        @endif
-                                        @if ($extvideo == 'mkv')
-                                            <source src="{{ $path_video }}" alt="" type="video/mkv">
-                                        @endif
-                                        @if ($extvideo == 'webm')
-                                            <source src="{{ $path_video }}" alt="" type="video/webm">
-                                        @endif
-                                    </video>
+                                    <img src="{{ $path_video }}" alt="" class="img-fluid">
                                 </div>
                                 <div class="contentvid">
-                                    <h3 class="blue6">{{ $item->name }}</h3>
+                                    <h5 class="blue6">{{ $item->name }}</h5>
                                     {{-- <p>{{ $item->body }}</p> --}}
                                     <a href="{{ route('detail', [$item->id, $item->name]) }}"
-                                        class="btn btn-info btn-blue6 mt-4 text-light">Detail</a>
+                                        class="btn btn-primary btn-blue6 mt-4 text-light btn-sm">Detail</a>
                                 </div>
                             </div>
                         </div>
@@ -182,17 +163,17 @@
                                 <div class="audiobox">
                                     <img src="{{ asset('dist_frontend/img/audiopic.png') }}" alt="">
                                 </div>
-                                <div class="contentaudio">
+                                <div class="contentaudio mt-2">
                                     @if ($extaudio == 'mp3')
                                         <audio src="{{ $path_audio }}" type="audio/mp3" controls></audio>
                                     @endif
                                     @if ($extaudio == 'm4a')
                                         <audio src="{{ $path_audio }}" type="audio/m4a" controls></audio>
                                     @endif
-                                    <h3 class="mt-4 blue6">{{ $item->name }}</h3>
+                                    <h5 class="mt-2 blue6">{{ $item->name }}</h5>
                                     {{-- <p>{{ $item->body }}</p> --}}
                                     <a href="{{ route('detail', [$item->id, $item->name]) }}"
-                                        class="btn btn-primary mt-4 btn-blue6">Detail</a>
+                                        class="btn btn-primary mt-3 btn-blue6 btn-sm">Detail</a>
                                 </div>
                             </div>
                         </div>

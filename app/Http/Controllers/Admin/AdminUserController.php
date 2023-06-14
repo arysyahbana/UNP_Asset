@@ -68,4 +68,13 @@ class AdminUserController extends Controller
         User::where('id', $id)->delete();
         return redirect()->route('admin_user_show');
     }
+
+    public function makepremium($id)
+    {
+        $update = User::where('id', $id)->first();
+        $update->role = 'premium';
+        $update->update();
+        compact('update');
+        return redirect()->route('admin_user_show');
+    }
 }
