@@ -16,47 +16,6 @@ body {
     font-family: 'Carter One', cursive;
 }
 
-/* warna menu 1 */
-/* .menu-color {
-    background-color: #F6F1F1;
-}
-
-.white {
-    color: #F6F1F1;
-}
-
-.blue3 {
-    color: #AFD3E2;
-}
-
-.blue2 {
-    color: #19A7CE;
-}
-
-.blue1 {
-    color: #146C94;
-} */
-/* end warna menu 1 */
-
-
-/* warna btn 1 */
-/* .btnblue1 {
-    background-color: #146C94;
-}
-
-.btnblue2 {
-    background-color: #19A7CE;
-}
-
-.btnblue3 {
-    background-color: #AFD3E2;
-}
-
-.btnwhite {
-    background-color: #F6F1F1;
-} */
-/* end warna btn 1 */
-
 /* warna footer */
 .footer1-color {
     background-color: #3093f0;
@@ -152,7 +111,7 @@ body {
 }
 
 .card-img:hover {
-    height: 300px;
+    height: 270px;
 }
 
 .card-img .imgbox {
@@ -179,11 +138,12 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    max-width: 100%;
 }
 
 .card-img .content {
     position: absolute;
-    top: 245px;
+    top: 255px;
     width: 100%;
     padding: 0 30px;
     height: 35px;
@@ -197,6 +157,69 @@ body {
     height: 250px;
 }
 /* end cooler card photo */
+
+/* cooler card photo profile */
+.card-img2 {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 220px;
+    height: 160px;
+    background: rgb(255, 255, 255);
+    border-radius: 20px;
+    box-shadow: 0 35px 80px rgba(0, 0, 0, 0.15);
+    transition: 0.5s;
+}
+
+.card-img2:hover {
+    height: 170px;
+}
+
+.card-img2 .imgbox2 {
+    position: absolute;
+    top: 10px;
+    width: 200px;
+    height: 120px;
+    background: black;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+.card-img2:hover .imgbox2 {
+    top: -50px;
+    scale: 0.8;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 2);
+}
+
+.card-img2 .imgbox2 img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-width: 100%;
+}
+
+.card-img2 .content2 {
+    position: absolute;
+    top: 130px;
+    width: 100%;
+    padding: 0 30px;
+    height: 35px;
+    overflow: hidden;
+    text-align: center;
+    transition: 0.5s;
+}
+
+.card-img2:hover .content2 {
+    top: 85px;
+    height: 150px;
+}
+
+/* end cooler card photo profile */
 
 /* cooler card video */
 .card-vid {
@@ -213,7 +236,7 @@ body {
 }
 
 .card-vid:hover {
-    height: 380px;
+    height: 350px;
 }
 
 .card-vid .vidbox {
@@ -227,6 +250,15 @@ body {
     transition: 0.5s;
 }
 
+.card-vid .vidbox img {
+    position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    object-fit: cover;
+}
+
 .card-vid:hover .vidbox {
     scale: 0.9;
     box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
@@ -234,7 +266,7 @@ body {
 
 .card-vid .contentvid {
     position: absolute;
-    top: 250px;
+    top: 255px;
     width: 100%;
     padding: 0 30px;
     height: 35px;
@@ -248,6 +280,66 @@ body {
     height: 250px;
 }
 /* end cooler card video */
+
+/* cooler card video profile */
+.card-vid2 {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 220px;
+    height: 160px;
+    background: rgb(255, 255, 255);
+    border-radius: 20px;
+    box-shadow: 0 35px 80px rgba(0, 0, 0, 0.15);
+    transition: 0.5s;
+}
+
+.card-vid2:hover {
+    height: 220px;
+}
+
+.card-vid2 .vidbox2 {
+    position: absolute;
+    top: 10px;
+    width: 200px;
+    height: 120px;
+    background: black;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+.card-vid2 .vidbox2 img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-vid2:hover .vidbox2 {
+    scale: 0.9;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
+}
+
+.card-vid2 .contentvid2 {
+    position: absolute;
+    top: 133px;
+    width: 100%;
+    padding: 0 30px;
+    height: 35px;
+    overflow: hidden;
+    text-align: center;
+    transition: 0.5s;
+}
+
+.card-vid2:hover .contentvid2 {
+    top: 140px;
+    height: 250px;
+}
+/* end cooler card video profile */
 
 /* cooler card audio */
 .card-audio {
@@ -264,7 +356,7 @@ body {
 }
 
 .card-audio:hover {
-    height: 450px;
+    height: 400px;
 }
 
 .card-audio .audiobox {
@@ -309,65 +401,194 @@ body {
 
 /* end cooler card audio */
 
-/* background signup */
-/* section{
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  background: #3586ff;
-  overflow: hidden;
+/* cooler card audio profile */
+.card-audio2 {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 220px;
+    height: 200px;
+    background: rgb(255, 255, 255);
+    border-radius: 20px;
+    box-shadow: 0 35px 80px rgba(0, 0, 0, 0.15);
+    transition: 0.5s;
 }
-section .air{
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100px;
-  background: url(https://1.bp.blogspot.com/-xQUc-TovqDk/XdxogmMqIRI/AAAAAAAACvI/AizpnE509UMGBcTiLJ58BC6iViPYGYQfQCLcBGAsYHQ/s1600/wave.png);
-  background-size: 1000px 100px
+
+.card-audio2:hover {
+    height: 300px;
 }
-section .air.air1{
-  animation: wave 30s linear infinite;
-  z-index: 1000;
-  opacity: 1;
-  animation-delay: 0s;
-  bottom: 0;
+
+.card-audio2 .audiobox2 {
+    position: absolute;
+    top: 10px;
+    width: 200px;
+    height: 120px;
+    background: black;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.5s;
 }
-section .air.air2{
-  animation: wave2 15s linear infinite;
-  z-index: 999;
-  opacity: 0.5;
-  animation-delay: -5s;
-  bottom: 10px;
+
+.card-audio2:hover .audiobox2 {
+    scale: 0.9;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
 }
-section .air.air3{
-  animation: wave 30s linear infinite;
-  z-index: 998;
-  opacity: 0.2;
-  animation-delay: -2s;
-  bottom: 15px;
+
+.card-audio2 .audiobox2 img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
-section .air.air4{
-  animation: wave2 5s linear infinite;
-  z-index: 997;
-  opacity: 0.7;
-  animation-delay: -5s;
-  bottom: 20px;
+
+.card-audio2 .contentaudio2 {
+    position: absolute;
+    top: 130px;
+    width: 100%;
+    height: 50px;
+    overflow: hidden;
+    text-align: center;
+    transition: 0.5s;
 }
-@keyframes wave{
-  0%{
-    background-position-x: 0px;
-  }
-  100%{
-    background-position-x: 1000px;
-  }
+
+.card-audio2:hover .contentaudio2 {
+    top: 130px;
+    height: 230px;
 }
-@keyframes wave2{
-  0%{
-    background-position-x: 0px;
-  }
-  100%{
-    background-position-x: -1000px;
-  }
-} */
-/* end background signup */
+
+.card-audio2 audio {
+    width: 100%;
+}
+
+/* end cooler card audio profile */
+
+/* tombol download video */
+.tombol-utama {
+    margin-bottom: 10px;
+}
+
+.tombol-lainnya {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.tombol-lainnya.muncul {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* end tombol download video */
+
+/* warna svg */
+.theme-icon-active use {
+    fill: white;
+}
+/* end warna svg */
+
+/* media query */
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+    .card-img .imgbox {
+            width: 210px;
+        }
+    .card-img2 .imgbox2 {
+            width: 130px;
+        }
+     .card-vid .vidbox {
+            width: 210px;
+        }
+    .card-audio .audiobox {
+            width: 210px;
+        }
+    .card-audio .waudio {
+            width: 92%;
+        }
+}
+@media screen and (min-width: 1200px) and (max-width: 1399px) {
+    .card-img .imgbox {
+            width: 250px;
+        }
+    .card-img2 .imgbox2 {
+            width: 150px;
+        }
+    .card-vid .vidbox {
+            width: 250px;
+        }
+    .card-audio .audiobox {
+            width: 250px;
+        }
+    .card-audio .waudio {
+            width: 95%;
+        }
+}
+/* end media query */
+
+/* icon yt dan drive */
+.iconyd {
+    width: 1.5rem;
+    transition: 0.5s;
+}
+
+.iconyd:hover {
+    width: 2rem;
+}
+/* end icon yt dan drive */
+
+/* tombol download video */
+
+/* end tombol download video */
+
+/* foto profil */
+.foto-profil {
+    width: 8rem;
+    height: 8rem;
+    background: black;
+    margin: 0 auto;
+}
+
+.foto-profil img{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-width: 100%;
+}
+.profil-edit {
+    width: 15rem;
+    height: 15rem;
+    background: black;
+}
+
+.profil-edit img{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-width: 100%;
+}
+
+.profil-detail {
+    width: 3rem;
+    height: 3rem;
+    background: black;
+}
+
+.profil-detail img{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-width: 100%;
+}
+/* end foto profil */
+
+/* icon profile */
+.iconsize {
+    width: 1.5rem;
+}
+/* end icon profile */

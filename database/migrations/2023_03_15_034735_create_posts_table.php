@@ -21,6 +21,11 @@ return new class extends Migration
             $table->string('file');
             $table->string('file_mentah')->nullable();
             $table->string('thumbnail')->nullable();
+            $table->string('resolution')->nullable();
+            $table->string('q720p')->nullable();
+            $table->string('q480p')->nullable();
+            $table->string('q360p')->nullable();
+            // $table->string('linkyt')->nullable();
             $table->string('body');
             $table->timestamp('published_at')->nullable();
             $table->timestamps();

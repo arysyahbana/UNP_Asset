@@ -85,7 +85,7 @@
             </div> --}}
 
             <div class="col col-12 col-md-6 col-lg-6 pt-4 pt-md-0 pt-lg-0">
-                <div class="card justify-content-center">
+                <div class="card justify-content-center shadow">
                     <h5 class="card-header">Choose Plan</h5>
                     <div class="card-body">
                         <div class="row">
@@ -154,7 +154,7 @@
                 </div>
                 <div class="modal-body">
 
-                    <div class="form-check d-flex align-item-center">
+                    {{-- <div class="form-check d-flex align-item-center">
                         <input class="form-check-input" type="radio" name="pembayaran" value="123"
                             id="flexRadioDefault1" checked>
                         <label class="form-check-label" for="flexRadioDefault1">
@@ -168,30 +168,49 @@
                         <label class="form-check-label" for="flexRadioDefault2">
                             <img src="{{ asset('dist_frontend/img/Dana.svg') }}" alt="">
                         </label>
+                    </div> --}}
+
+                    <div class="form-check">
+                        <div class="row">
+                            <div class="col col-1 d-flex align-self-center">
+                                <input class="form-check-input" type="radio" name="pembayaran" value="789"
+                                    id="flexRadioDefault2">
+                            </div>
+                            <div class="col col-6">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    <img src="{{ asset('dist_frontend/img/BRI.svg') }}" alt="">
+                                </label>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="pembayaran" value="789"
-                            id="flexRadioDefault2">
-                        <label class="form-check-label" for="flexRadioDefault2">
-                            <img src="{{ asset('dist_frontend/img/BRI.svg') }}" alt="">
-                        </label>
+                        <div class="row">
+                            <div class="col col-1 d-flex align-self-center">
+                                <input class="form-check-input" type="radio" name="pembayaran" value="901"
+                                    id="flexRadioDefault2">
+                            </div>
+                            <div class="col col-6">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    <img src="{{ asset('dist_frontend/img/BNI.svg') }}" alt="">
+                                </label>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="pembayaran" value="901"
-                            id="flexRadioDefault2">
-                        <label class="form-check-label" for="flexRadioDefault2">
-                            <img src="{{ asset('dist_frontend/img/BNI.svg') }}" alt="">
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="pembayaran" value="234"
-                            id="flexRadioDefault2">
-                        <label class="form-check-label" for="flexRadioDefault2">
-                            <img src="{{ asset('dist_frontend/img/mandiri.svg') }}" alt="">
-                        </label>
+                        <div class="row">
+                            <div class="col col-1 d-flex align-self-center">
+                                <input class="form-check-input d-flex align-item-center" type="radio" name="pembayaran"
+                                    value="234" id="flexRadioDefault2">
+                            </div>
+                            <div class="col col-6">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    <img src="{{ asset('dist_frontend/img/mandiri.svg') }}" alt=""
+                                        class="img-fluid">
+                                </label>
+                            </div>
+                        </div>
                     </div>
 
 
@@ -234,7 +253,7 @@
                 <div class="modal-footer">
                     <form action="{{ route('update_premium', Auth::user()->id) }}" method="post">
                         @csrf
-                        <input type="submit" class="btn btn-warning px-auto" value="Konfirmasi">
+                        <input type="submit" class="btn btn-success px-auto" value="Konfirmasi">
                     </form>
                 </div>
             </div>

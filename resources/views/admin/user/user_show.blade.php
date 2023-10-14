@@ -34,7 +34,12 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->email }}</td>
-                                            <td>{{ $item->role }}</td>
+                                            <td>{{ $item->role }}
+                                                @if ($item->role == 'pending')
+                                                    <a href="{{ route('admin_make_premium', $item->id) }}"
+                                                        class="btn btn-warning mx-3">Make Premium</a>
+                                                @endif
+                                            </td>
                                             <td>
                                                 <a href="{{ route('admin_user_edit', $item->id) }}"
                                                     class="btn btn-success"><i class="fa fa-edit"></i>

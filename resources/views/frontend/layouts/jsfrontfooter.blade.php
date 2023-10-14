@@ -1,6 +1,92 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
 </script>
+{{-- dark mode --}}
+<script>
+    /*!
+     * Color mode toggler for Bootstrap's docs (https://getbootstrap.com/)
+     * Copyright 2011-2023 The Bootstrap Authors
+     * Licensed under the Creative Commons Attribution 3.0 Unported License.
+     */
+
+    (() => {
+        'use strict'
+
+        const getStoredTheme = () => localStorage.getItem('theme')
+        const setStoredTheme = theme => localStorage.setItem('theme', theme)
+
+        const getPreferredTheme = () => {
+            const storedTheme = getStoredTheme()
+            if (storedTheme) {
+                return storedTheme
+            }
+
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        }
+
+        const setTheme = theme => {
+            if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.setAttribute('data-bs-theme', 'dark')
+            } else {
+                document.documentElement.setAttribute('data-bs-theme', theme)
+            }
+        }
+
+        setTheme(getPreferredTheme())
+
+        const showActiveTheme = (theme, focus = false) => {
+            const themeSwitcher = document.querySelector('#bd-theme')
+
+            if (!themeSwitcher) {
+                return
+            }
+
+            const themeSwitcherText = document.querySelector('#bd-theme-text')
+            const activeThemeIcon = document.querySelector('.theme-icon-active use')
+            const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
+            const svgOfActiveBtn = btnToActive.querySelector('svg use').getAttribute('href')
+
+            document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
+                element.classList.remove('active')
+                element.setAttribute('aria-pressed', 'false')
+            })
+
+            btnToActive.classList.add('active')
+            btnToActive.setAttribute('aria-pressed', 'true')
+            activeThemeIcon.setAttribute('href', svgOfActiveBtn)
+            const themeSwitcherLabel = `${themeSwitcherText.textContent} (${btnToActive.dataset.bsThemeValue})`
+            themeSwitcher.setAttribute('aria-label', themeSwitcherLabel)
+
+            if (focus) {
+                themeSwitcher.focus()
+            }
+        }
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+            const storedTheme = getStoredTheme()
+            if (storedTheme !== 'light' && storedTheme !== 'dark') {
+                setTheme(getPreferredTheme())
+            }
+        })
+
+        window.addEventListener('DOMContentLoaded', () => {
+            showActiveTheme(getPreferredTheme())
+
+            document.querySelectorAll('[data-bs-theme-value]')
+                .forEach(toggle => {
+                    toggle.addEventListener('click', () => {
+                        const theme = toggle.getAttribute('data-bs-theme-value')
+                        setStoredTheme(theme)
+                        setTheme(theme)
+                        showActiveTheme(theme, true)
+                    })
+                })
+        })
+    })()
+</script>
+{{-- end dark mode --}}
+
+
 @if ($errors->any())
     @foreach ($errors->all() as $error)
         <script>
@@ -42,6 +128,7 @@
     AOS.init();
 </script>
 {{-- end initialize aos --}}
+
 {{-- pembayaran --}}
 <script>
     var totalPajak;
@@ -109,6 +196,26 @@
         });
     }
 </script>
+
+<script>
+    function loginpending() {
+        iziToast.error({
+            // title: 'Notifikasi',
+            message: 'Akun anda masih dalam status pending',
+            position: 'topRight',
+            timeout: 5000, // Durasi tampilan alert dalam milidetik (ms)
+            progressBar: true, // Menampilkan progress bar
+            buttons: [
+                ['<button class="rounded-pill">OK</button>', function(instance, toast) {
+                    instance.hide({
+                        transitionOut: 'fadeOut'
+                    }, toast);
+                }]
+            ]
+        });
+    }
+</script>
+
 {{-- radio --}}
 <script>
     function getValue() {
@@ -141,3 +248,57 @@
 
     }
 </script>
+{{-- end radio --}}
+
+{{-- tombol download video --}}
+<script>
+    var tombolLainnya = document.getElementsByClassName('tombol-lainnya');
+    var tombolUtamaDitekan = false;
+
+    function toggleTombolLainnya() {
+        tombolUtamaDitekan = !tombolUtamaDitekan;
+
+        if (tombolUtamaDitekan) {
+            for (var i = 0; i < tombolLainnya.length; i++) {
+                var delay = (i + 1) * 100; // Delay setiap tombol lain sebesar 100ms
+
+                setTimeout(function(index) {
+                    tombolLainnya[index].classList.add('muncul');
+                }, delay, i);
+            }
+        } else {
+            for (var i = 0; i < tombolLainnya.length; i++) {
+                tombolLainnya[i].classList.remove('muncul');
+            }
+        }
+    }
+</script>
+{{-- end tombol download video --}}
+
+{{-- upload link --}}
+<script>
+    var inputs = [document.getElementById("file"), document.getElementById("linkyt"), document.getElementById(
+        "linkgd")];
+    var showFile = document.getElementById("showFile");
+
+    function toggleTombolIcon(target) {
+        for (var i = 0; i < inputs.length; i++) {
+            if (i === target) {
+                inputs[i].style.display = "block";
+            } else {
+                inputs[i].style.display = "none";
+            }
+        }
+        updateShowFile();
+    }
+
+    function showFile() {
+        inputs[0].style.display = "block";
+        updateShowFile();
+    }
+
+    function updateShowFile() {
+        showFile.style.display = (inputs[0].style.display === "none") ? "block" : "none";
+    }
+</script>
+{{-- end upload link --}}

@@ -5,7 +5,7 @@
 @section('container')
     <div class="container mt-3">
         <div class="row">
-            @foreach ($data as $item)
+            @foreach ($likePosts as $item)
                 @php
                     $path_photo = asset('storage/uploads/photo/compress/' . $item->file);
                     $extphoto = pathinfo($path_photo, PATHINFO_EXTENSION);
@@ -28,12 +28,7 @@
                                 <h5 class="blue6">{{ $item->name }}</h5>
                                 {{-- <p>{{ $item->body }}</p> --}}
                                 <a href="{{ route('detail', [$item->id, $item->name]) }}"
-                                    class="btn btn-primary btn-sm mt-3">View</a>
-                                <a href="{{ route('post_edit', $item->id) }}"
-                                    class="btn btn-warning btn-sm text-light mt-3">Edit</a>
-                                <a href="{{ route('post_delete', $item->id) }}"
-                                    onclick="return confirm('data akan dihapus')"
-                                    class="btn btn-danger btn-sm mt-3">Delete</a>
+                                    class="btn btn-primary btn-sm mt-3">Detail</a>
                             </div>
                         </div>
                     </div>
@@ -51,22 +46,18 @@
                                 <h5 class="blue6">{{ $item->name }}</h5>
                                 {{-- <p>{{ $item->body }}</p> --}}
                                 <a href="{{ route('detail', [$item->id, $item->name]) }}"
-                                    class="btn btn-primary btn-sm mt-3">View</a>
-                                <a href="{{ route('post_edit', $item->id) }}"
-                                    class="btn btn-warning btn-sm text-light mt-3">Edit</a>
-                                <a href="{{ route('post_delete', $item->id) }}"
-                                    onclick="return confirm('data akan dihapus')"
-                                    class="btn btn-danger btn-sm mt-3">Delete</a>
+                                    class="btn btn-primary btn-sm mt-3">Detail</a>
                             </div>
                         </div>
                     </div>
                 @endif
 
-                {{-- @if ($item->file && filter_var($item->file, FILTER_VALIDATE_URL))
+                @if ($item->file && filter_var($item->file, FILTER_VALIDATE_URL))
                     <div class="video-container">
-                        {!! Embed::make($item->file)->parseUrl()->getIframe() !!}
+                        <iframe width="560" height="315" src="{{ $item->file }}" frameborder="0"
+                            allowfullscreen></iframe>
                     </div>
-                @endif --}}
+                @endif
 
 
                 {{-- end Video --}}
@@ -88,12 +79,7 @@
                                 <h5 class="blue6">{{ $item->name }}</h5>
                                 {{-- <p>{{ $item->body }}</p> --}}
                                 <a href="{{ route('detail', [$item->id, $item->name]) }}"
-                                    class="btn btn-primary btn-sm mt-3">View</a>
-                                <a href="{{ route('post_edit', $item->id) }}"
-                                    class="btn btn-warning text-light btn-sm mt-3">Edit</a>
-                                <a href="{{ route('post_delete', $item->id) }}"
-                                    onclick="return confirm('data akan dihapus')"
-                                    class="btn btn-danger btn-sm mt-3">Delete</a>
+                                    class="btn btn-primary btn-sm mt-3">Detail</a>
                             </div>
                         </div>
                     </div>

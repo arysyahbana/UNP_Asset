@@ -42,7 +42,8 @@ Route::post('admin/reset-submit', [AdminLoginController::class, 'reset_submit'])
 //end admin login
 
 //admin post
-Route::get('admin/posts/show', [AdminPostController::class, 'show'])->name('admin_posts_show')->middleware('admin:admin');
+Route::get('admin/post/show', [AdminPostController::class, 'show'])->name('admin-post-show')->middleware('admin:admin');
+Route::get('admin/post/delete/{id}', [AdminPostController::class, 'delete'])->name('admin-post-delete')->middleware('admin:admin');
 //end admin post
 
 //admin category
@@ -53,6 +54,11 @@ Route::get('admin/category/edit/{id}', [AdminCategoryController::class, 'edit'])
 Route::post('admin/category/update/{id}', [AdminCategoryController::class, 'update'])->name('admin_category_update')->middleware('admin:admin');
 Route::get('admin/category/delete/{id}', [AdminCategoryController::class, 'delete'])->name('admin_category_delete')->middleware('admin:admin');
 //end admin category
+
+// admin make premium
+// Route::post('/user/premium/{id}', [FrontPremiumController::class, 'premium'])->name('update_premium')->middleware('auth');
+Route::get('admin/make-premium/{id}', [AdminUserController::class, 'makepremium'])->name('admin_make_premium')->middleware('admin:admin');
+// end admin make premium
 
 //admin sub category (tidak dipakai)
 // Route::get('admin/sub-category/show', [AdminSubCategoryController::class, 'show'])->name('admin_subCategory_show')->middleware('admin:admin');
@@ -80,6 +86,9 @@ Route::get('/photo/{ukuran}', [FrontHomeController::class, 'reso'])->name('reso'
 Route::get('/video', [FrontHomeController::class, 'video'])->name('video');
 Route::get('/audio', [FrontHomeController::class, 'audio'])->name('audio');
 Route::get('/detail/{id}/{name}', [FrontHomeController::class, 'detail'])->name('detail');
+Route::get('/detail/720p/{id}/{name}', [FrontHomeController::class, 'detail_720p'])->name('720p');
+Route::get('/detail/480p/{id}/{name}', [FrontHomeController::class, 'detail_480p'])->name('480p');
+Route::get('/detail/360p/{id}/{name}', [FrontHomeController::class, 'detail_360p'])->name('360p');
 Route::get('/download/{file}', [FrontHomeController::class, 'download'])->name('download')->middleware('auth');
 Route::get('/link/{id}', [FrontHomeController::class, 'linkuser'])->name('linkuser')->middleware('auth');
 // end Frontend
@@ -92,6 +101,8 @@ Route::get('posts/delete/{id}', [FrontPostController::class, 'delete'])->name('p
 Route::get('posts/view/{id}/{name}', [FrontPostController::class, 'view'])->name('post_view')->middleware('auth');
 Route::get('posts/edit/{id}', [FrontPostController::class, 'edit'])->name('post_edit')->middleware('auth');
 Route::post('posts/update/{id}', [FrontPostController::class, 'update'])->name('post_update')->middleware('auth');
+
+Route::get('like/show/{id}', [LikeController::class, 'like_show'])->name('like_show')->middleware('auth');
 //end front post
 
 //front signup
@@ -111,7 +122,8 @@ Route::post('user/reset-submit', [FrontLoginControler::class, 'reset_submit'])->
 //end front login
 
 //front profile
-Route::get('profile/{id}', [FrontProfileController::class, 'edit'])->name('profile_edit')->middleware('auth');
+Route::get('profile/{id}', [FrontProfileController::class, 'profile'])->name('profile')->middleware('auth');
+Route::get('profile/edit/{id}', [FrontProfileController::class, 'edit'])->name('profile_edit')->middleware('auth');
 Route::post('profile/update/{id}', [FrontProfileController::class, 'update'])->name('profile_update')->middleware('auth');
 //end front profile
 

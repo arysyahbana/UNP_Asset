@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
+use FFMpeg\Format\Video\X264;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\Filters\Video\VideoFilters;
 
 // use Illuminate\Support\Facades\Storage;
 
@@ -35,16 +37,28 @@ class FrontPostController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'file' => 'required|mimes:png,jpg,jpeg,mp4,mkv,webm,mp3,m4a,eps,psd,ai,aep,aepx,prproj,aup3,sesx,als',
+            'file' => 'mimes:png,jpg,jpeg,mp4,mkv,webm,mp3,m4a,eps,psd,ai,aep,aepx,prproj,aup3,sesx,als,zip,rar',
             'body' => 'required',
 
         ], [
             'body.required' => 'deskripsi harus diisikan',
-            'file.required' => 'harus ada file yang dimasukan',
             'file.mimes' => 'file harus berupa gambar, video, audio',
             'title.required' => 'title tidak boleh kosong'
         ]);
         $store = new Post();
+        $store->user_id = Auth::guard()->user()->id;
+        $store->name = $request->title;
+        $store->body = $request->body;
+        $pilkat = $store->category_id = $request->category_menu;
+
+        // Tautan YouTube
+        // if ($request->has('linkyt')) {
+        //     $store->file = $request->linkyt;
+        //     $store->save();
+
+        //     return redirect()->back()->with('success', 'Video YouTube berhasil diunggah.');
+        // }
+
         $files = $request->file('file');
         $ext = $files->getClientOriginalExtension();
 
@@ -72,26 +86,60 @@ class FrontPostController extends Controller
             $request->file('file')->move(storage_path('app/public/uploads/video/'), $final);
             $store->file = $final;
 
-            // Path ke video yang diunggah
-            $videoPath = storage_path('app/public/uploads/video/') . $final;
+            //    thumbnail video
+            $video = FFMpeg::fromDisk('video')->open($final);
+            $thumbnail = 'thumb' . time() . '.jpg';
+            $video->getFrameFromSeconds(2)
+                ->export()
+                ->accurate()
+                ->save('thumbnail/' . $thumbnail);
 
-            // Inisialisasi objek FFMpeg
-            $ffmpeg = FFMpeg::create();
+            $store->thumbnail = $thumbnail;
+            // end thumbnail video
 
-            // Buka video menggunakan FFMpeg
-            $video = $ffmpeg->open($videoPath);
+            // Konversi video
+            $video2 = FFMpeg::fromDisk('video')->open($final);
 
-            // Ambil thumbnail di waktu 00:00:05
-            $frame = $video->frame(TimeCode::fromSeconds(5));
+            // 720p
+            $q720p = '720p' . time() . '.mp4';
+            $video2->addFilter(function (VideoFilters $filters) {
+                $filters->resize(new \FFMpeg\Coordinate\Dimension(1280, 720));
+            })
+                ->export()
+                ->toDisk('video')
+                ->inFormat(new X264)
+                ->save('720p/' . $q720p);
+            $store->q720p = $q720p;
+            // end 720p
 
-            // Simpan thumbnail
-            $thumbnailPath = 'thumbnails/' . uniqid() . '.jpg';
-            $frame->save(storage_path('app/public/') . $thumbnailPath);
+            // 480p
+            $q480p = '480p' . time() . '.mp4';
+            $video2->addFilter(function (VideoFilters $filters) {
+                $filters->resize(new \FFMpeg\Coordinate\Dimension(640, 480));
+            })
+                ->export()
+                ->toDisk('video')
+                ->inFormat(new X264)
+                ->save('480p/' . $q480p);
+            $store->q480p = $q480p;
+            // end 480p
 
-            // Simpan path thumbnail ke dalam database atau variabel lainnya
-            $store->thumbnail = $thumbnailPath;
+            // 360p
+            $q360p = '360p' . time() . '.mp4';
+            $video2->addFilter(function (VideoFilters $filters) {
+                $filters->resize(new \FFMpeg\Coordinate\Dimension(640, 360));
+            })
+                ->export()
+                ->toDisk('video')
+                ->inFormat(new X264)
+                ->save('360p/' . $q360p);
+            $store->q360p = $q360p;
+            // end 360p
+
+            // end Konversi Video
         }
 
+        // audio
         if ($ext == 'mp3' || $ext == 'm4a') {
             $ext = $request->file('file')->extension();
             $final = 'audio' . time() . '.' . $ext;
@@ -99,6 +147,7 @@ class FrontPostController extends Controller
             $store->file = $final;
         }
 
+        // Input File Project
         if ($request->file('file2')) {
             $files2 = $request->file('file2');
             $ext2 = $files2->getClientOriginalExtension();
@@ -111,23 +160,36 @@ class FrontPostController extends Controller
 
             if ($ext2 == 'aep' || $ext2 == 'aepx' || $ext2 == 'prproj') {
                 // $ext2 = $request->file('file2')->getClientOriginalExtension();
-
                 $final2 = 'rawvideo' . time() . '.' . $ext2;
                 $request->file('file2')->move(storage_path('app/public/uploads/rawvideo'), $final2);
                 $store->file_mentah = $final2;
             }
 
             if ($ext2 == 'aup3' || $ext2 == 'sesx' || $ext2 == 'als') {
-                // $ext2 = $request->file('file2')->extension();
                 $final2 = 'rawaudio' . time() . '.' . $ext2;
                 $request->file('file2')->move(storage_path('app/public/uploads/rawaudio'), $final2);
                 $store->file_mentah = $final2;
             }
+
+            if ($ext2 == 'rar' || $ext2 == 'zip') {
+                if ($pilkat == 3) {
+                    $final2 = 'rawphoto' . time() . '.' . $ext2;
+                    $request->file('file2')->move(storage_path('app/public/uploads/rawphoto'), $final2);
+                    $store->file_mentah = $final2;
+                } elseif ($pilkat == 4) {
+                    $final2 = 'rawvideo' . time() . '.' . $ext2;
+                    $request->file('file2')->move(storage_path('app/public/uploads/rawvideo'), $final2);
+                    $store->file_mentah = $final2;
+                } elseif ($pilkat == 5) {
+                    $final2 = 'rawaudio' . time() . '.' . $ext2;
+                    $request->file('file2')->move(storage_path('app/public/uploads/rawaudio'), $final2);
+                    $store->file_mentah = $final2;
+                }
+            }
         }
-        $store->user_id = Auth::guard()->user()->id;
-        $store->name = $request->title;
-        $store->body = $request->body;
-        $store->category_id = $request->category_menu;
+        // end Input Project
+
+
         $store->save();
         return redirect()->back()->with('success', 'Upload Success');
     }
@@ -141,14 +203,18 @@ class FrontPostController extends Controller
             unlink(storage_path('app/public/uploads/photo/compress/' . $delete->file));
         } elseif (file_exists(storage_path('app/public/uploads/video/' . $delete->file))) {
             unlink(storage_path('app/public/uploads/video/' . $delete->file));
+            unlink(storage_path('app/public/uploads/video/thumbnail/' . $delete->thumbnail));
+            unlink(storage_path('app/public/uploads/video/720p/' . $delete->q720p));
+            unlink(storage_path('app/public/uploads/video/480p/' . $delete->q480p));
+            unlink(storage_path('app/public/uploads/video/360p/' . $delete->q360p));
         } elseif (file_exists(storage_path('app/public/uploads/audio/' . $delete->file))) {
             unlink(storage_path('app/public/uploads/audio/' . $delete->file));
         } elseif (file_exists(storage_path('app/public/uploads/rawphoto/' . $delete->file))) {
             unlink(storage_path('app/public/uploads/rawphoto/' . $delete->file_mentah));
         } elseif (file_exists(storage_path('app/public/uploads/rawvideo/' . $delete->file))) {
             unlink(storage_path('app/public/uploads/rawvideo/' . $delete->file_mentah));
-        } elseif (file_exists(storage_path('app/public/uploads/rawaudio/' . $delete->file))) {
-            unlink(storage_path('app/public/uploads/rawaudio/' . $delete->file_mentah));
+            // } elseif (file_exists(storage_path('app/public/uploads/rawaudio/' . $delete->file))) {
+            //     unlink(storage_path('app/public/uploads/rawaudio/' . $delete->file_mentah));
         }
         $delete->delete();
         return redirect()->back()->with('success', 'berhasil di hapus');
@@ -167,13 +233,15 @@ class FrontPostController extends Controller
         $post = Post::where('id', $id)->first();
         return view('frontend.Post.front_post_edit', compact('edit', 'post'));
     }
+
     public function update(Request $request, $id)
     {
         $update = Post::where('id', $id)->first();
         $user = User::where('id', $update->user_id)->first();
+        $pilkat = $update->category_id;
 
         $request->validate([
-            'file' => 'required|mimes:png,jpg,jpeg,mp4,mkv,webm,mp3,m4a,eps,psd,ai,aep,aepx,prproj,aup3,sesx,als',
+            'file' => 'mimes:png,jpg,jpeg,mp4,mkv,webm,mp3,m4a,eps,psd,ai,aep,aepx,prproj,aup3,sesx,als',
 
         ], [
             'file.required' => 'harus ada file yang dimasukan',
@@ -230,14 +298,122 @@ class FrontPostController extends Controller
                     $final = 'video' . time() . '.' . $ext;
                     $request->file('file')->move(storage_path('app/public/uploads/video/'), $final);
                     $update->file = $final;
+
+                    //    thumbnail video
+                    $video = FFMpeg::fromDisk('video')->open($final);
+                    $thumbnail = 'thumb' . time() . '.jpg';
+                    $video->getFrameFromSeconds(2)
+                        ->export()
+                        ->accurate()
+                        ->save('thumbnail/' . $thumbnail);
+
+                    $update->thumbnail = $thumbnail;
+                    // end thumbnail video
+
+                    // Konversi video
+                    $video2 = FFMpeg::fromDisk('video')->open($final);
+
+                    // 720p
+                    $q720p = '720p' . time() . '.mp4';
+                    $video2->addFilter(function (VideoFilters $filters) {
+                        $filters->resize(new \FFMpeg\Coordinate\Dimension(1280, 720));
+                    })
+                        ->export()
+                        ->toDisk('video')
+                        ->inFormat(new X264)
+                        ->save('720p/' . $q720p);
+                    $update->q720p = $q720p;
+                    // end 720p
+
+                    // 480p
+                    $q480p = '480p' . time() . '.mp4';
+                    $video2->addFilter(function (VideoFilters $filters) {
+                        $filters->resize(new \FFMpeg\Coordinate\Dimension(640, 480));
+                    })
+                        ->export()
+                        ->toDisk('video')
+                        ->inFormat(new X264)
+                        ->save('480p/' . $q480p);
+                    $update->q480p = $q480p;
+                    // end 480p
+
+                    // 360p
+                    $q360p = '360p' . time() . '.mp4';
+                    $video2->addFilter(function (VideoFilters $filters) {
+                        $filters->resize(new \FFMpeg\Coordinate\Dimension(640, 360));
+                    })
+                        ->export()
+                        ->toDisk('video')
+                        ->inFormat(new X264)
+                        ->save('360p/' . $q360p);
+                    $update->q360p = $q360p;
+                    // end 360p
+
+                    // end Konversi Video
                 }
             } elseif (storage_path('app/public/uploads/video/' . $update->file)) {
                 unlink(storage_path('app/public/uploads/video/' . $update->file));
-                if ($ext == 'mp4' || $ext == 'mkv' || $ext == 'webm') {
+                unlink(storage_path('app/public/uploads/video/thumbnail/' . $update->thumbnail));
+                unlink(storage_path('app/public/uploads/video/720p/' . $update->q720p));
+                unlink(storage_path('app/public/uploads/video/480p/' . $update->q480p));
+                unlink(storage_path('app/public/uploads/video/360p/' . $update->q360p));
+                if ($ext == 'mp4' || $ext == 'mkv' || $ext == 'webm' || $ext == 'jpg') {
                     $ext = $request->file('file')->extension();
                     $final = 'video' . time() . '.' . $ext;
                     $request->file('file')->move(storage_path('app/public/uploads/video/'), $final);
                     $update->file = $final;
+
+                    //    thumbnail video
+                    $video = FFMpeg::fromDisk('video')->open($final);
+                    $thumbnail = 'thumb' . time() . '.jpg';
+                    $video->getFrameFromSeconds(2)
+                        ->export()
+                        ->accurate()
+                        ->save('thumbnail/' . $thumbnail);
+
+                    $update->thumbnail = $thumbnail;
+                    // end thumbnail video
+
+                    // Konversi video
+                    $video2 = FFMpeg::fromDisk('video')->open($final);
+
+                    // 720p
+                    $q720p = '720p' . time() . '.mp4';
+                    $video2->addFilter(function (VideoFilters $filters) {
+                        $filters->resize(new \FFMpeg\Coordinate\Dimension(1280, 720));
+                    })
+                        ->export()
+                        ->toDisk('video')
+                        ->inFormat(new X264)
+                        ->save('720p/' . $q720p);
+                    $update->q720p = $q720p;
+                    // end 720p
+
+                    // 480p
+                    $q480p = '480p' . time() . '.mp4';
+                    $video2->addFilter(function (VideoFilters $filters) {
+                        $filters->resize(new \FFMpeg\Coordinate\Dimension(640, 480));
+                    })
+                        ->export()
+                        ->toDisk('video')
+                        ->inFormat(new X264)
+                        ->save('480p/' . $q480p);
+                    $update->q480p = $q480p;
+                    // end 480p
+
+                    // 360p
+                    $q360p = '360p' . time() . '.mp4';
+                    $video2->addFilter(function (VideoFilters $filters) {
+                        $filters->resize(new \FFMpeg\Coordinate\Dimension(640, 360));
+                    })
+                        ->export()
+                        ->toDisk('video')
+                        ->inFormat(new X264)
+                        ->save('360p/' . $q360p);
+                    $update->q360p = $q360p;
+                    // end 360p
+
+                    // end Konversi Video
                 }
             }
             // end Video
@@ -322,6 +498,43 @@ class FrontPostController extends Controller
                 }
             }
             // end Project Audio
+
+            if ($ext2 == 'zip' || $ext2 == 'rar') {
+                if ($pilkat == 3) {
+                    if (storage_path('app/public/uploads/rawphoto/' . $update->file_mentah == '')) {
+                        $final2 = 'rawphoto' . time() . '.' . $ext2;
+                        $request->file('file2')->move(storage_path('app/public/uploads/rawphoto'), $final2);
+                        $update->file_mentah = $final2;
+                    } elseif (storage_path('app/public/uploads/rawphoto/' . $update->file_mentah)) {
+                        unlink(storage_path('app/public/uploads/rawphoto/' . $update->file_mentah));
+                        $final2 = 'rawphoto' . time() . '.' . $ext2;
+                        $request->file('file2')->move(storage_path('app/public/uploads/rawphoto'), $final2);
+                        $update->file_mentah = $final2;
+                    }
+                } elseif ($pilkat == 4) {
+                    if (storage_path('app/public/uploads/rawvideo/' . $update->file_mentah == '')) {
+                        $final2 = 'rawvideo' . time() . '.' . $ext2;
+                        $request->file('file2')->move(storage_path('app/public/uploads/rawvideo'), $final2);
+                        $update->file_mentah = $final2;
+                    } elseif (storage_path('app/public/uploads/rawvideo/' . $update->file_mentah)) {
+                        unlink(storage_path('app/public/uploads/rawvideo/' . $update->file_mentah));
+                        $final2 = 'rawvideo' . time() . '.' . $ext2;
+                        $request->file('file2')->move(storage_path('app/public/uploads/rawvideo'), $final2);
+                        $update->file_mentah = $final2;
+                    }
+                } elseif ($pilkat == 5) {
+                    if (storage_path('app/public/uploads/rawaudio/' . $update->file_mentah == '')) {
+                        $final2 = 'rawaudio' . time() . '.' . $ext2;
+                        $request->file('file2')->move(storage_path('app/public/uploads/rawaudio'), $final2);
+                        $update->file_mentah = $final2;
+                    } elseif (storage_path('app/public/uploads/rawaudio/' . $update->file_mentah)) {
+                        unlink(storage_path('app/public/uploads/rawaudio/' . $update->file_mentah));
+                        $final2 = 'rawaudio' . time() . '.' . $ext2;
+                        $request->file('file2')->move(storage_path('app/public/uploads/rawaudio'), $final2);
+                        $update->file_mentah = $final2;
+                    }
+                }
+            }
         }
         // end File 2
 

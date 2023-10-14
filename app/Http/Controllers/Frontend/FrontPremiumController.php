@@ -22,10 +22,10 @@ class FrontPremiumController extends Controller
     public function premium(Request $request, $id)
     {
         $update = User::where('id', $id)->first();
-        $update->role = 'premium';
+        $update->role = 'pending';
         $update->update();
         compact('update');
-        return redirect()->route('home')->with('success', 'Akun anda sudah Premium');
+        return redirect()->route('home')->with('success', 'Akun anda akan segera premium');
     }
 
     public function noHp()

@@ -59,13 +59,48 @@ class FrontHomeController extends Controller
     }
     public function detail($id, $nama)
     {
+        $page = 'detail';
         $post = Post::where('id', $id)->first();
         $post2 = Post::latest()->with('rUser')->get();
         $like = Like::where('post_id', $post->id)->count();
         $url = url('detail/' . $post->id . '/' . $post->rUser->name);
         $message = 'File from <a href="' . $url . '">' . $post->rUser->name . '</a> by UNP Asset';
-        return view('frontend.detailhome', compact('post', 'post2', 'like', 'url', 'message'));
+        return view('frontend.detailhome', compact('post', 'post2', 'like', 'url', 'message', 'page'));
     }
+
+    public function detail_720p($id, $nama)
+    {
+        $page = '720p';
+        $post = Post::where('id', $id)->first();
+        $post2 = Post::latest()->with('rUser')->get();
+        $like = Like::where('post_id', $post->id)->count();
+        $url = url('detail/' . $post->id . '/' . $post->rUser->name);
+        $message = 'File from <a href="' . $url . '">' . $post->rUser->name . '</a> by UNP Asset';
+        return view('frontend.detailhome', compact('post', 'post2', 'like', 'url', 'message', 'page'));
+    }
+
+    public function detail_480p($id, $nama)
+    {
+        $page = '480p';
+        $post = Post::where('id', $id)->first();
+        $post2 = Post::latest()->with('rUser')->get();
+        $like = Like::where('post_id', $post->id)->count();
+        $url = url('detail/' . $post->id . '/' . $post->rUser->name);
+        $message = 'File from <a href="' . $url . '">' . $post->rUser->name . '</a> by UNP Asset';
+        return view('frontend.detailhome', compact('post', 'post2', 'like', 'url', 'message', 'page'));
+    }
+
+    public function detail_360p($id, $nama)
+    {
+        $page = '360p';
+        $post = Post::where('id', $id)->first();
+        $post2 = Post::latest()->with('rUser')->get();
+        $like = Like::where('post_id', $post->id)->count();
+        $url = url('detail/' . $post->id . '/' . $post->rUser->name);
+        $message = 'File from <a href="' . $url . '">' . $post->rUser->name . '</a> by UNP Asset';
+        return view('frontend.detailhome', compact('post', 'post2', 'like', 'url', 'message', 'page'));
+    }
+
 
     public function download($file)
     {
@@ -74,6 +109,24 @@ class FrontHomeController extends Controller
         if ($extphoto == 'jpg' || $extphoto == 'png' || $extphoto == 'jpeg') {
             $path = storage_path('app/public/uploads/photo/' . $file);
             return response()->download($path);
+        }
+
+        $path_video_720p = storage_path('app/public/uploads/video/720p/' . $file);
+        $extvideo720p = pathinfo($path_video_720p, PATHINFO_EXTENSION);
+        if ($extvideo720p == 'mp4' && file_exists($path_video_720p)) {
+            return response()->download($path_video_720p);
+        }
+
+        $path_video_480p = storage_path('app/public/uploads/video/480p/' . $file);
+        $extvideo480p = pathinfo($path_video_480p, PATHINFO_EXTENSION);
+        if ($extvideo480p == 'mp4' && file_exists($path_video_480p)) {
+            return response()->download($path_video_480p);
+        }
+
+        $path_video_360p = storage_path('app/public/uploads/video/360p/' . $file);
+        $extvideo360p = pathinfo($path_video_360p, PATHINFO_EXTENSION);
+        if ($extvideo360p == 'mp4' && file_exists($path_video_360p)) {
+            return response()->download($path_video_360p);
         }
 
         $path_video = storage_path('app/public/uploads/video/' . $file);
@@ -102,6 +155,19 @@ class FrontHomeController extends Controller
         if ($extrawvideo == 'aep' || $extrawvideo == 'aepx' || $extrawvideo == 'prproj') {
             $path = storage_path('app/public/uploads/rawvideo/' . $file);
             return response()->download($path);
+        }
+
+        if (($extrawphoto == 'zip' || $extrawphoto == 'rar') && file_exists($path_raw_photo)) {
+            return response()->download($path_raw_photo);
+        }
+
+        if (($extrawvideo == 'zip' || $extrawvideo == 'rar') && file_exists($path_raw_video)) {
+            return response()->download($path_raw_video);
+        }
+        $path_raw_audio = storage_path('app/public/uploads/rawaudio/' . $file);
+        $extrawaudio = pathinfo($path_raw_audio, PATHINFO_EXTENSION);
+        if (($extrawaudio == 'zip' || $extrawaudio == 'rar') && file_exists($path_raw_audio)) {
+            return response()->download($path_raw_audio);
         }
     }
 

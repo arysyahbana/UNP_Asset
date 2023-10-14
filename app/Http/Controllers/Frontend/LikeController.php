@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Like;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class LikeController extends Controller
@@ -22,5 +23,14 @@ class LikeController extends Controller
             ]);
             return back();
         }
+    }
+
+    public function like_show($userId)
+    {
+        $likePosts = Post::whereHas('rLike', function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        })->latest()->get();
+
+        return view('frontend.Post.front_like_show', compact('likePosts'));
     }
 }

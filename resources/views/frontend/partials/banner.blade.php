@@ -1,9 +1,9 @@
 <!-- Awal Banner -->
 <div class="container-fluid banner">
     <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img src="{{ asset('dist_frontend/img/UNP Asset.png') }}" alt=""
-                    width="200px"></a>
+        <div class="container-fluid px-5">
+            <a class="navbar-brand" href="#"><img src="{{ asset('dist_frontend/img/CODIAS.png') }}" alt=""
+                    width="50px"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -14,20 +14,23 @@
                     @auth
                         <li class="nav-item">
                             <div class="dropdown">
-                                <button class="btn btn-light btnwhite dropdown-toggle rounded-pill mx-3 blue6 px-4"
+                                <button
+                                    class="btn btn-light btn-sm btnwhite dropdown-toggle rounded-pill blue6 px-3 mx-0 mx-lg-2 my-2 my-lg-0"
                                     type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="bi bi-person-circle"></i>
                                     {{ Auth::guard()->user()->name }}
                                 </button>
-                                <ul class="dropdown-menu">
+                                <ul class="dropdown-menu dropdown-menu-end">
                                     <li><a href="{{ route('post_create', [Auth::guard()->user()->id, Auth::guard()->user()->name]) }}"
                                             class="dropdown-item"><i class="bi bi-upload"></i>
                                             Unggah</a></li>
                                     <li><a href="{{ route('post_show', [Auth::guard()->user()->id, Auth::guard()->user()->name]) }}"
                                             class="dropdown-item"><i class="bi bi-file-earmark-image"></i>
                                             My Media</a></li>
-                                    <li><a class="dropdown-item"
-                                            href="{{ route('profile_edit', Auth::guard()->user()->id) }}"><i
+                                    <li><a href="{{ route('like_show', [Auth::guard()->user()->id, Auth::guard()->user()->name]) }}"
+                                            class="dropdown-item"><i class="bi bi-heart-fill"></i>
+                                            Liked</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('profile', Auth::guard()->user()->id) }}"><i
                                                 class="bi bi-file-text"></i>
                                             My Profile</a></li>
                                     <li><a class="dropdown-item" href="{{ route('user_logout') }}"><i
@@ -36,22 +39,125 @@
                                 </ul>
                             </div>
                         </li>
+
+                        <li class="nav-item dropdown">
+                            <button class="btn btn-sm px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-theme"
+                                type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static"
+                                aria-label="Toggle theme (auto)">
+                                <svg class="bi theme-icon-active" style="width: 20px; height: 20px;">
+                                    <use href="#circle-half"></use>
+                                </svg>
+                                <span class="d-lg-none ms-2" id="bd-theme-text">Toggle theme</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-theme-text">
+                                <li>
+                                    <button type="button" class="dropdown-item d-flex align-items-center"
+                                        data-bs-theme-value="light" aria-pressed="false">
+                                        <svg class="bi me-2 opacity-50 theme-icon text-light"
+                                            style="width: 20px; height: 20px;">
+                                            <use href="#sun-fill"></use>
+                                        </svg>
+                                        Light
+                                        <svg class="bi ms-auto d-none">
+                                            <use href="#check2"></use>
+                                        </svg>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" class="dropdown-item d-flex align-items-center"
+                                        data-bs-theme-value="dark" aria-pressed="false">
+                                        <svg class="bi me-2 opacity-50 theme-icon" style="width: 20px; height: 20px;">
+                                            <use href="#moon-stars-fill"></use>
+                                        </svg>
+                                        Dark
+                                        <svg class="bi ms-auto d-none">
+                                            <use href="#check2"></use>
+                                        </svg>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" class="dropdown-item d-flex align-items-center active"
+                                        data-bs-theme-value="auto" aria-pressed="true">
+                                        <svg class="bi me-2 opacity-50 theme-icon" style="width: 20px; height: 20px;">
+                                            <use href="#circle-half"></use>
+                                        </svg>
+                                        Auto
+                                        <svg class="bi ms-auto d-none">
+                                            <use href="#check2"></use>
+                                        </svg>
+                                    </button>
+                                </li>
+                            </ul>
+                        </li>
                     @else
                         <li class="nav-item">
-                            <a href="#" class="nav-link btn btn-light btn-block btnwhite blue6 rounded-pill px-lg-4"
-                                data-bs-toggle="modal" data-bs-target="#order"><i class="bi bi-box-arrow-in-right"></i> Log
+                            <a href="#" class="btn btn-sm btn-light btn-block btnwhite blue6 rounded-pill px-3"
+                                data-bs-toggle="modal" data-bs-target="#order"><i class="bi bi-box-arrow-in-right"></i>
+                                Log
                                 in</a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('user_signup') }}"
-                                class="nav-link btn btn-light btn-block btnwhite blue6 rounded-pill px-lg-4 ms-2"><i
+                                class="btn btn-sm btn-light btn-block btnwhite blue6 rounded-pill px-3 ms-0 ms-lg-2 my-2 my-lg-0"><i
                                     class="bi bi-plus-square"></i>
                                 Sign up</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link btn btn-light btn-block btnwhite blue6 rounded-pill px-4 mx-2"
+                            <a href="#"
+                                class="btn btn-sm btn-light btn-block btnwhite blue6 rounded-pill px-3 mx-0 mx-lg-2 mb-2 mb-lg-0"
                                 onclick="loginfail()"><i class="bi bi-upload"></i> Unggah</a>
                         </li>
+                        <li class="nav-item dropdown">
+                            <button class="btn btn-sm px-0 px-lg-2 dropdown-toggle d-flex align-items-center"
+                                id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown"
+                                data-bs-display="static" aria-label="Toggle theme (auto)">
+                                <svg class="bi theme-icon-active" style="width: 20px; height: 20px;">
+                                    <use href="#circle-half"></use>
+                                </svg>
+                                <span class="d-lg-none ms-2" id="bd-theme-text">Toggle theme</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-theme-text">
+                                <li>
+                                    <button type="button" class="dropdown-item d-flex align-items-center"
+                                        data-bs-theme-value="light" aria-pressed="false">
+                                        <svg class="bi me-2 opacity-50 theme-icon text-light"
+                                            style="width: 20px; height: 20px;">
+                                            <use href="#sun-fill"></use>
+                                        </svg>
+                                        Light
+                                        <svg class="bi ms-auto d-none">
+                                            <use href="#check2"></use>
+                                        </svg>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" class="dropdown-item d-flex align-items-center"
+                                        data-bs-theme-value="dark" aria-pressed="false">
+                                        <svg class="bi me-2 opacity-50 theme-icon" style="width: 20px; height: 20px;">
+                                            <use href="#moon-stars-fill"></use>
+                                        </svg>
+                                        Dark
+                                        <svg class="bi ms-auto d-none">
+                                            <use href="#check2"></use>
+                                        </svg>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" class="dropdown-item d-flex align-items-center active"
+                                        data-bs-theme-value="auto" aria-pressed="true">
+                                        <svg class="bi me-2 opacity-50 theme-icon" style="width: 20px; height: 20px;">
+                                            <use href="#circle-half"></use>
+                                        </svg>
+                                        Auto
+                                        <svg class="bi ms-auto d-none">
+                                            <use href="#check2"></use>
+                                        </svg>
+                                    </button>
+                                </li>
+                            </ul>
+                        </li>
+
+
                     @endauth
                 </ul>
             </div>
@@ -117,8 +223,8 @@
                 @endif --}}
                 <form action="{{ route('photo') }}" method="GET">
                     <div class="input-group">
-                        <input type="text" class="form-control py-3 rounded-start-pill shadow" placeholder="Search.."
-                            name="search_photo" value="{{ request('search_photo') }}">
+                        <input type="text" class="form-control py-3 rounded-start-pill shadow"
+                            placeholder="Search.." name="search_photo" value="{{ request('search_photo') }}">
                         <button class="btn btn-info warna_search rounded-end-pill" type="submit"><i
                                 class="bi bi-search white"></i></button>
                     </div>
@@ -133,8 +239,8 @@
             <div class="col col-12 col-lg-6 text-center mt-3">
                 <form action="{{ route('video') }}" method="GET">
                     <div class="input-group">
-                        <input type="text" class="form-control py-3 rounded-start-pill shadow" placeholder="Search.."
-                            name="search_video" value="{{ request('search_video') }}">
+                        <input type="text" class="form-control py-3 rounded-start-pill shadow"
+                            placeholder="Search.." name="search_video" value="{{ request('search_video') }}">
                         <button class="btn btn-info warna_search rounded-end-pill" type="submit"><i
                                 class="bi bi-search white"></i></button>
                     </div>
@@ -186,16 +292,17 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+                <img src="{{ asset('dist_frontend/img/CODIAS.png') }}" alt="" width="60px">
+                <span class="ms-2 fs-4 fw-bold pt-1 text-dark">Login</span>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="container">
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col text-center">
-                            <img src="{{ asset('dist_frontend/img/UNP Asset.png') }}" alt="" width="200px">
-                            <h2 class="fw-bold blue6">Login</h2>
+
                         </div>
-                    </div>
+                    </div> --}}
                     <form action="{{ route('user_login_submit') }}" method="post">
                         @csrf
                         <div class="py-3">
@@ -211,7 +318,7 @@
                             <a href="{{ route('user_forget') }}" class="text-decoration-none">Forget password?</a>
                         </div>
                         <div class="modal-footer">
-                            <input type="submit" class="btn btn-success form-control" value="Login">
+                            <input type="submit" class="btn btn-primary btn-blue6 form-control" value="Login">
                         </div>
                     </form>
 
