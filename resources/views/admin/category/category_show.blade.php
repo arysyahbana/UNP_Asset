@@ -34,10 +34,10 @@
                                             <td>{{ $category->name }}</td>
                                             <td>{{ $category->show_on_menu }}</td>
                                             <td>
-                                                <a href="{{ route('admin_category_edit', $category->id) }}"
+                                                <a href="{{ route('admin_category_edit', $category->name) }}"
                                                     class="btn btn-success"><i class="fa fa-edit"></i>
                                                     Edit</a>
-                                                <a href="{{ route('admin_category_delete', $category->id) }}"
+                                                <a href="{{ route('admin_category_delete', $category->name) }}"
                                                     class="btn btn-danger" onclick="return confirm('are you sure?')"><i
                                                         class="fa fa-edit"></i>
                                                     Delete</a>

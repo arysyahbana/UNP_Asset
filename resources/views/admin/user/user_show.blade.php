@@ -36,16 +36,17 @@
                                             <td>{{ $item->email }}</td>
                                             <td>{{ $item->role }}
                                                 @if ($item->role == 'pending')
-                                                    <a href="{{ route('admin_make_premium', $item->id) }}"
+                                                    <a href="{{ route('admin_make_premium', $item->name) }}"
                                                         class="btn btn-warning mx-3">Make Premium</a>
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('admin_user_edit', $item->id) }}"
+                                                <a href="{{ route('admin_user_edit', $item->name) }}"
                                                     class="btn btn-success"><i class="fa fa-edit"></i>
                                                     Edit</a>
-                                                <a href="{{ route('admin_user_delete', $item->id) }}" class="btn btn-danger"
-                                                    onclick="return confirm('are you sure?')"><i class="fa fa-edit"></i>
+                                                <a href="{{ route('admin_user_delete', $item->name) }}"
+                                                    class="btn btn-danger" onclick="return confirm('are you sure?')"><i
+                                                        class="fa fa-edit"></i>
                                                     Delete</a>
                                             </td>
                                         </tr>

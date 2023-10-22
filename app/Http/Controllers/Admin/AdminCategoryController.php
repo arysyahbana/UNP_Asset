@@ -32,28 +32,28 @@ class AdminCategoryController extends Controller
         return redirect()->route('admin_category_show');
     }
 
-    public function edit($id)
+    public function edit($name)
     {
-        $edit = Category::where('id', $id)->first();
+        $edit = Category::where('name', $name)->first();
         return view('admin.category.category_edit', compact('edit'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $name)
     {
         $request->validate([
             'category_name' => 'required',
         ]);
 
-        $category_update = Category::where('id', $id)->first();
+        $category_update = Category::where('name', $name)->first();
         $category_update->name = $request->category_name;
         $category_update->show_on_menu = $request->show_on_menu;
         $category_update->update();
         return redirect()->route('admin_category_show');
     }
 
-    public function delete($id)
+    public function delete($name)
     {
-        Category::where('id', $id)->delete();
+        Category::where('name', $name)->delete();
         return redirect()->route('admin_category_show');
     }
 }

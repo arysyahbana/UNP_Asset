@@ -46,8 +46,16 @@ class FrontSignUpController extends Controller
     public function verif($token, $email)
     {
         $verif = User::where('token', $token)->where('email', $email)->first();
-        $verif->token = NULL;
-        $verif->update();
-        return redirect()->route('home')->with('success', 'verifikasi berhasil');
+
+        if ($verif) {
+            // dd($verif, $token, $email);
+            $verif->update(['token' => null]);
+            // dd($verif);
+            // die;
+            return redirect()->route('home')->with('success', 'verifikasi berhasil');
+        } else {
+            // Handle the case where no matching user is found
+            return redirect()->route('home')->with('success', 'verifikasi berhasil');
+        }
     }
 }

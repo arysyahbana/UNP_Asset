@@ -5,7 +5,7 @@
 @section('main_content')
     <div class="container-fluid">
         <div class="card">
-            <form action="{{ route('admin_user_update', $edit->id) }}" method="post">
+            <form action="{{ route('admin_user_update', $edit->name) }}" method="post">
                 @csrf
                 <div class="card-body">
                     <h5 class="card-title">Update User</h5>

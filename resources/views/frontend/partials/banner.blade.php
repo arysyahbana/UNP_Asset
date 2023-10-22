@@ -2,7 +2,7 @@
 <div class="container-fluid banner">
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid px-5">
-            <a class="navbar-brand" href="#"><img src="{{ asset('dist_frontend/img/CODIAS.png') }}" alt=""
+            <a class="navbar-brand" href="/"><img src="{{ asset('dist_frontend/img/CODIAS.png') }}" alt=""
                     width="50px"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,16 +21,17 @@
                                     {{ Auth::guard()->user()->name }}
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a href="{{ route('post_create', [Auth::guard()->user()->id, Auth::guard()->user()->name]) }}"
+                                    <li><a href="{{ route('post_create', [Auth::guard()->user()->name]) }}"
                                             class="dropdown-item"><i class="bi bi-upload"></i>
                                             Unggah</a></li>
-                                    <li><a href="{{ route('post_show', [Auth::guard()->user()->id, Auth::guard()->user()->name]) }}"
+                                    <li><a href="{{ route('post_show', [Auth::guard()->user()->name]) }}"
                                             class="dropdown-item"><i class="bi bi-file-earmark-image"></i>
                                             My Media</a></li>
-                                    <li><a href="{{ route('like_show', [Auth::guard()->user()->id, Auth::guard()->user()->name]) }}"
+                                    <li><a href="{{ route('like_show', [Auth::guard()->user()->name]) }}"
                                             class="dropdown-item"><i class="bi bi-heart-fill"></i>
                                             Liked</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('profile', Auth::guard()->user()->id) }}"><i
+                                    <li><a class="dropdown-item"
+                                            href="{{ route('profile', [Auth::guard()->user()->name]) }}"><i
                                                 class="bi bi-file-text"></i>
                                             My Profile</a></li>
                                     <li><a class="dropdown-item" href="{{ route('user_logout') }}"><i

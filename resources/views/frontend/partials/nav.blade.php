@@ -28,16 +28,16 @@
                             {{ Auth::guard()->user()->name }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a href="{{ route('post_create', [Auth::guard()->user()->id, Auth::guard()->user()->name]) }}"
-                                    class="dropdown-item"><i class="bi bi-upload"></i>
+                            <li><a href="{{ route('post_create', [Auth::guard()->user()->name]) }}" class="dropdown-item"><i
+                                        class="bi bi-upload"></i>
                                     Unggah</a></li>
-                            <li><a href="{{ route('post_show', [Auth::guard()->user()->id, Auth::guard()->user()->name]) }}"
-                                    class="dropdown-item"><i class="bi bi-file-earmark-image"></i>
+                            <li><a href="{{ route('post_show', [Auth::guard()->user()->name]) }}" class="dropdown-item"><i
+                                        class="bi bi-file-earmark-image"></i>
                                     My Media</a></li>
-                            <li><a href="{{ route('like_show', [Auth::guard()->user()->id, Auth::guard()->user()->name]) }}"
-                                    class="dropdown-item"><i class="bi bi-heart-fill"></i>
+                            <li><a href="{{ route('like_show', [Auth::guard()->user()->name]) }}" class="dropdown-item"><i
+                                        class="bi bi-heart-fill"></i>
                                     Liked</a></li>
-                            <li><a class="dropdown-item" href="{{ route('profile', Auth::guard()->user()->id) }}"><i
+                            <li><a class="dropdown-item" href="{{ route('profile', Auth::guard()->user()->name) }}"><i
                                         class="bi bi-file-text"></i>
                                     My Profile</a></li>
                             <li><a class="dropdown-item" href="{{ route('user_logout') }}"><i

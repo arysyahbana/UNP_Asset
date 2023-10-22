@@ -65,7 +65,7 @@
                                             <div class="fs-2"><i class="bi bi-person-circle"></i></div>
                                         @endif
                                     </div>
-                                    <div class="col col-10"><a href="{{ route('profile', [$post->rUser->id]) }}"
+                                    <div class="col col-10"><a href="{{ route('profile', [$post->rUser->name]) }}"
                                             class="fs-3 text-decoration-none text-dark">{{ $post->rUser->name }}</a>
                                     </div>
                                 </div>
@@ -173,7 +173,7 @@
                                 <div class="content">
                                     <h5 class="blue6">{{ $item->name }}</h5>
                                     {{-- <p>{{ $item->body }}</p> --}}
-                                    <a href="{{ route('detail', [$item->id, $item->name]) }}"
+                                    <a href="{{ route('detail', [$item->slug]) }}"
                                         class="btn btn-primary btn-blue6 mt-4 btn-sm">Detail</a>
                                 </div>
                             </div>
@@ -245,13 +245,13 @@
                         </div>
                     @endif
                     <div class="text-center my-3">
-                        <a href="{{ route('detail', [$post->id, $post->name]) }}"
+                        <a href="{{ route('detail', [$post->slug]) }}"
                             class="btn btn-small {{ $page == 'detail' ? ' btn-primary' : 'btn-secondary' }}">Original</a>
-                        <a href="{{ route('720p', [$post->id, $post->name]) }}"
+                        <a href="{{ route('720p', [$post->slug]) }}"
                             class="btn btn-small {{ $page == '720p' ? ' btn-primary' : 'btn-secondary' }}">720p</a>
-                        <a href="{{ route('480p', [$post->id, $post->name]) }}"
+                        <a href="{{ route('480p', [$post->slug]) }}"
                             class="btn btn-small {{ $page == '480p' ? ' btn-primary' : 'btn-secondary' }}">480p</a>
-                        <a href="{{ route('360p', [$post->id, $post->name]) }}"
+                        <a href="{{ route('360p', [$post->slug]) }}"
                             class="btn btn-small {{ $page == '360p' ? ' btn-primary' : 'btn-secondary' }}">360p</a>
                     </div>
                 </div>
@@ -275,7 +275,7 @@
                                             <div class="fs-2"><i class="bi bi-person-circle"></i></div>
                                         @endif
                                     </div>
-                                    <div class="col col-10"><a href="{{ route('profile', [$post->rUser->id]) }}"
+                                    <div class="col col-10"><a href="{{ route('profile', [$post->rUser->name]) }}"
                                             class="fs-3 text-decoration-none text-dark">{{ $post->rUser->name }}</a></div>
                                 </div>
                                 <p class="mt-4"><i class="bi bi-tags-fill"></i> Kategori : {{ $post->rCategory->name }}
@@ -405,7 +405,7 @@
                                 <div class="contentvid">
                                     <h5 class="blue6">{{ $item->name }}</h5>
                                     {{-- <p>{{ $item->body }}</p> --}}
-                                    <a href="{{ route('detail', [$item->id, $item->name]) }}"
+                                    <a href="{{ route('detail', [$item->slug]) }}"
                                         class="btn btn-primary btn-blue6 mt-4 btn-sm">Detail</a>
                                 </div>
                             </div>
@@ -454,7 +454,7 @@
                                             <div class="fs-2"><i class="bi bi-person-circle"></i></div>
                                         @endif
                                     </div>
-                                    <div class="col col-10"><a href="{{ route('profile', [$post->rUser->id]) }}"
+                                    <div class="col col-10"><a href="{{ route('profile', [$post->rUser->name]) }}"
                                             class="fs-3 text-decoration-none text-dark">{{ $post->rUser->name }}</a></div>
                                 </div>
                                 <p class="mt-4"><i class="bi bi-tags-fill"></i> Kategori : {{ $post->rCategory->name }}
@@ -577,7 +577,7 @@
                                     @endif
                                     <h5 class="blue6 mt-2">{{ $item->name }}</h5>
                                     {{-- <p>{{ $item->body }}</p> --}}
-                                    <a href="{{ route('detail', [$item->id, $item->name]) }}"
+                                    <a href="{{ route('detail', [$item->slug]) }}"
                                         class="btn btn-primary btn-blue6 mt-3 btn-sm">Detail</a>
                                 </div>
                             </div>
@@ -587,6 +587,104 @@
                 {{-- end Audio lainnya --}}
             @endif
             {{-- end Audio --}}
+
+            {{-- Youtube --}}
+            @if ($post->url)
+                <div class="col col-12 col-lg-8">
+                    <div class="card shadow rounded-4">
+                        <x-embed url="{{ $post->url }}" aspect-ratio="16:9" style="width: 400px; height: 300px;" />
+                    </div>
+                </div>
+
+                <div class="col col-12 col-lg-4">
+                    <div class="card shadow rounded-4">
+                        <div class="container p-3">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col col-2">
+                                        @php
+                                            $path_photo = asset('storage/uploads/photo/profil/' . $post->rUser->foto_profil);
+                                            $extphoto = pathinfo($path_photo, PATHINFO_EXTENSION);
+                                        @endphp
+                                        @if ($extphoto == 'jpg' || $extphoto == 'png' || $extphoto == 'jpeg')
+                                            <div class="profil-detail rounded-pill">
+                                                <img src="{{ asset($path_photo) }}" alt=""
+                                                    class="img-fluid rounded-pill">
+                                            </div>
+                                        @elseif ($extphoto == '')
+                                            <div class="fs-2"><i class="bi bi-person-circle"></i></div>
+                                        @endif
+                                    </div>
+                                    <div class="col col-10"><a href="{{ route('profile', [$post->rUser->name]) }}"
+                                            class="fs-3 text-decoration-none text-dark">{{ $post->rUser->name }}</a></div>
+                                </div>
+                                <p class="mt-4"><i class="bi bi-tags-fill"></i> Kategori : {{ $post->rCategory->name }}
+                                </p>
+                                <p><i class="bi bi-chat-square-dots-fill"></i> Title : {{ $post->name }}</p>
+                                <p><i class="bi bi-card-text"></i> Deskripsi : {{ $post->body }}</p>
+                                <p><i class="bi bi-files"></i> File Type : {{ $extvideo }}, {{ $extrawvideo }}
+                                </p>
+
+                                @auth
+                                    <a href="{{ route('like', $post->id) }}" class="text-decoration-none text-danger"><i
+                                            class="bi bi-heart-fill"></i>
+                                        {{ $like }} Like</a>
+
+                                    {{-- Tidak Login --}}
+                                @else
+                                    <a href="#" class="text-decoration-none text-danger" onclick="loginfail()"><i
+                                            class="bi bi-heart-fill"></i>
+                                        {{ $like }} Like</a>
+                                    @if ($post->file_mentah == '')
+                                    @else
+                                        <a href="#" class="btn btn-primary btnblue1 white form-control mt-3 py-2"
+                                            onclick="loginfail()">
+                                            <h5><i class="bi bi-download"></i>
+                                                Download
+                                                {{ $extrawvideo }}</h5>
+                                        </a>
+                                    @endif
+                                    <a href="#" class="btn btn-success form-control mt-3 py-2" onclick="loginfail()">
+                                        <h5>
+                                            <i class="bi bi-download"></i>
+                                            Download {{ $extvideo }}
+                                        </h5>
+                                    </a>
+                                @endauth
+                                {{-- end Tidak Login --}}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- Video lainnya --}}
+                <div class="" style="height: 10vh"></div>
+                <div class="fs-4">Lainnya...</div>
+                @foreach ($post2 as $item)
+                    @php
+                        $path_video = asset('storage/uploads/video/thumbnail/' . $item->thumbnail);
+                        $extvideo = pathinfo($path_video, PATHINFO_EXTENSION);
+                    @endphp
+                    @if ($extvideo == 'jpg')
+                        <div class="col col-12 col-md-6 col-lg-3 my-2 d-flex justify-content-center" data-aos="fade-up"
+                            data-aos-duration="1200">
+                            <div class="card-vid">
+                                <div class="vidbox">
+                                    <img src="{{ $path_video }}" alt="" class="img-fluid">
+                                </div>
+                                <div class="contentvid">
+                                    <h5 class="blue6">{{ $item->name }}</h5>
+                                    {{-- <p>{{ $item->body }}</p> --}}
+                                    <a href="{{ route('detail', [$item->slug]) }}"
+                                        class="btn btn-primary btn-blue6 mt-4 btn-sm">Detail</a>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+                {{-- end Video lainnya --}}
+            @endif
+            {{-- end Youtube --}}
         </div>
     </div>
 

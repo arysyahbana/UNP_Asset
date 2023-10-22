@@ -25,10 +25,10 @@ class LikeController extends Controller
         }
     }
 
-    public function like_show($userId)
+    public function like_show($name)
     {
-        $likePosts = Post::whereHas('rLike', function ($query) use ($userId) {
-            $query->where('user_id', $userId);
+        $likePosts = Post::whereHas('rLike', function ($query) use ($name) {
+            $query->where('name', $name);
         })->latest()->get();
 
         return view('frontend.Post.front_like_show', compact('likePosts'));

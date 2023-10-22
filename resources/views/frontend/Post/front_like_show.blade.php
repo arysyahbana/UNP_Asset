@@ -9,13 +9,13 @@
                 @php
                     $path_photo = asset('storage/uploads/photo/compress/' . $item->file);
                     $extphoto = pathinfo($path_photo, PATHINFO_EXTENSION);
-                    
+
                     $path_video = asset('storage/uploads/video/thumbnail/' . $item->thumbnail);
                     $extvideo = pathinfo($path_video, PATHINFO_EXTENSION);
-                    
+
                     $path_audio = asset('storage/uploads/audio/' . $item->file);
                     $extaudio = pathinfo($path_audio, PATHINFO_EXTENSION);
-                    
+
                 @endphp
                 {{-- Photo --}}
                 @if ($extphoto == 'jpg' || $extphoto == 'png' || $extphoto == 'jpeg')
@@ -25,9 +25,9 @@
                                 <img src="{{ $path_photo }}" alt="" class="img-fluid">
                             </div>
                             <div class="content">
-                                <h5 class="blue6">{{ $item->name }}</h5>
+                                <h5 class="blue6 teks">{{ $item->name }}</h5>
                                 {{-- <p>{{ $item->body }}</p> --}}
-                                <a href="{{ route('detail', [$item->id, $item->name]) }}"
+                                <a href="{{ route('detail', [$item->slug]) }}"
                                     class="btn btn-primary btn-sm mt-3">Detail</a>
                             </div>
                         </div>
@@ -43,9 +43,9 @@
                                 <img src="{{ $path_video }}" alt="" class="img-fluid">
                             </div>
                             <div class="contentvid">
-                                <h5 class="blue6">{{ $item->name }}</h5>
+                                <h5 class="blue6 teks">{{ $item->name }}</h5>
                                 {{-- <p>{{ $item->body }}</p> --}}
-                                <a href="{{ route('detail', [$item->id, $item->name]) }}"
+                                <a href="{{ route('detail', [$item->slug]) }}"
                                     class="btn btn-primary btn-sm mt-3">Detail</a>
                             </div>
                         </div>
@@ -76,9 +76,9 @@
                                 @if ($extaudio == 'm4a')
                                     <audio src="{{ $path_audio }}" type="audio/m4a" controls></audio>
                                 @endif
-                                <h5 class="blue6">{{ $item->name }}</h5>
+                                <h5 class="blue6 teks">{{ $item->name }}</h5>
                                 {{-- <p>{{ $item->body }}</p> --}}
-                                <a href="{{ route('detail', [$item->id, $item->name]) }}"
+                                <a href="{{ route('detail', [$item->slug]) }}"
                                     class="btn btn-primary btn-sm mt-3">Detail</a>
                             </div>
                         </div>

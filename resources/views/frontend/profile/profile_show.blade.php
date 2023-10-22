@@ -90,9 +90,9 @@
                                                                             class="img-fluid">
                                                                     </div>
                                                                     <div class="content2">
-                                                                        <h5 class="blue6">{{ $item->name }}</h5>
+                                                                        <h5 class="blue6 teks2">{{ $item->name }}</h5>
                                                                         {{-- <p>{{ $item->body }}</p> --}}
-                                                                        <a href="{{ route('detail', [$item->id, $item->name]) }}"
+                                                                        <a href="{{ route('detail', [$item->slug]) }}"
                                                                             class="btn btn-primary btn-blue6 mt-2 btn-sm">Detail</a>
                                                                     </div>
                                                                 </div>
@@ -118,10 +118,26 @@
                                                                             class="img-fluid">
                                                                     </div>
                                                                     <div class="contentvid2">
-                                                                        <h5 class="blue6">{{ $item->name }}</h5>
+                                                                        <h5 class="blue6 teks2">{{ $item->name }}</h5>
                                                                         {{-- <p>{{ $item->body }}</p> --}}
                                                                         <a href="{{ route('detail', [$item->id, $item->name]) }}"
                                                                             class="btn btn-primary btn-blue6 mt-2 text-light btn-sm">Detail</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @elseif ($item->url)
+                                                            <div class="col col-12 col-md-6 col-lg-3 my-2"
+                                                                data-aos="fade-up" data-aos-duration="1200">
+                                                                <div class="card-vid">
+                                                                    <div class="vidbox">
+                                                                        <x-embed url="{{ $item->url }}"
+                                                                            aspect-ratio="4:3"
+                                                                            style="width: 400px; height: 300px;" />
+                                                                    </div>
+                                                                    <div class="contentvid">
+                                                                        <h5 class="blue6">{{ $item->name }}</h5>
+                                                                        <a href="{{ route('detail', [$item->slug]) }}"
+                                                                            class="btn btn-primary mt-3 btn-blue6 btn-sm">Detail</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -155,9 +171,11 @@
                                                                                 type="audio/m4a" controls
                                                                                 class="waudio"></audio>
                                                                         @endif
-                                                                        <h5 class="mt-2 blue6">{{ $item->name }}</h5>
+                                                                        <h5 class="mt-2 blue6 teks2">
+                                                                            {{ $item->name }}
+                                                                        </h5>
                                                                         {{-- <p>{{ $item->body }}</p> --}}
-                                                                        <a href="{{ route('detail', [$item->id, $item->name]) }}"
+                                                                        <a href="{{ route('detail', [$item->slug]) }}"
                                                                             class="btn btn-primary mt-3 btn-blue6 btn-sm">Detail</a>
                                                                     </div>
                                                                 </div>
@@ -170,17 +188,14 @@
                                     </div>
                                 </div>
                             </div>
-
-                            @if (Auth::guard('web')->user()->id == $show->id)
-                                <div class="row mt-4">
+                            <div class="row mt-4">
+                                @if (Auth::guard('web')->check() && Auth::guard('web')->user()->id == $show->id)
                                     <div class="col col-12 d-flex justify-content-end">
-                                        <a href="{{ route('profile_edit', $show->id) }}"
-                                            class="btn btn-sm btn-success">Edit
-                                            Profile</a>
+                                        <a href="{{ route('profile_edit', $show->name) }}"
+                                            class="btn btn-sm btn-success">Edit Profile</a>
                                     </div>
-                                </div>
-                            @else
-                            @endif
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>

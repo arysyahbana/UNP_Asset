@@ -18,14 +18,16 @@ return new class extends Migration
             $table->foreignId('category_id');
             $table->foreignId('user_id');
             $table->string('name');
+            $table->string('slug');
             $table->string('file');
+            $table->string('url')->nullable();
+            $table->string('urlgd')->nullable();
             $table->string('file_mentah')->nullable();
             $table->string('thumbnail')->nullable();
             $table->string('resolution')->nullable();
             $table->string('q720p')->nullable();
             $table->string('q480p')->nullable();
             $table->string('q360p')->nullable();
-            // $table->string('linkyt')->nullable();
             $table->string('body');
             $table->timestamp('published_at')->nullable();
             $table->timestamps();

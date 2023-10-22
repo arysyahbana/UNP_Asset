@@ -15,9 +15,9 @@ class AdminPostController extends Controller
         return view('admin.post.post_show', compact('posts'));
     }
 
-    public function delete($id)
+    public function delete($name)
     {
-        Post::where('id', $id)->delete();
+        Post::where('name', $name)->delete();
         return redirect()->route('admin-post-show')->with('success', 'Delete Success');
     }
 }

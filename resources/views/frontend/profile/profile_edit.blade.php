@@ -11,7 +11,7 @@
                         <div class="card-body">
                             <h3 class="card-title mb-5 display-6 fw-bold text-center">Update Profile</h3>
 
-                            <form action="{{ route('profile_update', $edit->id) }}" method="post"
+                            <form action="{{ route('profile_update', $edit->name) }}" method="post"
                                 enctype="multipart/form-data">
                                 @csrf
 
@@ -76,9 +76,8 @@
                                 <div class="form-group mb-3">
                                     <label>Status</label>
                                     <select name="status" class="form-select" id="status">
-                                        <option>Pilih Menu...</option>
-                                        <option value="Bekerja">Bekerja</option>
                                         <option value="Tidak Bekerja">Tidak Bekerja</option>
+                                        <option value="Bekerja">Bekerja</option>
                                     </select>
                                 </div>
 

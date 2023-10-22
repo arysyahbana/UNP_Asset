@@ -251,7 +251,7 @@
                     <p>Batas Akhir Pembayaran 2 jam setelah Nomor Virtual Account diberikan!!</p>
                 </div>
                 <div class="modal-footer">
-                    <form action="{{ route('update_premium', Auth::user()->id) }}" method="post">
+                    <form action="{{ route('update_premium', Auth::user()->name) }}" method="post">
                         @csrf
                         <input type="submit" class="btn btn-success px-auto" value="Konfirmasi">
                     </form>

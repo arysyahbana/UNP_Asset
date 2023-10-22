@@ -43,21 +43,21 @@ Route::post('admin/reset-submit', [AdminLoginController::class, 'reset_submit'])
 
 //admin post
 Route::get('admin/post/show', [AdminPostController::class, 'show'])->name('admin-post-show')->middleware('admin:admin');
-Route::get('admin/post/delete/{id}', [AdminPostController::class, 'delete'])->name('admin-post-delete')->middleware('admin:admin');
+Route::get('admin/post/delete/{name}', [AdminPostController::class, 'delete'])->name('admin-post-delete')->middleware('admin:admin');
 //end admin post
 
 //admin category
 Route::get('admin/category/show', [AdminCategoryController::class, 'show'])->name('admin_category_show')->middleware('admin:admin');
 Route::get('admin/category/create', [AdminCategoryController::class, 'create'])->name('admin_category_create')->middleware('admin:admin');
 Route::post('admin/category/store', [AdminCategoryController::class, 'store'])->name('admin_category_store')->middleware('admin:admin');
-Route::get('admin/category/edit/{id}', [AdminCategoryController::class, 'edit'])->name('admin_category_edit')->middleware('admin:admin');
-Route::post('admin/category/update/{id}', [AdminCategoryController::class, 'update'])->name('admin_category_update')->middleware('admin:admin');
-Route::get('admin/category/delete/{id}', [AdminCategoryController::class, 'delete'])->name('admin_category_delete')->middleware('admin:admin');
+Route::get('admin/category/edit/{name}', [AdminCategoryController::class, 'edit'])->name('admin_category_edit')->middleware('admin:admin');
+Route::post('admin/category/update/{name}', [AdminCategoryController::class, 'update'])->name('admin_category_update')->middleware('admin:admin');
+Route::get('admin/category/delete/{name}', [AdminCategoryController::class, 'delete'])->name('admin_category_delete')->middleware('admin:admin');
 //end admin category
 
 // admin make premium
 // Route::post('/user/premium/{id}', [FrontPremiumController::class, 'premium'])->name('update_premium')->middleware('auth');
-Route::get('admin/make-premium/{id}', [AdminUserController::class, 'makepremium'])->name('admin_make_premium')->middleware('admin:admin');
+Route::get('admin/make-premium/{name}', [AdminUserController::class, 'makepremium'])->name('admin_make_premium')->middleware('admin:admin');
 // end admin make premium
 
 //admin sub category (tidak dipakai)
@@ -73,9 +73,9 @@ Route::get('admin/make-premium/{id}', [AdminUserController::class, 'makepremium'
 Route::get('admin/users/show', [AdminUserController::class, 'show'])->name('admin_user_show')->middleware('admin:admin');
 Route::get('admin/users/create', [AdminUserController::class, 'create'])->name('admin_user_create')->middleware('admin:admin');
 Route::post('admin/users/store', [AdminUserController::class, 'store'])->name('admin_user_store')->middleware('admin:admin');
-Route::get('admin/users/edit/{id}', [AdminUserController::class, 'edit'])->name('admin_user_edit')->middleware('admin:admin');
-Route::post('admin/users/update/{id}', [AdminUserController::class, 'update'])->name('admin_user_update')->middleware('admin:admin');
-Route::get('admin/users/delete/{id}', [AdminUserController::class, 'delete'])->name('admin_user_delete')->middleware('admin:admin');
+Route::get('admin/users/edit/{name}', [AdminUserController::class, 'edit'])->name('admin_user_edit')->middleware('admin:admin');
+Route::post('admin/users/update/{name}', [AdminUserController::class, 'update'])->name('admin_user_update')->middleware('admin:admin');
+Route::get('admin/users/delete/{name}', [AdminUserController::class, 'delete'])->name('admin_user_delete')->middleware('admin:admin');
 //end admin users
 
 
@@ -85,24 +85,24 @@ Route::get('/photo', [FrontHomeController::class, 'photo'])->name('photo');
 Route::get('/photo/{ukuran}', [FrontHomeController::class, 'reso'])->name('reso');
 Route::get('/video', [FrontHomeController::class, 'video'])->name('video');
 Route::get('/audio', [FrontHomeController::class, 'audio'])->name('audio');
-Route::get('/detail/{id}/{name}', [FrontHomeController::class, 'detail'])->name('detail');
-Route::get('/detail/720p/{id}/{name}', [FrontHomeController::class, 'detail_720p'])->name('720p');
-Route::get('/detail/480p/{id}/{name}', [FrontHomeController::class, 'detail_480p'])->name('480p');
-Route::get('/detail/360p/{id}/{name}', [FrontHomeController::class, 'detail_360p'])->name('360p');
+Route::get('/detail/{slug}', [FrontHomeController::class, 'detail'])->name('detail');
+Route::get('/detail/720p/{slug}', [FrontHomeController::class, 'detail_720p'])->name('720p');
+Route::get('/detail/480p/{slug}', [FrontHomeController::class, 'detail_480p'])->name('480p');
+Route::get('/detail/360p/{slug}', [FrontHomeController::class, 'detail_360p'])->name('360p');
 Route::get('/download/{file}', [FrontHomeController::class, 'download'])->name('download')->middleware('auth');
 Route::get('/link/{id}', [FrontHomeController::class, 'linkuser'])->name('linkuser')->middleware('auth');
 // end Frontend
 
 //front post
-Route::get('posts/show/{id}/{name}', [FrontPostController::class, 'show'])->name('post_show')->middleware('auth');
-Route::get('posts/create/{id}/{name}', [FrontPostController::class, 'create'])->name('post_create')->middleware('auth');
+Route::get('posts/show/{name}', [FrontPostController::class, 'show'])->name('post_show')->middleware('auth');
+Route::get('posts/create/{name}', [FrontPostController::class, 'create'])->name('post_create')->middleware('auth');
 Route::post('posts/store', [FrontPostController::class, 'store'])->name('post_store')->middleware('auth');
-Route::get('posts/delete/{id}', [FrontPostController::class, 'delete'])->name('post_delete')->middleware('auth');
-Route::get('posts/view/{id}/{name}', [FrontPostController::class, 'view'])->name('post_view')->middleware('auth');
-Route::get('posts/edit/{id}', [FrontPostController::class, 'edit'])->name('post_edit')->middleware('auth');
-Route::post('posts/update/{id}', [FrontPostController::class, 'update'])->name('post_update')->middleware('auth');
+Route::get('posts/delete/{slug}', [FrontPostController::class, 'delete'])->name('post_delete')->middleware('auth');
+// Route::get('posts/view/{id}/{name}', [FrontPostController::class, 'view'])->name('post_view')->middleware('auth');
+Route::get('posts/edit/{slug}', [FrontPostController::class, 'edit'])->name('post_edit')->middleware('auth');
+Route::post('posts/update/{slug}', [FrontPostController::class, 'update'])->name('post_update')->middleware('auth');
 
-Route::get('like/show/{id}', [LikeController::class, 'like_show'])->name('like_show')->middleware('auth');
+Route::get('like/show/{name}', [LikeController::class, 'like_show'])->name('like_show')->middleware('auth');
 //end front post
 
 //front signup
@@ -122,9 +122,9 @@ Route::post('user/reset-submit', [FrontLoginControler::class, 'reset_submit'])->
 //end front login
 
 //front profile
-Route::get('profile/{id}', [FrontProfileController::class, 'profile'])->name('profile')->middleware('auth');
-Route::get('profile/edit/{id}', [FrontProfileController::class, 'edit'])->name('profile_edit')->middleware('auth');
-Route::post('profile/update/{id}', [FrontProfileController::class, 'update'])->name('profile_update')->middleware('auth');
+Route::get('profile/{name}', [FrontProfileController::class, 'profile'])->name('profile');
+Route::get('profile/edit/{name}', [FrontProfileController::class, 'edit'])->name('profile_edit')->middleware('auth');
+Route::post('profile/update/{name}', [FrontProfileController::class, 'update'])->name('profile_update')->middleware('auth');
 //end front profile
 
 //front like

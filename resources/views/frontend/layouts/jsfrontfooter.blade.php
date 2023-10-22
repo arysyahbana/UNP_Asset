@@ -277,28 +277,28 @@
 
 {{-- upload link --}}
 <script>
-    var inputs = [document.getElementById("file"), document.getElementById("linkyt"), document.getElementById(
-        "linkgd")];
-    var showFile = document.getElementById("showFile");
+    document.getElementById('button1').addEventListener('click', function() {
+        document.getElementById('input1').style.display = 'block';
+        document.getElementById('input2').style.display = 'none';
+        document.getElementById('input3').style.display = 'none';
+        document.getElementById('input4').style.display = 'block';
+        document.getElementById('input5').style.display = 'block';
+    });
 
-    function toggleTombolIcon(target) {
-        for (var i = 0; i < inputs.length; i++) {
-            if (i === target) {
-                inputs[i].style.display = "block";
-            } else {
-                inputs[i].style.display = "none";
-            }
-        }
-        updateShowFile();
-    }
+    document.getElementById('button2').addEventListener('click', function() {
+        document.getElementById('input1').style.display = 'none';
+        document.getElementById('input2').style.display = 'block';
+        document.getElementById('input3').style.display = 'none';
+        document.getElementById('input4').style.display = 'block';
+        document.getElementById('input5').style.display = 'none';
+    });
 
-    function showFile() {
-        inputs[0].style.display = "block";
-        updateShowFile();
-    }
-
-    function updateShowFile() {
-        showFile.style.display = (inputs[0].style.display === "none") ? "block" : "none";
-    }
+    document.getElementById('button3').addEventListener('click', function() {
+        document.getElementById('input1').style.display = 'none';
+        document.getElementById('input2').style.display = 'none';
+        document.getElementById('input3').style.display = 'block';
+        document.getElementById('input4').style.display = 'none';
+        document.getElementById('input5').style.display = 'block';
+    });
 </script>
 {{-- end upload link --}}

@@ -36,20 +36,20 @@ class AdminUserController extends Controller
         return redirect()->route('admin_user_show');
     }
 
-    public function edit($id)
+    public function edit($name)
     {
-        $edit = User::where('id', $id)->first();
+        $edit = User::where('name', $name)->first();
         return view('admin.user.user_edit', compact('edit'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $name)
     {
         $request->validate([
             'name' => 'required',
             'email' => 'required|email'
         ]);
 
-        $user_update = User::where('id', $id)->first();
+        $user_update = User::where('name', $name)->first();
         $user_update->name = $request->name;
         $user_update->email = $request->email;
 
@@ -63,15 +63,15 @@ class AdminUserController extends Controller
         return redirect()->route('admin_user_show');
     }
 
-    public function delete($id)
+    public function delete($name)
     {
-        User::where('id', $id)->delete();
+        User::where('name', $name)->delete();
         return redirect()->route('admin_user_show');
     }
 
-    public function makepremium($id)
+    public function makepremium($name)
     {
-        $update = User::where('id', $id)->first();
+        $update = User::where('name', $name)->first();
         $update->role = 'premium';
         $update->update();
         compact('update');

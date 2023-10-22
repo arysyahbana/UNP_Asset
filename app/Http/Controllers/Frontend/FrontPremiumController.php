@@ -19,9 +19,9 @@ class FrontPremiumController extends Controller
         return view('frontend.subscribe.front_gopremium', compact('edit'));
     }
 
-    public function premium(Request $request, $id)
+    public function premium(Request $request, $name)
     {
-        $update = User::where('id', $id)->first();
+        $update = User::where('name', $name)->first();
         $update->role = 'pending';
         $update->update();
         compact('update');

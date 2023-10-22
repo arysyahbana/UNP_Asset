@@ -17,7 +17,9 @@ class FrontHomeController extends Controller
     {
         // $post = Post::with('rUser')->get();
         $search = $request->input('search');
-        $post = Post::where('name', 'like', '%' . $search . '%')->latest()->with('rUser')->get();
+        $perPage = 8;
+        $data = Post::latest()->take($perPage)->get();
+        $post = Post::where('name', 'like', '%' . $search . '%')->latest()->with('rUser')->take(8)->paginate($perPage);
         $reso = Post::query()->distinct()->select('resolution')->get();
         return view('frontend.home', compact('post', 'reso'));
     }
@@ -26,7 +28,7 @@ class FrontHomeController extends Controller
         $search = $request->input('search_photo');
         $pattern = 'photo';
         $reso = Post::query()->distinct()->select('resolution')->get();
-        $post = Post::where('name', 'like', '%' . $search . '%')->Where('file', 'like', '%' . $pattern . '%')->latest()->with('rUser')->get();
+        $post = Post::where('name', 'like', '%' . $search . '%')->Where('file', 'like', '%' . $pattern . '%')->latest()->with('rUser')->paginate(8);
         // $post2 = Post::latest()->with('rUser')->get();
         return view('frontend.home', compact('post', 'reso'));
     }
@@ -36,7 +38,7 @@ class FrontHomeController extends Controller
         $search = $request->input('search_photo');
         $pattern = 'photo';
         // $post = Post::where('name', 'like', '%' . $search . '%')->Where('file', 'like', '%' . $pattern . '%')->latest()->with('rUser')->get();
-        $post = Post::where('resolution', $ukuran)->where('name', 'like', '%' . $search . '%')->Where('file', 'like', '%' . $pattern . '%')->latest()->with('rUser')->get();
+        $post = Post::where('resolution', $ukuran)->where('name', 'like', '%' . $search . '%')->Where('file', 'like', '%' . $pattern . '%')->latest()->with('rUser')->paginate(8);
         $reso = Post::query()->distinct()->select('resolution')->get();
         return view('frontend.home', compact('post', 'reso'));
     }
@@ -44,34 +46,45 @@ class FrontHomeController extends Controller
     public function video(Request $request)
     {
         $search = $request->input('search_video');
-        $pattern = 'video';
-        $post = Post::where('name', 'like', '%' . $search . '%')->Where('file', 'like', '%' . $pattern . '%')->latest()->get();
+        $extensions = ['mp4', 'mkv', 'webm'];
+
+        $post = Post::where('name', 'like', '%' . $search . '%')
+            ->where(function ($query) use ($extensions) {
+                $query->where('file', 'like', '%' . $extensions[0])
+                    ->orWhere('file', 'like', '%' . $extensions[1])
+                    ->orWhere('file', 'like', '%' . $extensions[2]);
+            })->orWhere('url', 'like', '%' . $search . '%')
+            ->latest()
+            ->with('rUser')
+            ->paginate(8);
+
         $reso = Post::query()->distinct()->select('resolution')->get();
+
         return view('frontend.home', compact('post', 'reso'));
     }
     public function audio(Request $request)
     {
         $search = $request->input('search_audio');
         $pattern = 'audio';
-        $post = Post::where('name', 'like', '%' . $search . '%')->Where('file', 'like', '%' . $pattern . '%')->latest()->get();
+        $post = Post::where('name', 'like', '%' . $search . '%')->Where('file', 'like', '%' . $pattern . '%')->latest()->paginate(8);
         $reso = Post::query()->distinct()->select('resolution')->get();
         return view('frontend.home', compact('post', 'reso'));
     }
-    public function detail($id, $nama)
+    public function detail($slug)
     {
         $page = 'detail';
-        $post = Post::where('id', $id)->first();
+        $post = Post::where('slug', $slug)->first();
         $post2 = Post::latest()->with('rUser')->get();
         $like = Like::where('post_id', $post->id)->count();
-        $url = url('detail/' . $post->id . '/' . $post->rUser->name);
+        $url = url('detail/' . $post->slug . '/' . $post->rUser->name);
         $message = 'File from <a href="' . $url . '">' . $post->rUser->name . '</a> by UNP Asset';
         return view('frontend.detailhome', compact('post', 'post2', 'like', 'url', 'message', 'page'));
     }
 
-    public function detail_720p($id, $nama)
+    public function detail_720p($slug)
     {
         $page = '720p';
-        $post = Post::where('id', $id)->first();
+        $post = Post::where('slug', $slug)->first();
         $post2 = Post::latest()->with('rUser')->get();
         $like = Like::where('post_id', $post->id)->count();
         $url = url('detail/' . $post->id . '/' . $post->rUser->name);
@@ -79,10 +92,10 @@ class FrontHomeController extends Controller
         return view('frontend.detailhome', compact('post', 'post2', 'like', 'url', 'message', 'page'));
     }
 
-    public function detail_480p($id, $nama)
+    public function detail_480p($slug)
     {
         $page = '480p';
-        $post = Post::where('id', $id)->first();
+        $post = Post::where('slug', $slug)->first();
         $post2 = Post::latest()->with('rUser')->get();
         $like = Like::where('post_id', $post->id)->count();
         $url = url('detail/' . $post->id . '/' . $post->rUser->name);
@@ -90,10 +103,10 @@ class FrontHomeController extends Controller
         return view('frontend.detailhome', compact('post', 'post2', 'like', 'url', 'message', 'page'));
     }
 
-    public function detail_360p($id, $nama)
+    public function detail_360p($slug)
     {
         $page = '360p';
-        $post = Post::where('id', $id)->first();
+        $post = Post::where('slug', $slug)->first();
         $post2 = Post::latest()->with('rUser')->get();
         $like = Like::where('post_id', $post->id)->count();
         $url = url('detail/' . $post->id . '/' . $post->rUser->name);

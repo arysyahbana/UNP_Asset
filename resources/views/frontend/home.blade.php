@@ -49,22 +49,27 @@
                                     <img src="{{ $path_photo }}" alt="" class="img-fluid">
                                 </div>
                                 <div class="content">
-                                    <h5 class="blue6">{{ $item->name }}</h5>
+                                    <h5 class="blue6 teks">{{ $item->name }}</h5>
                                     {{-- <p>{{ $item->body }}</p> --}}
-                                    <a href="{{ route('detail', [$item->id, $item->name]) }}"
+                                    <a href="{{ route('detail', [$item->slug]) }}"
                                         class="btn btn-primary btn-blue6 mt-4 btn-sm">Detail</a>
                                 </div>
                             </div>
                         </div>
                     @endif
+                    @if (Request::path() == 'photo/*')
+                        <div class="mt-4"></div>
+                        {{ $post->links() }}
+                    @endif
 
                     {{-- Video --}}
                 @elseif (Request::path() == 'video')
+                    {{-- {{ dd($item->url) }} --}}
                     @php
                         $path_video = asset('storage/uploads/video/thumbnail/' . $item->thumbnail);
                         $extvideo = pathinfo($path_video, PATHINFO_EXTENSION);
                     @endphp
-                    @if ($extvideo == 'jpg')
+                    @if ($extvideo)
                         <div class="col col-12 col-md-6 col-lg-3 my-2 d-flex justify-content-center" data-aos="fade-up"
                             data-aos-duration="1200">
                             <div class="card-vid">
@@ -72,14 +77,32 @@
                                     <img src="{{ $path_video }}" alt="" class="img-fluid">
                                 </div>
                                 <div class="contentvid">
-                                    <h5 class="blue6">{{ $item->name }}</h5>
-                                    {{-- <p>{{ $item->body }}</p> --}}
-                                    <a href="{{ route('detail', [$item->id, $item->name]) }}"
+                                    <h5 class="blue6 teks">{{ $item->name }}</h5>
+                                    <a href="{{ route('detail', [$item->slug]) }}"
                                         class="btn btn-primary btn-blue6 mt-4 btn-sm">Detail</a>
                                 </div>
                             </div>
                         </div>
+                    @elseif ($item->url)
+                        <div class="col col-12 col-md-6 col-lg-3 my-2" data-aos="fade-up" data-aos-duration="1200">
+                            <div class="card-vid">
+                                <div class="vidbox">
+                                    <x-embed url="{{ $item->url }}" aspect-ratio="4:3"
+                                        style="width: 400px; height: 300px;" />
+                                </div>
+                                <div class="contentvid">
+                                    <h5 class="blue6">{{ $item->name }}</h5>
+                                    <a href="{{ route('detail', [$item->slug]) }}"
+                                        class="btn btn-primary mt-3 btn-blue6 btn-sm">Detail</a>
+                                </div>
+                            </div>
+                        </div>
                     @endif
+
+                    {{-- @if (Request::path() == 'video/*')
+                        <div class="mt-4"></div>
+                        {{ $post->links() }}
+                    @endif --}}
 
                     {{-- Audio --}}
                 @elseif (Request::path() == 'audio')
@@ -102,13 +125,17 @@
                                     @if ($extaudio == 'm4a')
                                         <audio src="{{ $path_audio }}" type="audio/m4a" controls class="waudio"></audio>
                                     @endif
-                                    <h5 class="blue6 mt-2">{{ $item->name }}</h5>
+                                    <h5 class="blue6 mt-2 teks">{{ $item->name }}</h5>
                                     {{-- <p>{{ $item->body }}</p> --}}
-                                    <a href="{{ route('detail', [$item->id, $item->name]) }}"
+                                    <a href="{{ route('detail', [$item->slug]) }}"
                                         class="btn btn-primary btn-blue6 mt-3 btn-sm">Detail</a>
                                 </div>
                             </div>
                         </div>
+                    @endif
+                    @if (Request::path() == 'audio/*')
+                        <div class="mt-4"></div>
+                        {{ $post->links() }}
                     @endif
 
                     {{-- Home --}}
@@ -132,9 +159,9 @@
                                     <img src="{{ $path_photo }}" alt="" class="img-fluid">
                                 </div>
                                 <div class="content">
-                                    <h5 class="blue6">{{ $item->name }}</h5>
+                                    <h5 class="blue6 teks">{{ $item->name }}</h5>
                                     {{-- <p>{{ $item->body }}</p> --}}
-                                    <a href="{{ route('detail', [$item->id, $item->name]) }}"
+                                    <a href="{{ route('detail', [$item->slug]) }}"
                                         class="btn btn-primary btn-blue6 mt-4 text-light btn-sm">Detail</a>
                                 </div>
                             </div>
@@ -148,9 +175,9 @@
                                     <img src="{{ $path_video }}" alt="" class="img-fluid">
                                 </div>
                                 <div class="contentvid">
-                                    <h5 class="blue6">{{ $item->name }}</h5>
+                                    <h5 class="blue6 teks">{{ $item->name }}</h5>
                                     {{-- <p>{{ $item->body }}</p> --}}
-                                    <a href="{{ route('detail', [$item->id, $item->name]) }}"
+                                    <a href="{{ route('detail', [$item->slug]) }}"
                                         class="btn btn-primary btn-blue6 mt-4 text-light btn-sm">Detail</a>
                                 </div>
                             </div>
@@ -165,14 +192,32 @@
                                 </div>
                                 <div class="contentaudio mt-2">
                                     @if ($extaudio == 'mp3')
-                                        <audio src="{{ $path_audio }}" type="audio/mp3" controls class="waudio"></audio>
+                                        <audio src="{{ $path_audio }}" type="audio/mp3" controls
+                                            class="waudio"></audio>
                                     @endif
                                     @if ($extaudio == 'm4a')
-                                        <audio src="{{ $path_audio }}" type="audio/m4a" controls class="waudio"></audio>
+                                        <audio src="{{ $path_audio }}" type="audio/m4a" controls
+                                            class="waudio"></audio>
                                     @endif
-                                    <h5 class="mt-2 blue6">{{ $item->name }}</h5>
+                                    <h5 class="mt-2 blue6 teks">{{ $item->name }}</h5>
                                     {{-- <p>{{ $item->body }}</p> --}}
-                                    <a href="{{ route('detail', [$item->id, $item->name]) }}"
+                                    <a href="{{ route('detail', [$item->slug]) }}"
+                                        class="btn btn-primary mt-3 btn-blue6 btn-sm">Detail</a>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                    @if ($item->url == '')
+                    @else
+                        <div class="col col-12 col-md-6 col-lg-3 my-2" data-aos="fade-up" data-aos-duration="1200">
+                            <div class="card-vid">
+                                <div class="vidbox">
+                                    <x-embed url="{{ $item->url }}" aspect-ratio="4:3"
+                                        style="width: 400px; height: 300px;" />
+                                </div>
+                                <div class="contentvid">
+                                    <h5 class="blue6">{{ $item->name }}</h5>
+                                    <a href="{{ route('detail', [$item->slug]) }}"
                                         class="btn btn-primary mt-3 btn-blue6 btn-sm">Detail</a>
                                 </div>
                             </div>
@@ -180,9 +225,11 @@
                     @endif
                 @endif
             @endforeach
+            <div class="mt-4"></div>
+            {{ $post->links() }}
         </div>
-        <div class="mt-5 mb-3">
-            {{-- {{ $post->links() }} --}}
-        </div>
+        {{-- <div class="mt-5 mb-3">
+            {{ $post->links() }}
+        </div> --}}
     </div>
 @endsection

@@ -30,13 +30,13 @@
                                         @php
                                             $path_photo = asset('storage/uploads/photo/compress/' . $post->file);
                                             $extphoto = pathinfo($path_photo, PATHINFO_EXTENSION);
-                                            
+
                                             $path_video = asset('storage/uploads/video/thumbnail/' . $post->thumbnail);
                                             $extvideo = pathinfo($path_video, PATHINFO_EXTENSION);
-                                            
+
                                             $path_audio = asset('storage/uploads/audio/' . $post->file);
                                             $extaudio = pathinfo($path_audio, PATHINFO_EXTENSION);
-                                            
+
                                         @endphp
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
@@ -55,8 +55,9 @@
                                             </td>
 
                                             <td>
-                                                <a href="{{ route('admin-post-delete', $post->id) }}" class="btn btn-danger"
-                                                    onclick="return confirm('are you sure?')"><i class="fa fa-edit"></i>
+                                                <a href="{{ route('admin-post-delete', $post->name) }}"
+                                                    class="btn btn-danger" onclick="return confirm('are you sure?')"><i
+                                                        class="fa fa-edit"></i>
                                                     Delete</a>
 
                                                 {{-- <form action="{{ route('admin_category_delete', $category->id) }}"

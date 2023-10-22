@@ -96,6 +96,20 @@ body {
     min-height: 18rem;
 }
 
+.teks {
+    width: 250px; /* Atur lebar maksimum untuk kontainer teks */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.teks2 {
+    width: 150px; /* Atur lebar maksimum untuk kontainer teks */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 /* cooler card photo */
 .card-img {
     position: relative;
@@ -252,10 +266,10 @@ body {
 
 .card-vid .vidbox img {
     position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
@@ -527,12 +541,12 @@ body {
 
 /* icon yt dan drive */
 .iconyd {
-    width: 1.5rem;
+    width: 1.3rem;
     transition: 0.5s;
 }
 
 .iconyd:hover {
-    width: 2rem;
+    width: 1.5rem;
 }
 /* end icon yt dan drive */
 
@@ -592,3 +606,31 @@ body {
     width: 1.5rem;
 }
 /* end icon profile */
+
+/* embed youtube */
+ .laravel-embed__responsive-wrapper {
+     position: relative;
+     height: 0;
+     overflow: hidden;
+     max-width: 100%;
+ }
+
+ .laravel-embed__fallback {
+     background: rgba(0, 0, 0, 0.15);
+     color: rgba(0, 0, 0, 0.7);
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
+
+ .laravel-embed__fallback,
+ .laravel-embed__responsive-wrapper iframe,
+ .laravel-embed__responsive-wrapper object,
+ .laravel-embed__responsive-wrapper embed {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+ }
+/* end embed youtube */
