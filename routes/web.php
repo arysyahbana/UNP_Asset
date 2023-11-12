@@ -90,7 +90,7 @@ Route::get('/detail/720p/{slug}', [FrontHomeController::class, 'detail_720p'])->
 Route::get('/detail/480p/{slug}', [FrontHomeController::class, 'detail_480p'])->name('480p');
 Route::get('/detail/360p/{slug}', [FrontHomeController::class, 'detail_360p'])->name('360p');
 Route::get('/download/{file}', [FrontHomeController::class, 'download'])->name('download')->middleware('auth');
-Route::get('/link/{id}', [FrontHomeController::class, 'linkuser'])->name('linkuser')->middleware('auth');
+Route::get('/link/{slug}', [FrontHomeController::class, 'linkuser'])->name('linkuser')->middleware('auth');
 // end Frontend
 
 //front post
@@ -137,3 +137,7 @@ Route::get('/user/show-bayar/{id}', [FrontPremiumController::class, 'show_bayar'
 Route::post('/user/premium/{id}', [FrontPremiumController::class, 'premium'])->name('update_premium')->middleware('auth');
 Route::get('/user/premium/hp', [FrontPremiumController::class, 'noHp'])->name('noHp')->middleware('auth');
 // end akun premium
+
+// Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

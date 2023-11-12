@@ -6,10 +6,10 @@
     <div class="container mt-3">
         <!-- Filter Resolution -->
         <div class="btn-group dropend {{ Request::is('photo', 'photo/*') ? '' : 'd-none' }} mt-3">
-            <button type="button" class="btn btn-secondary">
+            <button type="button" class="btn btn-secondary btn-sm">
                 Resolution
             </button>
-            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
+            <button type="button" class="btn btn-secondary btn-sm dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
                 aria-expanded="false">
                 <span class="visually-hidden">Toggle Dropend</span>
             </button>
@@ -56,7 +56,42 @@
                                 </div>
                             </div>
                         </div>
+                    @elseif ($item->urlgd && $item->category_id == '3')
+                        <div class="col col-12 col-md-6 col-lg-3 my-2" data-aos="fade-up" data-aos-duration="1200">
+                            <div class="card-vid">
+                                <div class="vidbox">
+                                    <iframe src="{{ $item->urlgd }}" width="640" height="480"
+                                        allow="autoplay"></iframe>
+                                </div>
+                                <div class="contentvid">
+                                    <h5 class="blue6 teks">{{ $item->name }}</h5>
+                                    <a href="{{ route('detail', [$item->slug]) }}"
+                                        class="btn btn-primary mt-3 btn-blue6 btn-sm">Detail</a>
+                                </div>
+                            </div>
+                        </div>
                     @endif
+
+                    {{-- Googledrive --}}
+                    {{-- @if ($item->urlgd)
+                        @if ($item->category_id == '3')
+                            <div class="col col-12 col-md-6 col-lg-3 my-2" data-aos="fade-up" data-aos-duration="1200">
+                                <div class="card-vid">
+                                    <div class="vidbox">
+                                        <iframe src="{{ $item->urlgd }}" width="640" height="480"
+                                            allow="autoplay"></iframe>
+                                    </div>
+                                    <div class="contentvid">
+                                        <h5 class="blue6 teks">{{ $item->name }}</h5>
+                                        <a href="{{ route('detail', [$item->slug]) }}"
+                                            class="btn btn-primary mt-3 btn-blue6 btn-sm">Detail</a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @endif --}}
+                    {{-- end Googledrive --}}
+
                     @if (Request::path() == 'photo/*')
                         <div class="mt-4"></div>
                         {{ $post->links() }}
@@ -64,7 +99,6 @@
 
                     {{-- Video --}}
                 @elseif (Request::path() == 'video')
-                    {{-- {{ dd($item->url) }} --}}
                     @php
                         $path_video = asset('storage/uploads/video/thumbnail/' . $item->thumbnail);
                         $extvideo = pathinfo($path_video, PATHINFO_EXTENSION);
@@ -91,7 +125,21 @@
                                         style="width: 400px; height: 300px;" />
                                 </div>
                                 <div class="contentvid">
-                                    <h5 class="blue6">{{ $item->name }}</h5>
+                                    <h5 class="blue6 teks">{{ $item->name }}</h5>
+                                    <a href="{{ route('detail', [$item->slug]) }}"
+                                        class="btn btn-primary mt-3 btn-blue6 btn-sm">Detail</a>
+                                </div>
+                            </div>
+                        </div>
+                    @elseif ($item->urlgd && $item->category_id == '4')
+                        <div class="col col-12 col-md-6 col-lg-3 my-2" data-aos="fade-up" data-aos-duration="1200">
+                            <div class="card-vid">
+                                <div class="vidbox">
+                                    <iframe src="{{ $item->urlgd }}" width="640" height="480"
+                                        allow="autoplay"></iframe>
+                                </div>
+                                <div class="contentvid">
+                                    <h5 class="blue6 teks">{{ $item->name }}</h5>
                                     <a href="{{ route('detail', [$item->slug]) }}"
                                         class="btn btn-primary mt-3 btn-blue6 btn-sm">Detail</a>
                                 </div>
@@ -133,6 +181,27 @@
                             </div>
                         </div>
                     @endif
+
+                    {{-- Googledrive --}}
+                    {{-- @if ($item->urlgd)
+                        @if ($item->category_id == '5')
+                            <div class="col col-12 col-md-6 col-lg-3 my-2" data-aos="fade-up" data-aos-duration="1200">
+                                <div class="card-vid">
+                                    <div class="vidbox">
+                                        <iframe src="{{ $item->urlgd }}" width="640" height="480"
+                                            allow="autoplay"></iframe>
+                                    </div>
+                                    <div class="contentvid">
+                                        <h5 class="blue6 teks">{{ $item->name }}</h5>
+                                        <a href="{{ route('detail', [$item->slug]) }}"
+                                            class="btn btn-primary mt-3 btn-blue6 btn-sm">Detail</a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @endif --}}
+                    {{-- end Googledrive --}}
+
                     @if (Request::path() == 'audio/*')
                         <div class="mt-4"></div>
                         {{ $post->links() }}
@@ -207,8 +276,9 @@
                             </div>
                         </div>
                     @endif
-                    @if ($item->url == '')
-                    @else
+
+                    {{-- Youtube --}}
+                    @if ($item->url)
                         <div class="col col-12 col-md-6 col-lg-3 my-2" data-aos="fade-up" data-aos-duration="1200">
                             <div class="card-vid">
                                 <div class="vidbox">
@@ -216,20 +286,40 @@
                                         style="width: 400px; height: 300px;" />
                                 </div>
                                 <div class="contentvid">
-                                    <h5 class="blue6">{{ $item->name }}</h5>
+                                    <h5 class="blue6 teks">{{ $item->name }}</h5>
                                     <a href="{{ route('detail', [$item->slug]) }}"
                                         class="btn btn-primary mt-3 btn-blue6 btn-sm">Detail</a>
                                 </div>
                             </div>
                         </div>
                     @endif
+                    {{-- end Youtube --}}
+
+                    {{-- Googledrive --}}
+                    @if ($item->urlgd)
+                        <div class="col col-12 col-md-6 col-lg-3 my-2" data-aos="fade-up" data-aos-duration="1200">
+                            <div class="card-vid">
+                                <div class="vidbox">
+                                    <iframe src="{{ $item->urlgd }}" width="640" height="480"
+                                        allow="autoplay"></iframe>
+                                </div>
+                                <div class="contentvid">
+                                    <h5 class="blue6 teks">{{ $item->name }}</h5>
+                                    <a href="{{ route('detail', [$item->slug]) }}"
+                                        class="btn btn-primary mt-3 btn-blue6 btn-sm">Detail</a>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                    {{-- end Googledrive --}}
                 @endif
             @endforeach
-            <div class="mt-4"></div>
+            {{-- @if ()
+
+            @endif --}}
+        </div>
+        <div class="mt-5 mb-3">
             {{ $post->links() }}
         </div>
-        {{-- <div class="mt-5 mb-3">
-            {{ $post->links() }}
-        </div> --}}
     </div>
 @endsection

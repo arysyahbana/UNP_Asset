@@ -98,8 +98,7 @@
                 {{-- end Audio --}}
 
                 {{-- Youtube --}}
-                @if ($item->url == '')
-                @else
+                @if ($item->url)
                     <div class="col col-12 col-md-6 col-lg-3 my-2" data-aos="fade-up" data-aos-duration="1200">
                         <div class="card-vid">
                             <div class="vidbox">
@@ -107,7 +106,7 @@
                                     style="width: 400px; height: 300px;" />
                             </div>
                             <div class="contentvid">
-                                <h5 class="blue6">{{ $item->name }}</h5>
+                                <h5 class="blue6 teks">{{ $item->name }}</h5>
                                 <a href="{{ route('detail', [$item->slug]) }}" class="btn btn-primary btn-sm mt-3">View</a>
                                 <a href="{{ route('post_edit', $item->slug) }}"
                                     class="btn btn-warning btn-sm text-light mt-3">Edit</a>
@@ -117,12 +116,28 @@
                             </div>
                         </div>
                     </div>
-                    {{-- end Youtube --}}
-
-                    {{-- GoogleDrive --}}
-                    {{-- <iframe src="{{ $item->urlgd }}" width="640" height="480" allow="autoplay"></iframe> --}}
-                    {{-- end Googledrive --}}
                 @endif
+                {{-- end Youtube --}}
+                {{-- GoogleDrive --}}
+                @if ($item->urlgd)
+                    <div class="col col-12 col-md-6 col-lg-3 my-2" data-aos="fade-up" data-aos-duration="1200">
+                        <div class="card-vid">
+                            <div class="vidbox">
+                                <iframe src="{{ $item->urlgd }}" width="640" height="480" allow="autoplay"></iframe>
+                            </div>
+                            <div class="contentvid">
+                                <h5 class="blue6 teks">{{ $item->name }}</h5>
+                                <a href="{{ route('detail', [$item->slug]) }}" class="btn btn-primary btn-sm mt-3">View</a>
+                                <a href="{{ route('post_edit', $item->slug) }}"
+                                    class="btn btn-warning btn-sm text-light mt-3">Edit</a>
+                                <a href="{{ route('post_delete', $item->slug) }}"
+                                    onclick="return confirm('data akan dihapus')"
+                                    class="btn btn-danger btn-sm mt-3">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+                {{-- end Googledrive --}}
             @endforeach
         </div>
     </div>

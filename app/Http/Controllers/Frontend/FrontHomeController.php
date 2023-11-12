@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+// use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Http;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class FrontHomeController extends Controller
 {
@@ -17,19 +20,57 @@ class FrontHomeController extends Controller
     {
         // $post = Post::with('rUser')->get();
         $search = $request->input('search');
-        $perPage = 8;
+        $perPage = 12;
         $data = Post::latest()->take($perPage)->get();
-        $post = Post::where('name', 'like', '%' . $search . '%')->latest()->with('rUser')->take(8)->paginate($perPage);
         $reso = Post::query()->distinct()->select('resolution')->get();
+        $extensions = ['png', 'jpg', 'jpeg', 'mp4', 'mkv', 'webm', 'mp3', 'm4a'];
+        // $post = Post::where('name', 'like', '%' . $search . '%')->latest()->with('rUser')->take(8)->paginate($perPage);
+        $post = Post::where('name', 'like', '%' . $search . '%')
+            ->where(function ($query) use ($extensions, $search) {
+                $query->where('file', 'like', '%' . $extensions[0])
+                    ->orWhere('file', 'like', '%' . $extensions[1])
+                    ->orWhere('file', 'like', '%' . $extensions[2])
+                    ->orWhere('file', 'like', '%' . $extensions[3])
+                    ->orWhere('file', 'like', '%' . $extensions[4])
+                    ->orWhere('file', 'like', '%' . $extensions[5])
+                    ->orWhere('file', 'like', '%' . $extensions[6])
+                    ->orWhere('file', 'like', '%' . $extensions[7])
+                    ->orWhere('name', 'like', '%' . $search . '%');
+            })->orWhere('url', 'like', '%' . $search . '%')
+            ->latest()
+            ->with('rUser')
+            ->paginate(12);
         return view('frontend.home', compact('post', 'reso'));
     }
     public function photo(Request $request)
     {
+        // $search = $request->input('search_photo');
+        // $pattern = 'photo';
+        // $reso = Post::query()->distinct()->select('resolution')->get();
+        // $post = Post::where('name', 'like', '%' . $search . '%')->Where('file', 'like', '%' . $pattern . '%')->latest()->with('rUser')->paginate(12);
+
         $search = $request->input('search_photo');
-        $pattern = 'photo';
+        $extensions = ['png', 'jpg', 'jpeg'];
+
+        $post = Post::whereHas('rCategory', function ($query) {
+            $query->where('id', 3);
+        })
+            ->where(function ($query) use ($search, $extensions) {
+                $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhere(function ($subquery) use ($search, $extensions) {
+                        $subquery->where('file', 'like', '%' . $extensions[0])
+                            ->orWhere('file', 'like', '%' . $extensions[1])
+                            ->orWhere('file', 'like', '%' . $extensions[2]);
+                    })
+                    ->orWhere('url', 'like', '%' . $search . '%')
+                    ->orWhere('urlgd', 'like', '%' . $search . '%');
+            })
+            ->latest()
+            ->with('rUser')
+            ->paginate(12);
+
         $reso = Post::query()->distinct()->select('resolution')->get();
-        $post = Post::where('name', 'like', '%' . $search . '%')->Where('file', 'like', '%' . $pattern . '%')->latest()->with('rUser')->paginate(8);
-        // $post2 = Post::latest()->with('rUser')->get();
+
         return view('frontend.home', compact('post', 'reso'));
     }
 
@@ -48,25 +89,33 @@ class FrontHomeController extends Controller
         $search = $request->input('search_video');
         $extensions = ['mp4', 'mkv', 'webm'];
 
-        $post = Post::where('name', 'like', '%' . $search . '%')
-            ->where(function ($query) use ($extensions) {
-                $query->where('file', 'like', '%' . $extensions[0])
-                    ->orWhere('file', 'like', '%' . $extensions[1])
-                    ->orWhere('file', 'like', '%' . $extensions[2]);
-            })->orWhere('url', 'like', '%' . $search . '%')
+        $post = Post::whereHas('rCategory', function ($query) {
+            $query->where('id', 4);
+        })
+            ->where(function ($query) use ($search, $extensions) {
+                $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhere(function ($subquery) use ($search, $extensions) {
+                        $subquery->where('file', 'like', '%' . $extensions[0])
+                            ->orWhere('file', 'like', '%' . $extensions[1])
+                            ->orWhere('file', 'like', '%' . $extensions[2]);
+                    })
+                    ->orWhere('url', 'like', '%' . $search . '%')
+                    ->orWhere('urlgd', 'like', '%' . $search . '%');
+            })
             ->latest()
             ->with('rUser')
-            ->paginate(8);
+            ->paginate(12);
 
         $reso = Post::query()->distinct()->select('resolution')->get();
 
         return view('frontend.home', compact('post', 'reso'));
     }
+
     public function audio(Request $request)
     {
         $search = $request->input('search_audio');
         $pattern = 'audio';
-        $post = Post::where('name', 'like', '%' . $search . '%')->Where('file', 'like', '%' . $pattern . '%')->latest()->paginate(8);
+        $post = Post::where('name', 'like', '%' . $search . '%')->Where('file', 'like', '%' . $pattern . '%')->latest()->paginate(12);
         $reso = Post::query()->distinct()->select('resolution')->get();
         return view('frontend.home', compact('post', 'reso'));
     }
@@ -76,7 +125,7 @@ class FrontHomeController extends Controller
         $post = Post::where('slug', $slug)->first();
         $post2 = Post::latest()->with('rUser')->get();
         $like = Like::where('post_id', $post->id)->count();
-        $url = url('detail/' . $post->slug . '/' . $post->rUser->name);
+        $url = url('detail/' . $post->slug);
         $message = 'File from <a href="' . $url . '">' . $post->rUser->name . '</a> by UNP Asset';
         return view('frontend.detailhome', compact('post', 'post2', 'like', 'url', 'message', 'page'));
     }
@@ -184,15 +233,16 @@ class FrontHomeController extends Controller
         }
     }
 
-    public function linkUser($id)
+    public function linkUser($slug)
     {
-        $post = Post::with('rUser')->where('id', $id)->first();
-        $like = Like::where('post_id', $post->id)->count();
-        $url = url('detail/' . $post->id . '/' . $post->rUser->name);
-        $message = 'klik link <a href="' . $url . '">ini</a>';
-        return view('frontend.detailhome', compact('url', 'post', 'like', 'message'));
-        // dd($url);
-        // die;
-        // $message = 'klik link <a href="' . $reset_link . '">ini</a>';
+        $post = Post::with('rUser')->where('slug', $slug)->first();
+
+        if ($post) {
+            $like = Like::where('post_id', $post->id)->count();
+            $url = url('detail/' . $post->slug);
+            $message = 'klik link <a href="' . $url . '">ini</a>';
+            return view('frontend.detailhome', compact('url', 'post', 'like', 'message'));
+        } else {
+        }
     }
 }

@@ -32,6 +32,7 @@ class AdminUserController extends Controller
         $user_store->name = $request->name;
         $user_store->email = $request->email;
         $user_store->password = Hash::make($request->password);
+        $user_store->role = 'umum';
         $user_store->save();
         return redirect()->route('admin_user_show');
     }

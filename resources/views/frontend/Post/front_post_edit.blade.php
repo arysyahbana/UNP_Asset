@@ -19,7 +19,7 @@
                                         aria-label=".form-control-lg example" name="title" value="{{ $edit->name }}">
                                 </div>
 
-                                @if ($edit->url == '')
+                                @if ($edit->url == '' && $edit->urlgd == '')
                                     {{-- Menampilkan File --}}
                                     <div class="mb-4">
                                         <label for="exampleFormControlInput1" class="form-label">File Lama</label>
@@ -111,21 +111,61 @@
                                         <label for="" class="form-label">File Baru</label>
                                         <input class="form-control" type="file" name="file">
                                     </div>
-
                                     <div class="mb-4">
                                         <label for="" class="form-label">Ganti file project</label>
                                         <input class="form-control" type="file" name="file2">
                                     </div>
-                                @else
+                                    {{-- <div class="form-group mb-3" id="input5">
+                                        <label>Kategori</label>
+                                        <select name="category_menu" class="form-select" id="category_menu">
+                                            <option>Pilih Menu...</option>
+                                            @foreach ($category as $item)
+                                                <option value="{{ $item->id }}">
+                                                    {{ $item->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div> --}}
+                                @elseif ($edit->url)
+                                    <div class="mb-4">
+                                        <label for="" class="form-label">Ganti file project</label>
+                                        <input class="form-control" type="file" name="file2">
+                                    </div>
                                     <div class="mb-4" id="input2">
                                         <label for="" class="form-label">Video youtube sebelumnya</label>
                                         <x-embed url="{{ $edit->url }}" aspect-ratio="16:9" />
                                     </div>
                                     <div class="mb-4" id="input2">
-                                        <label for="" class="form-label">Masukkan link youtube</label>
+                                        <label for="" class="form-label">Ganti link youtube</label>
                                         <input class="form-control" type="text" name="linkyt"
                                             value="{{ $edit->url }}">
                                     </div>
+                                @elseif ($edit->urlgd)
+                                    <div class="mb-4">
+                                        <label for="" class="form-label">Ganti file project</label>
+                                        <input class="form-control" type="file" name="file2">
+                                    </div>
+                                    <div class="mb-4" id="input2">
+                                        <label for="" class="form-label">Sematan Googledrive sebelumnya</label>
+                                        <iframe src="{{ $edit->urlgd }}" width="640" height="380"
+                                            allow="autoplay"></iframe>
+                                    </div>
+                                    <div class="mb-4" id="input3">
+                                        <label for="" class="form-label">Ganti link googledrive</label>
+                                        <input class="form-control" type="text" name="linkgd"
+                                            value="{{ $edit->urlgd }}">
+                                    </div>
+                                    {{-- <div class="form-group mb-3" id="input5">
+                                        <label>Kategori</label>
+                                        <select name="category_menu" class="form-select" id="category_menu">
+                                            <option>Pilih Menu...</option>
+                                            @foreach ($category as $item)
+                                                <option value="{{ $item->id }}">
+                                                    {{ $item->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div> --}}
                                 @endif
 
 

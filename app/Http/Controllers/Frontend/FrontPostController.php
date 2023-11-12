@@ -15,6 +15,7 @@ use Intervention\Image\Facades\Image;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\Filters\Video\VideoFilters;
+use Illuminate\Support\Facades\Storage;
 
 // use Illuminate\Support\Facades\Storage;
 
@@ -63,21 +64,17 @@ class FrontPostController extends Controller
         $store->slug = $slug;
         $store->body = $request->body;
 
-        // YouTube
-        if ($request->has('linkyt')) {
-            $store->url = $request->linkyt;
-            $store->category_id = 4;
-            // $store->save();
-
-            // return redirect()->back()->with('success', 'Video YouTube berhasil diunggah.');
-        }
-        //end YouTube
-
         // Googledrive
-        // if ($request->has('urlgd')) {
-        //     $store->urlgd = $request->linkgd;
-        //     $store->category_id = $request->category_menu;
-        // }
+        if ($request->has('linkgd')) {
+            if (strpos($request->linkgd, 'preview') !== false) {
+                $change_link = $request->linkgd;
+            } elseif (strpos($request->linkgd, 'view') !== false) {
+                $change_link = str_replace('view', 'preview', $request->linkgd);
+            }
+
+            $store->urlgd = $change_link;
+            $store->category_id = $request->category_menu;
+        }
         // end Googledrive
 
         if ($request->file('file')) {
@@ -214,40 +211,48 @@ class FrontPostController extends Controller
         }
         // end Input Project
 
+        // YouTube
+        if ($request->has('linkyt')) {
+            // dd('linkyt exists');
+            $store->category_id = 4;
+            $store->url = $request->linkyt;
+        }
+        //end YouTube
+
         $store->save();
         return redirect()->back()->with('success', 'Upload Success');
     }
 
-    public function delete($slug)
-    {
-        $delete = Post::where('slug', $slug)->first();
+    // public function delete($slug)
+    // {
+    //     $delete = Post::where('slug', $slug)->first();
 
-        if ($delete->file == '') {
-            $delete->delete();
-            return redirect()->back()->with('success', 'berhasil di hapus');
-        } else {
-            if (file_exists(storage_path('app/public/uploads/photo/' . $delete->file))) {
-                unlink(storage_path('app/public/uploads/photo/' . $delete->file));
-                unlink(storage_path('app/public/uploads/photo/compress/' . $delete->file));
-            } elseif (file_exists(storage_path('app/public/uploads/video/' . $delete->file))) {
-                unlink(storage_path('app/public/uploads/video/' . $delete->file));
-                unlink(storage_path('app/public/uploads/video/thumbnail/' . $delete->thumbnail));
-                unlink(storage_path('app/public/uploads/video/720p/' . $delete->q720p));
-                unlink(storage_path('app/public/uploads/video/480p/' . $delete->q480p));
-                unlink(storage_path('app/public/uploads/video/360p/' . $delete->q360p));
-            } elseif (file_exists(storage_path('app/public/uploads/audio/' . $delete->file))) {
-                unlink(storage_path('app/public/uploads/audio/' . $delete->file));
-            } elseif (file_exists(storage_path('app/public/uploads/rawphoto/' . $delete->file))) {
-                unlink(storage_path('app/public/uploads/rawphoto/' . $delete->file_mentah));
-            } elseif (file_exists(storage_path('app/public/uploads/rawvideo/' . $delete->file))) {
-                unlink(storage_path('app/public/uploads/rawvideo/' . $delete->file_mentah));
-                // } elseif (file_exists(storage_path('app/public/uploads/rawaudio/' . $delete->file))) {
-                //     unlink(storage_path('app/public/uploads/rawaudio/' . $delete->file_mentah));
-            }
-            $delete->delete();
-            return redirect()->back()->with('success', 'berhasil di hapus');
-        }
-    }
+    //     if ($delete->file == '') {
+    //         $delete->delete();
+    //         return redirect()->back()->with('success', 'berhasil di hapus');
+    //     } else {
+    //         if (file_exists(storage_path('app/public/uploads/photo/' . $delete->file))) {
+    //             unlink(storage_path('app/public/uploads/photo/' . $delete->file));
+    //             unlink(storage_path('app/public/uploads/photo/compress/' . $delete->file));
+    //         } elseif (file_exists(storage_path('app/public/uploads/video/' . $delete->file))) {
+    //             unlink(storage_path('app/public/uploads/video/' . $delete->file));
+    //             unlink(storage_path('app/public/uploads/video/thumbnail/' . $delete->thumbnail));
+    //             unlink(storage_path('app/public/uploads/video/720p/' . $delete->q720p));
+    //             unlink(storage_path('app/public/uploads/video/480p/' . $delete->q480p));
+    //             unlink(storage_path('app/public/uploads/video/360p/' . $delete->q360p));
+    //         } elseif (file_exists(storage_path('app/public/uploads/audio/' . $delete->file))) {
+    //             unlink(storage_path('app/public/uploads/audio/' . $delete->file));
+    //         } elseif (file_exists(storage_path('app/public/uploads/rawphoto/' . $delete->file))) {
+    //             unlink(storage_path('app/public/uploads/rawphoto/' . $delete->file_mentah));
+    //         } elseif (file_exists(storage_path('app/public/uploads/rawvideo/' . $delete->file))) {
+    //             unlink(storage_path('app/public/uploads/rawvideo/' . $delete->file_mentah));
+    //             // } elseif (file_exists(storage_path('app/public/uploads/rawaudio/' . $delete->file))) {
+    //             //     unlink(storage_path('app/public/uploads/rawaudio/' . $delete->file_mentah));
+    //         }
+    //         $delete->delete();
+    //         return redirect()->back()->with('success', 'berhasil di hapus');
+    //     }
+    // }
 
     // public function view($id, $name)
     // {
@@ -256,11 +261,60 @@ class FrontPostController extends Controller
     // }
 
 
+
+    public function delete($slug)
+    {
+        $delete = Post::where('slug', $slug)->first();
+
+        if (!$delete) {
+            return redirect()->back()->with('error', 'Postingan tidak ditemukan.');
+        }
+
+        $filePaths = [];
+
+        if ($delete->file != '') {
+            $extension = pathinfo($delete->file, PATHINFO_EXTENSION);
+
+            if (in_array($extension, ['jpg', 'png', 'jpeg', 'gif'])) {
+                $filePaths = array_merge($filePaths, [
+                    'public/uploads/photo/' . $delete->file,
+                    'public/uploads/photo/compress/' . $delete->file,
+                    'public/uploads/rawphoto/' . $delete->file_mentah,
+                ]);
+            } elseif (in_array($extension, ['mp4', 'avi', 'mov'])) {
+                $filePaths = array_merge($filePaths, [
+                    'public/uploads/video/' . $delete->file,
+                    'public/uploads/video/thumbnail/' . $delete->thumbnail,
+                    'public/uploads/video/720p/' . $delete->q720p,
+                    'public/uploads/video/480p/' . $delete->q480p,
+                    'public/uploads/video/360p/' . $delete->q360p,
+                    'public/uploads/rawvideo/' . $delete->file_mentah,
+                ]);
+            } elseif (in_array($extension, ['mp3', 'wav'])) {
+                $filePaths = array_merge($filePaths, [
+                    'public/uploads/audio/' . $delete->file,
+                    'public/uploads/rawaudio/' . $delete->file_mentah,
+                ]);
+            }
+        }
+
+        foreach ($filePaths as $filePath) {
+            if (Storage::exists($filePath)) {
+                Storage::delete($filePath);
+            }
+        }
+
+        $delete->delete();
+        return redirect()->back()->with('success', 'Postingan dan file terkait berhasil dihapus.');
+    }
+
+
     public function edit($slug)
     {
         $edit = Post::where('slug', $slug)->first();
         $post = Post::where('slug', $slug)->first();
-        return view('frontend.Post.front_post_edit', compact('edit', 'post'));
+        $category = Category::get();
+        return view('frontend.Post.front_post_edit', compact('edit', 'post', 'category'));
     }
 
     public function update(Request $request, $slug)
@@ -566,6 +620,43 @@ class FrontPostController extends Controller
         }
         // end File 2
 
+        // Ganti Kategori
+        // $newCategory = $request->category_menu;
+        // if ($newCategory != $pilkat) {
+        //     if ($request->hasFile('file2')) {
+        //         $files2 = $request->file('file2');
+        //         $ext2 = $files2->getClientOriginalExtension();
+
+        //         if ($pilkat == 3) {
+        //             if ($newCategory == 4) {
+        //                 if (storage_path('app/public/uploads/rawphoto/' . $update->file_mentah)) {
+        //                     unlink(storage_path('app/public/uploads/rawphoto/' . $update->file_mentah));
+        //                     $update->resolution = '';
+        //                 }
+        //                 if ($ext2 == 'aep' || $ext2 == 'aepx' || $ext2 == 'prproj' || $ext2 == 'zip' || $ext2 == 'rar') {
+        //                     $final2 = 'rawvideo' . time() . '.' . $ext2;
+        //                     $request->file('file2')->move(storage_path('app/public/uploads/rawvideo'), $final2);
+        //                     $update->file_mentah = $final2;
+        //                 }
+        //                 // elseif ($ext2 == 'zip' || $ext2 == 'rar') {
+        //                 //     $final2 = 'rawvideo' . time() . '.' . $ext2;
+        //                 //     $request->file('file2')->move(storage_path('app/public/uploads/rawvideo'), $final2);
+        //                 //     $update->file_mentah = $final2;
+        //                 // }
+        //             }
+        //         } elseif ($pilkat == 4) {
+        //             if (file_exists(storage_path('app/public/uploads/rawvideo/' . $update->file_mentah))) {
+        //                 unlink(storage_path('app/public/uploads/rawvideo/' . $update->file_mentah));
+        //             }
+        //         } elseif ($pilkat == 5) {
+        //             if (file_exists(storage_path('app/public/uploads/rawaudio/' . $update->file_mentah))) {
+        //                 unlink(storage_path('app/public/uploads/rawaudio/' . $update->file_mentah));
+        //             }
+        //         }
+        //     }
+        // }
+        // end Ganti Kategori
+
         $request->validate([
             'title' => 'required',
             'body' => 'required',
@@ -573,10 +664,17 @@ class FrontPostController extends Controller
 
         ], [
             'body.required' => 'deskripsi harus diisikan',
-            'title.required' => 'title tidak boleh kosong'
+            'title.required' => 'title tidak boleh kosong',
         ]);
+        $slug = SlugService::createSlug(Post::class, 'slug', $request->title);
+        $update->slug = $slug;
         $update->name = $request->title;
+        // $update->category_id = $newCategory;
         $update->url = $request->linkyt;
+
+        $change_link = str_replace('view', 'preview', $request->linkgd);
+        $update->urlgd = $change_link;
+
         $update->body = $request->body;
         $update->update();
         return redirect()->route('post_show', [$user->name])->with('success', 'berhasil di edit');

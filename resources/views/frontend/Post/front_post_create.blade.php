@@ -10,6 +10,15 @@
                     <div class="card-body">
                         {{-- <h5 class="card-title">Card title</h5> --}}
                         <div class="container px-5 py-3">
+                            <p class="fs-3" id="icon1"><img src="{{ asset('dist_frontend/img/folder.png') }}"
+                                    alt="" class="iconps me-3">Upload File</p>
+                            <p class="fs-3" id="icon2" style="display: none"><img
+                                    src="{{ asset('dist_frontend/img/youtube.png') }}" alt=""
+                                    class="iconps me-3">Sematkan Link YouTube</p>
+                            <p class="fs-3" id="icon3" style="display: none"><img
+                                    src="{{ asset('dist_frontend/img/drive.png') }}" alt=""
+                                    class="iconps me-3">Sematkan Link Googledrive</p>
+                            <hr>
                             <form action="{{ route('post_store') }}" method="post" enctype="multipart/form-data">
                                 @csrf
 
@@ -67,6 +76,36 @@
                                     <label for="" class="form-label">Deskripsi</label>
                                     <textarea class="form-control" id="" rows="3" name="body"></textarea>
                                 </div>
+
+                                {{-- <div class="progress mt-4">
+                                    <div class="bar"></div>
+                                    <div class="percent">0%</div>
+                                </div> --}}
+
+                                <!-- Add a button to trigger the modal -->
+
+                                <!-- The modal -->
+                                <div class="modal fade" id="progressModal" tabindex="-1" role="dialog"
+                                    aria-labelledby="progressModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="progressModalLabel">Upload Progress</h5>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div id="progress">
+                                                    <div class="progress">
+                                                        <div class="progress-bar progress-bar-striped active"
+                                                            role="progressbar" style="width: 0%;">
+                                                        </div>
+                                                    </div>
+                                                    <div id="progress-status">0%</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
 
                                 <div class="text-end mt-4">
                                     <input type="submit" class="btn btn-success px-4 py-2" value="Uploads">
