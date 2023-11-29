@@ -113,54 +113,79 @@ class FrontHomeController extends Controller
 
     public function audio(Request $request)
     {
+        // $search = $request->input('search_audio');
+        // $pattern = 'audio';
+        // $post = Post::where('name', 'like', '%' . $search . '%')->Where('file', 'like', '%' . $pattern . '%')->latest()->paginate(12);
+        // $reso = Post::query()->distinct()->select('resolution')->get();
+
         $search = $request->input('search_audio');
-        $pattern = 'audio';
-        $post = Post::where('name', 'like', '%' . $search . '%')->Where('file', 'like', '%' . $pattern . '%')->latest()->paginate(12);
+        $extensions = ['mp3', 'm4a'];
+
+        $post = Post::whereHas('rCategory', function ($query) {
+            $query->where('id', 5);
+        })
+            ->where(function ($query) use ($search, $extensions) {
+                $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhere(function ($subquery) use ($search, $extensions) {
+                        $subquery->where('file', 'like', '%' . $extensions[0])
+                            ->orWhere('file', 'like', '%' . $extensions[1]);
+                    })
+                    ->orWhere('url', 'like', '%' . $search . '%')
+                    ->orWhere('urlgd', 'like', '%' . $search . '%');
+            })
+            ->latest()
+            ->with('rUser')
+            ->paginate(12);
+
         $reso = Post::query()->distinct()->select('resolution')->get();
+
         return view('frontend.home', compact('post', 'reso'));
     }
     public function detail($slug)
     {
         $page = 'detail';
         $post = Post::where('slug', $slug)->first();
-        $post2 = Post::latest()->with('rUser')->get();
+        $posts = Post::latest()->with('rUser')->get();
+        // $posts = Post::latest()->with('rUser')->paginate(12);
+        // dd($posts);
+        // die;
         $like = Like::where('post_id', $post->id)->count();
         $url = url('detail/' . $post->slug);
         $message = 'File from <a href="' . $url . '">' . $post->rUser->name . '</a> by UNP Asset';
-        return view('frontend.detailhome', compact('post', 'post2', 'like', 'url', 'message', 'page'));
+        return view('frontend.detailhome', compact('post', 'posts', 'like', 'url', 'message', 'page'));
     }
 
     public function detail_720p($slug)
     {
         $page = '720p';
         $post = Post::where('slug', $slug)->first();
-        $post2 = Post::latest()->with('rUser')->get();
+        $posts = Post::latest()->with('rUser')->get();
         $like = Like::where('post_id', $post->id)->count();
         $url = url('detail/' . $post->id . '/' . $post->rUser->name);
         $message = 'File from <a href="' . $url . '">' . $post->rUser->name . '</a> by UNP Asset';
-        return view('frontend.detailhome', compact('post', 'post2', 'like', 'url', 'message', 'page'));
+        return view('frontend.detailhome', compact('post', 'posts', 'like', 'url', 'message', 'page'));
     }
 
     public function detail_480p($slug)
     {
         $page = '480p';
         $post = Post::where('slug', $slug)->first();
-        $post2 = Post::latest()->with('rUser')->get();
+        $posts = Post::latest()->with('rUser')->get();
         $like = Like::where('post_id', $post->id)->count();
         $url = url('detail/' . $post->id . '/' . $post->rUser->name);
         $message = 'File from <a href="' . $url . '">' . $post->rUser->name . '</a> by UNP Asset';
-        return view('frontend.detailhome', compact('post', 'post2', 'like', 'url', 'message', 'page'));
+        return view('frontend.detailhome', compact('post', 'posts', 'like', 'url', 'message', 'page'));
     }
 
     public function detail_360p($slug)
     {
         $page = '360p';
         $post = Post::where('slug', $slug)->first();
-        $post2 = Post::latest()->with('rUser')->get();
+        $posts = Post::latest()->with('rUser')->get();
         $like = Like::where('post_id', $post->id)->count();
         $url = url('detail/' . $post->id . '/' . $post->rUser->name);
         $message = 'File from <a href="' . $url . '">' . $post->rUser->name . '</a> by UNP Asset';
-        return view('frontend.detailhome', compact('post', 'post2', 'like', 'url', 'message', 'page'));
+        return view('frontend.detailhome', compact('post', 'posts', 'like', 'url', 'message', 'page'));
     }
 
 

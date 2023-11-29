@@ -4,7 +4,7 @@
 
 @section('container')
     <div class="container mt-3">
-        <div class="row">
+        <div class="row justify-content-center">
             @php
                 $path_photo = asset('storage/uploads/photo/' . $post->file);
                 $extphoto = pathinfo($path_photo, PATHINFO_EXTENSION);
@@ -158,7 +158,7 @@
                 {{-- Photo lainnya --}}
                 <div class="" style="height: 10vh"></div>
                 <div class="fs-4">Lainnya...</div>
-                @foreach ($post2 as $item)
+                @foreach ($posts as $item)
                     @php
                         $path_photo = asset('storage/uploads/photo/compress/' . $item->file);
                         $extphoto = pathinfo($path_photo, PATHINFO_EXTENSION);
@@ -175,6 +175,20 @@
                                     {{-- <p>{{ $item->body }}</p> --}}
                                     <a href="{{ route('detail', [$item->slug]) }}"
                                         class="btn btn-primary btn-blue6 mt-4 btn-sm">Detail</a>
+                                </div>
+                            </div>
+                        </div>
+                    @elseif ($item->urlgd && $item->category_id == '3')
+                        <div class="col col-12 col-md-6 col-lg-3 my-2" data-aos="fade-up" data-aos-duration="1200">
+                            <div class="card-vid">
+                                <div class="vidbox">
+                                    <iframe src="{{ $item->urlgd }}" width="640" height="480"
+                                        allow="autoplay"></iframe>
+                                </div>
+                                <div class="contentvid">
+                                    <h5 class="blue6 teks">{{ $item->name }}</h5>
+                                    <a href="{{ route('detail', [$item->slug]) }}"
+                                        class="btn btn-primary mt-3 btn-blue6 btn-sm">Detail</a>
                                 </div>
                             </div>
                         </div>
@@ -295,7 +309,7 @@
                                         @if ($post->file_mentah == '')
                                         @else
                                             <a href="{{ route('download', $post->file_mentah) }}"
-                                                class="btn btn-primary btnblue1 white form-control mt-3 py-2 download-btn"
+                                                class="btn btn-primary btn-blue6 white form-control mt-3 py-2 download-btn"
                                                 data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                 <h5><i class="bi bi-download"></i>
                                                     Download
@@ -309,7 +323,7 @@
                                         @if ($post->file_mentah == '')
                                         @else
                                             {{-- Button trigger modal --}}
-                                            <a href="#" class="btn btn-primary btnblue1 white form-control mt-3 py-2"
+                                            <a href="#" class="btn btn-primary btn-blue6 white form-control mt-3 py-2"
                                                 data-bs-toggle="modal" data-bs-target="#subscribe">
                                                 <h5><i class="bi bi-download"></i> Download
                                                     {{ $extrawvideo }}</h5>
@@ -367,7 +381,7 @@
                                         {{ $like }} Like</a>
                                     @if ($post->file_mentah == '')
                                     @else
-                                        <a href="#" class="btn btn-primary btnblue1 white form-control mt-3 py-2"
+                                        <a href="#" class="btn btn-primary btn-blue6 white form-control mt-3 py-2"
                                             onclick="loginfail()">
                                             <h5><i class="bi bi-download"></i>
                                                 Download
@@ -390,7 +404,7 @@
                 {{-- Video lainnya --}}
                 <div class="" style="height: 10vh"></div>
                 <div class="fs-4">Lainnya...</div>
-                @foreach ($post2 as $item)
+                @foreach ($posts as $item)
                     @php
                         $path_video = asset('storage/uploads/video/thumbnail/' . $item->thumbnail);
                         $extvideo = pathinfo($path_video, PATHINFO_EXTENSION);
@@ -410,6 +424,34 @@
                                 </div>
                             </div>
                         </div>
+                    @elseif ($item->url)
+                        <div class="col col-12 col-md-6 col-lg-3 my-2" data-aos="fade-up" data-aos-duration="1200">
+                            <div class="card-vid">
+                                <div class="vidbox">
+                                    <x-embed url="{{ $item->url }}" aspect-ratio="4:3"
+                                        style="width: 400px; height: 300px;" />
+                                </div>
+                                <div class="contentvid">
+                                    <h5 class="blue6 teks">{{ $item->name }}</h5>
+                                    <a href="{{ route('detail', [$item->slug]) }}"
+                                        class="btn btn-primary mt-3 btn-blue6 btn-sm">Detail</a>
+                                </div>
+                            </div>
+                        </div>
+                    @elseif ($item->urlgd && $item->category_id == '4')
+                        <div class="col col-12 col-md-6 col-lg-3 my-2" data-aos="fade-up" data-aos-duration="1200">
+                            <div class="card-vid">
+                                <div class="vidbox">
+                                    <iframe src="{{ $item->urlgd }}" width="640" height="480"
+                                        allow="autoplay"></iframe>
+                                </div>
+                                <div class="contentvid">
+                                    <h5 class="blue6 teks">{{ $item->name }}</h5>
+                                    <a href="{{ route('detail', [$item->slug]) }}"
+                                        class="btn btn-primary mt-3 btn-blue6 btn-sm">Detail</a>
+                                </div>
+                            </div>
+                        </div>
                     @endif
                 @endforeach
                 {{-- end Video lainnya --}}
@@ -418,10 +460,22 @@
 
             {{-- Audio --}}
             @if ($extaudio == 'mp3' || $extaudio == 'm4a')
-                <div class="col col-12 col-lg-8">
+                <div class="col col-12 col-lg-6">
                     <div class="card shadow rounded-5">
-                        <img src="{{ asset('dist_frontend/img/audiopic.png') }}" alt=""
-                            class="img-fluid rounded-top-5">
+                        <div class="card-header container text-center">
+                            <div class="music">
+                                <span class="bar"></span>
+                                <span class="bar"></span>
+                                <span class="bar"></span>
+                                <span class="bar"></span>
+                                <span class="bar"></span>
+                                <span class="bar"></span>
+                                <span class="bar"></span>
+                                <span class="bar"></span>
+                                <span class="bar"></span>
+                                <span class="bar"></span>
+                            </div>
+                        </div>
                         <div class="card-body text-center">
                             <audio controls>
                                 @if ($extaudio == 'mp3')
@@ -473,7 +527,7 @@
                                         @if ($post->file_mentah == '')
                                         @else
                                             <a href="{{ route('download', $post->file_mentah) }}"
-                                                class="btn btn-primary btnblue1 white form-control mt-3 py-2 download-btn"
+                                                class="btn btn-primary btn-blue6 white form-control mt-3 py-2 download-btn"
                                                 data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                 <h5>
                                                     <i class="bi bi-download"></i> Download
@@ -488,7 +542,7 @@
                                         @if ($post->file_mentah == '')
                                         @else
                                             {{-- Button trigger modal --}}
-                                            <a href="#" class="btn btn-primary btnblue1 white form-control mt-3 py-2"
+                                            <a href="#" class="btn btn-primary btn-blue6 white form-control mt-3 py-2"
                                                 data-bs-toggle="modal" data-bs-target="#subscribe">
                                                 <h5>
                                                     <i class="bi bi-download"></i>
@@ -528,7 +582,7 @@
 
                                     @if ($post->file_mentah == '')
                                     @else
-                                        <a href="#" class="btn btn-primary btnblue1 white form-control mt-3 py-2"
+                                        <a href="#" class="btn btn-primary btn-blue6 white form-control mt-3 py-2"
                                             onclick="loginfail()">
                                             <h5>
                                                 <i class="bi bi-download"></i>
@@ -555,7 +609,7 @@
                 {{-- Audio lainnya --}}
                 <div class="" style="height: 10vh"></div>
                 <div class="fs-4">Lainnya...</div>
-                @foreach ($post2 as $item)
+                @foreach ($posts as $item)
                     @php
                         $path_audio = asset('storage/uploads/audio/' . $item->file);
                         $extaudio = pathinfo($path_audio, PATHINFO_EXTENSION);
@@ -565,20 +619,49 @@
                             data-aos-duration="1200">
                             <div class="card-audio">
                                 <div class="audiobox">
-                                    <img src="{{ asset('dist_frontend/img/audiopic.png') }}" alt=""
-                                        class="img-fluid">
+                                    {{-- <img src="{{ asset('dist_frontend/img/audiopic.png') }}" alt=""
+                                        class="img-fluid"> --}}
+                                    <div class="music">
+                                        <span class="bar"></span>
+                                        <span class="bar"></span>
+                                        <span class="bar"></span>
+                                        <span class="bar"></span>
+                                        <span class="bar"></span>
+                                        <span class="bar"></span>
+                                        <span class="bar"></span>
+                                        <span class="bar"></span>
+                                        <span class="bar"></span>
+                                        <span class="bar"></span>
+                                    </div>
                                 </div>
                                 <div class="contentaudio mt-2">
+                                    <h5 class="mt-2 mx-auto blue6 teks">{{ $item->name }}</h5>
                                     @if ($extaudio == 'mp3')
-                                        <audio src="{{ $path_audio }}" type="audio/mp3" controls></audio>
+                                        <audio src="{{ $path_audio }}" type="audio/mp3" controls
+                                            class="waudio"></audio>
                                     @endif
                                     @if ($extaudio == 'm4a')
-                                        <audio src="{{ $path_audio }}" type="audio/m4a" controls></audio>
+                                        <audio src="{{ $path_audio }}" type="audio/m4a" controls
+                                            class="waudio"></audio>
                                     @endif
-                                    <h5 class="blue6 mt-2 teks">{{ $item->name }}</h5>
                                     {{-- <p>{{ $item->body }}</p> --}}
                                     <a href="{{ route('detail', [$item->slug]) }}"
-                                        class="btn btn-primary btn-blue6 mt-3 btn-sm">Detail</a>
+                                        class="btn btn-primary mt-3 btn-blue6 btn-sm">Detail</a>
+                                </div>
+                            </div>
+                        </div>
+                    @elseif ($item->urlgd && $item->category_id == '5')
+                        <div class="col col-12 col-md-6 col-lg-3 my-2 d-flex justify-content-center" data-aos="fade-up"
+                            data-aos-duration="1200">
+                            <div class="card-vid">
+                                <div class="vidbox">
+                                    <iframe src="{{ $item->urlgd }}" width="640" height="480"
+                                        allow="autoplay"></iframe>
+                                </div>
+                                <div class="contentvid">
+                                    <h5 class="blue6 teks">{{ $item->name }}</h5>
+                                    <a href="{{ route('detail', [$item->slug]) }}"
+                                        class="btn btn-primary mt-3 btn-blue6 btn-sm">Detail</a>
                                 </div>
                             </div>
                         </div>
@@ -616,19 +699,48 @@
                                         @endif
                                     </div>
                                     <div class="col col-10"><a href="{{ route('profile', [$post->rUser->name]) }}"
-                                            class="fs-3 text-decoration-none text-dark">{{ $post->rUser->name }}</a></div>
+                                            class="fs-3 text-decoration-none text-dark">{{ $post->rUser->name }}</a>
+                                    </div>
                                 </div>
-                                <p class="mt-4"><i class="bi bi-tags-fill"></i> Kategori : {{ $post->rCategory->name }}
+                                <p class="mt-4"><i class="bi bi-tags-fill"></i> Kategori :
+                                    {{ $post->rCategory->name }}
                                 </p>
                                 <p><i class="bi bi-chat-square-dots-fill"></i> Title : {{ $post->name }}</p>
                                 <p><i class="bi bi-card-text"></i> Deskripsi : {{ $post->body }}</p>
-                                <p><i class="bi bi-files"></i> File Type : {{ $extvideo }}, {{ $extrawvideo }}
+                                <p><i class="bi bi-files"></i> File Type : Youtube, {{ $extrawvideo }}
                                 </p>
 
                                 @auth
                                     <a href="{{ route('like', $post->id) }}" class="text-decoration-none text-danger"><i
                                             class="bi bi-heart-fill"></i>
                                         {{ $like }} Like</a>
+                                    {{-- Login Premium --}}
+                                    @if (Auth::guard('web')->user()->role == 'premium')
+                                        @if ($post->file_mentah == '')
+                                        @else
+                                            <a href="{{ route('download', $post->file_mentah) }}"
+                                                class="btn btn-primary btn-blue6 white form-control mt-3 py-2 download-btn"
+                                                data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                <h5>
+                                                    <i class="bi bi-download"></i> Download
+                                                    {{ $extrawaudio }}
+                                                </h5>
+                                            </a>
+                                        @endif
+                                        {{-- end Login Premium --}}
+                                        {{-- Login Pending --}}
+                                    @elseif (Auth::guard('web')->user()->role == 'pending')
+                                        @if ($post->file_mentah == '')
+                                        @else
+                                            <a href="#" class="btn btn-primary btn-blue6 white form-control mt-3 py-2"
+                                                onclick="loginpending()">
+                                                <h5><i class="bi bi-download"></i>
+                                                    Download
+                                                    {{ $extrawaudio }}</h5>
+                                            </a>
+                                        @endif
+                                    @endif
+                                    {{-- end Login Pending --}}
 
                                     {{-- Tidak Login --}}
                                 @else
@@ -637,19 +749,13 @@
                                         {{ $like }} Like</a>
                                     @if ($post->file_mentah == '')
                                     @else
-                                        <a href="#" class="btn btn-primary btnblue1 white form-control mt-3 py-2"
+                                        <a href="#" class="btn btn-primary btn-blue6 white form-control mt-3 py-2"
                                             onclick="loginfail()">
                                             <h5><i class="bi bi-download"></i>
                                                 Download
                                                 {{ $extrawvideo }}</h5>
                                         </a>
                                     @endif
-                                    <a href="#" class="btn btn-success form-control mt-3 py-2" onclick="loginfail()">
-                                        <h5>
-                                            <i class="bi bi-download"></i>
-                                            Download {{ $extvideo }}
-                                        </h5>
-                                    </a>
                                 @endauth
                                 {{-- end Tidak Login --}}
 
@@ -660,7 +766,7 @@
                 {{-- Video lainnya --}}
                 <div class="" style="height: 10vh"></div>
                 <div class="fs-4">Lainnya...</div>
-                @foreach ($post2 as $item)
+                @foreach ($posts as $item)
                     @php
                         $path_video = asset('storage/uploads/video/thumbnail/' . $item->thumbnail);
                         $extvideo = pathinfo($path_video, PATHINFO_EXTENSION);
@@ -677,6 +783,36 @@
                                     {{-- <p>{{ $item->body }}</p> --}}
                                     <a href="{{ route('detail', [$item->slug]) }}"
                                         class="btn btn-primary btn-blue6 mt-4 btn-sm">Detail</a>
+                                </div>
+                            </div>
+                        </div>
+                    @elseif ($item->url)
+                        <div class="col col-12 col-md-6 col-lg-3 my-2 d-flex justify-content-center" data-aos="fade-up"
+                            data-aos-duration="1200">
+                            <div class="card-vid">
+                                <div class="vidbox">
+                                    <x-embed url="{{ $item->url }}" aspect-ratio="4:3"
+                                        style="width: 400px; height: 300px;" />
+                                </div>
+                                <div class="contentvid">
+                                    <h5 class="blue6 teks">{{ $item->name }}</h5>
+                                    <a href="{{ route('detail', [$item->slug]) }}"
+                                        class="btn btn-primary mt-3 btn-blue6 btn-sm">Detail</a>
+                                </div>
+                            </div>
+                        </div>
+                    @elseif ($item->urlgd && $item->category_id == '4')
+                        <div class="col col-12 col-md-6 col-lg-3 my-2 d-flex justify-content-center" data-aos="fade-up"
+                            data-aos-duration="1200">
+                            <div class="card-vid">
+                                <div class="vidbox">
+                                    <iframe src="{{ $item->urlgd }}" width="640" height="480"
+                                        allow="autoplay"></iframe>
+                                </div>
+                                <div class="contentvid">
+                                    <h5 class="blue6 teks">{{ $item->name }}</h5>
+                                    <a href="{{ route('detail', [$item->slug]) }}"
+                                        class="btn btn-primary mt-3 btn-blue6 btn-sm">Detail</a>
                                 </div>
                             </div>
                         </div>
@@ -722,7 +858,7 @@
                                 </p>
                                 <p><i class="bi bi-chat-square-dots-fill"></i> Title : {{ $post->name }}</p>
                                 <p><i class="bi bi-card-text"></i> Deskripsi : {{ $post->body }}</p>
-                                <p><i class="bi bi-files"></i> File Type : {{ $extvideo }}, {{ $extrawvideo }}
+                                <p><i class="bi bi-files"></i> File Type : Googledrive, {{ $extrawvideo }}
                                 </p>
 
                                 @auth
@@ -735,21 +871,6 @@
                                     <a href="#" class="text-decoration-none text-danger" onclick="loginfail()"><i
                                             class="bi bi-heart-fill"></i>
                                         {{ $like }} Like</a>
-                                    @if ($post->file_mentah == '')
-                                    @else
-                                        <a href="#" class="btn btn-primary btnblue1 white form-control mt-3 py-2"
-                                            onclick="loginfail()">
-                                            <h5><i class="bi bi-download"></i>
-                                                Download
-                                                {{ $extrawvideo }}</h5>
-                                        </a>
-                                    @endif
-                                    <a href="#" class="btn btn-success form-control mt-3 py-2" onclick="loginfail()">
-                                        <h5>
-                                            <i class="bi bi-download"></i>
-                                            Download {{ $extvideo }}
-                                        </h5>
-                                    </a>
                                 @endauth
                                 {{-- end Tidak Login --}}
 
@@ -757,32 +878,168 @@
                         </div>
                     </div>
                 </div>
-                {{-- Video lainnya --}}
+
                 <div class="" style="height: 10vh"></div>
                 <div class="fs-4">Lainnya...</div>
-                @foreach ($post2 as $item)
-                    @php
-                        $path_video = asset('storage/uploads/video/thumbnail/' . $item->thumbnail);
-                        $extvideo = pathinfo($path_video, PATHINFO_EXTENSION);
-                    @endphp
-                    @if ($extvideo == 'jpg')
-                        <div class="col col-12 col-md-6 col-lg-3 my-2 d-flex justify-content-center" data-aos="fade-up"
-                            data-aos-duration="1200">
-                            <div class="card-vid">
-                                <div class="vidbox">
-                                    <img src="{{ $path_video }}" alt="" class="img-fluid">
-                                </div>
-                                <div class="contentvid">
-                                    <h5 class="blue6 teks">{{ $item->name }}</h5>
-                                    {{-- <p>{{ $item->body }}</p> --}}
-                                    <a href="{{ route('detail', [$item->slug]) }}"
-                                        class="btn btn-primary btn-blue6 mt-4 btn-sm">Detail</a>
+                @if ($post->category_id == '3')
+                    {{-- Photo lainnya --}}
+                    @foreach ($posts as $item)
+                        @php
+                            $path_photo = asset('storage/uploads/photo/compress/' . $item->file);
+                            $extphoto = pathinfo($path_photo, PATHINFO_EXTENSION);
+                        @endphp
+                        @if ($extphoto == 'jpg' || $extphoto == 'png' || $extphoto == 'jpeg')
+                            <div class="col col-12 col-md-6 col-lg-3 my-2 d-flex justify-content-center"
+                                data-aos="fade-up" data-aos-duration="1200">
+                                <div class="card-img">
+                                    <div class="imgbox">
+                                        <img src="{{ $path_photo }}" alt="" class="img-fluid">
+                                    </div>
+                                    <div class="content">
+                                        <h5 class="blue6 teks">{{ $item->name }}</h5>
+                                        {{-- <p>{{ $item->body }}</p> --}}
+                                        <a href="{{ route('detail', [$item->slug]) }}"
+                                            class="btn btn-primary btn-blue6 mt-4 btn-sm">Detail</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @endif
-                @endforeach
-                {{-- end Video lainnya --}}
+                        @elseif ($item->urlgd && $item->category_id == '3')
+                            <div class="col col-12 col-md-6 col-lg-3 my-2 d-flex justify-content-center"
+                                data-aos="fade-up" data-aos-duration="1200">
+                                <div class="card-vid">
+                                    <div class="vidbox">
+                                        <iframe src="{{ $item->urlgd }}" width="640" height="480"
+                                            allow="autoplay"></iframe>
+                                    </div>
+                                    <div class="contentvid">
+                                        <h5 class="blue6 teks">{{ $item->name }}</h5>
+                                        <a href="{{ route('detail', [$item->slug]) }}"
+                                            class="btn btn-primary mt-3 btn-blue6 btn-sm">Detail</a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                    {{-- end Photo lainnya --}}
+                @elseif ($post->category_id == '4')
+                    {{-- Video lainnya --}}
+                    @foreach ($posts as $item)
+                        @php
+                            $path_video = asset('storage/uploads/video/thumbnail/' . $item->thumbnail);
+                            $extvideo = pathinfo($path_video, PATHINFO_EXTENSION);
+                        @endphp
+                        @if ($extvideo == 'jpg')
+                            <div class="col col-12 col-md-6 col-lg-3 my-2 d-flex justify-content-center"
+                                data-aos="fade-up" data-aos-duration="1200">
+                                <div class="card-vid">
+                                    <div class="vidbox">
+                                        <img src="{{ $path_video }}" alt="" class="img-fluid">
+                                    </div>
+                                    <div class="contentvid">
+                                        <h5 class="blue6 teks">{{ $item->name }}</h5>
+                                        {{-- <p>{{ $item->body }}</p> --}}
+                                        <a href="{{ route('detail', [$item->slug]) }}"
+                                            class="btn btn-primary btn-blue6 mt-4 btn-sm">Detail</a>
+                                    </div>
+                                </div>
+                            </div>
+                        @elseif ($item->urlgd && $item->category_id == '4')
+                            <div class="col col-12 col-md-6 col-lg-3 my-2 d-flex justify-content-center"
+                                data-aos="fade-up" data-aos-duration="1200">
+                                <div class="card-vid">
+                                    <div class="vidbox">
+                                        <iframe src="{{ $item->urlgd }}" width="640" height="480"
+                                            allow="autoplay"></iframe>
+                                    </div>
+                                    <div class="contentvid">
+                                        <h5 class="blue6 teks">{{ $item->name }}</h5>
+                                        <a href="{{ route('detail', [$item->slug]) }}"
+                                            class="btn btn-primary mt-3 btn-blue6 btn-sm">Detail</a>
+                                    </div>
+                                </div>
+                            </div>
+                        @elseif ($item->url)
+                            <div class="col col-12 col-md-6 col-lg-3 my-2 d-flex justify-content-center"
+                                data-aos="fade-up" data-aos-duration="1200">
+                                <div class="card-vid">
+                                    <div class="vidbox">
+                                        <x-embed url="{{ $item->url }}" aspect-ratio="4:3"
+                                            style="width: 400px; height: 300px;" />
+                                    </div>
+                                    <div class="contentvid">
+                                        <h5 class="blue6 teks">{{ $item->name }}</h5>
+                                        <a href="{{ route('detail', [$item->slug]) }}"
+                                            class="btn btn-primary mt-3 btn-blue6 btn-sm">Detail</a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                    {{-- end Video lainnya --}}
+                @elseif ($post->category_id == '5')
+                    {{-- Audio Lainnya --}}
+                    @foreach ($posts as $item)
+                        @php
+                            $path_audio = asset('storage/uploads/audio/' . $item->file);
+                            $extaudio = pathinfo($path_audio, PATHINFO_EXTENSION);
+                        @endphp
+                        @if ($extaudio == 'mp3' || $extaudio == 'm4a')
+                            <div class="col col-12 col-md-6 col-lg-3 my-2 d-flex justify-content-center"
+                                data-aos="fade-up" data-aos-duration="1200">
+                                <div class="card-audio">
+                                    <div class="audiobox">
+                                        {{-- <img src="{{ asset('dist_frontend/img/audiopic.png') }}" alt=""
+                                        class="img-fluid"> --}}
+                                        <div class="music">
+                                            <span class="bar"></span>
+                                            <span class="bar"></span>
+                                            <span class="bar"></span>
+                                            <span class="bar"></span>
+                                            <span class="bar"></span>
+                                            <span class="bar"></span>
+                                            <span class="bar"></span>
+                                            <span class="bar"></span>
+                                            <span class="bar"></span>
+                                            <span class="bar"></span>
+                                        </div>
+                                    </div>
+                                    <div class="contentaudio mt-2">
+                                        <h5 class="mt-2 mx-auto blue6 teks">{{ $item->name }}</h5>
+                                        @if ($extaudio == 'mp3')
+                                            <audio src="{{ $path_audio }}" type="audio/mp3" controls
+                                                class="waudio"></audio>
+                                        @endif
+                                        @if ($extaudio == 'm4a')
+                                            <audio src="{{ $path_audio }}" type="audio/m4a" controls
+                                                class="waudio"></audio>
+                                        @endif
+                                        {{-- <p>{{ $item->body }}</p> --}}
+                                        <a href="{{ route('detail', [$item->slug]) }}"
+                                            class="btn btn-primary mt-3 btn-blue6 btn-sm">Detail</a>
+                                    </div>
+                                </div>
+                            </div>
+                        @elseif ($item->urlgd && $item->category_id == '5')
+                            <div class="col col-12 col-md-6 col-lg-3 my-2 d-flex justify-content-center"
+                                data-aos="fade-up" data-aos-duration="1200">
+                                <div class="card-vid">
+                                    <div class="vidbox">
+                                        <iframe src="{{ $item->urlgd }}" width="640" height="480"
+                                            allow="autoplay"></iframe>
+                                    </div>
+                                    <div class="contentvid">
+                                        <h5 class="blue6 teks">{{ $item->name }}</h5>
+                                        <a href="{{ route('detail', [$item->slug]) }}"
+                                            class="btn btn-primary mt-3 btn-blue6 btn-sm">Detail</a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                    {{-- end Audio Lainnya --}}
+                @endif
+
+                {{-- {{ $posts->links() }} --}}
             @endif
             {{-- end Googledrive --}}
         </div>
@@ -843,6 +1100,31 @@
                             value="{{ $message }}" id="salin">
                         <button class="btn btn-outline-secondary" type="button" id="button-addon2"
                             onclick="copyText()"><i class="bi bi-files"></i></button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3-->
+    <div class="modal fade" id="modalCopy" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    {{-- <img src="{{ asset('dist_frontend/img/UNP Asset.png') }}" alt="" width="200px"> --}}
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col col-12 mt-2">
+                            <p class="fs-3 text-center">
+                                <span class="text-success fw-bold"><i class="bi bi-check-circle-fill"></i></span>
+                                Berhasil menyalin
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

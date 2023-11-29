@@ -35,7 +35,9 @@
         var copyText = document.getElementById("salin");
         copyText.select();
         document.execCommand("copy");
-        alert("Teks berhasil dicopy");
+        $('#exampleModal').modal('hide');
+        $('#modalCopy').modal('show');
+        // alert("Teks berhasil dicopy");
     }
 </script>
 {{-- end copy --}}

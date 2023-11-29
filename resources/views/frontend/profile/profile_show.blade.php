@@ -97,25 +97,22 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        @elseif ($item->urlgd)
-                                                            @if ($item->category_id == '3')
-                                                                <div class="col col-12 col-md-4 my-2 d-flex justify-content-center"
-                                                                    data-aos="fade-up" data-aos-duration="1200">
-                                                                    <div class="card-img2">
-                                                                        <div class="imgbox2">
-                                                                            <iframe src="{{ $item->urlgd }}"
-                                                                                width="640" height="480"
-                                                                                allow="autoplay"></iframe>
-                                                                        </div>
-                                                                        <div class="content2">
-                                                                            <h5 class="blue6 teks2">{{ $item->name }}
-                                                                            </h5>
-                                                                            <a href="{{ route('detail', [$item->slug]) }}"
-                                                                                class="btn btn-primary mt-2 btn-blue6 btn-sm">Detail</a>
-                                                                        </div>
+                                                        @elseif ($item->urlgd && $item->category_id == '3')
+                                                            <div class="col col-12 col-md-4 my-2 d-flex justify-content-center"
+                                                                data-aos="fade-up" data-aos-duration="1200">
+                                                                <div class="card-vid2">
+                                                                    <div class="vidbox2">
+                                                                        <iframe src="{{ $item->urlgd }}" width="640"
+                                                                            height="480" allow="autoplay"></iframe>
+                                                                    </div>
+                                                                    <div class="contentvid2">
+                                                                        <h5 class="blue6 teks2">{{ $item->name }}
+                                                                        </h5>
+                                                                        <a href="{{ route('detail', [$item->slug]) }}"
+                                                                            class="btn btn-primary mt-2 btn-blue6 btn-sm">Detail</a>
                                                                     </div>
                                                                 </div>
-                                                            @endif
+                                                            </div>
                                                         @endif
                                                     @endforeach
 
@@ -159,25 +156,22 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        @elseif ($item->urlgd)
-                                                            @if ($item->category_id == '4')
-                                                                <div class="col col-12 col-md-4 my-2 d-flex justify-content-center"
-                                                                    data-aos="fade-up" data-aos-duration="1200">
-                                                                    <div class="card-vid2">
-                                                                        <div class="vidbox2">
-                                                                            <iframe src="{{ $item->urlgd }}"
-                                                                                width="640" height="480"
-                                                                                allow="autoplay"></iframe>
-                                                                        </div>
-                                                                        <div class="contentvid2">
-                                                                            <h5 class="blue6 teks2">{{ $item->name }}
-                                                                            </h5>
-                                                                            <a href="{{ route('detail', [$item->slug]) }}"
-                                                                                class="btn btn-primary mt-2 btn-blue6 btn-sm">Detail</a>
-                                                                        </div>
+                                                        @elseif ($item->urlgd && $item->category_id == '4')
+                                                            <div class="col col-12 col-md-4 my-2 d-flex justify-content-center"
+                                                                data-aos="fade-up" data-aos-duration="1200">
+                                                                <div class="card-vid2">
+                                                                    <div class="vidbox2">
+                                                                        <iframe src="{{ $item->urlgd }}" width="640"
+                                                                            height="480" allow="autoplay"></iframe>
+                                                                    </div>
+                                                                    <div class="contentvid2">
+                                                                        <h5 class="blue6 teks2">{{ $item->name }}
+                                                                        </h5>
+                                                                        <a href="{{ route('detail', [$item->slug]) }}"
+                                                                            class="btn btn-primary mt-2 btn-blue6 btn-sm">Detail</a>
                                                                     </div>
                                                                 </div>
-                                                            @endif
+                                                            </div>
                                                         @endif
                                                     @endforeach
                                                 </div>
@@ -194,10 +188,23 @@
                                                                 data-aos="fade-up" data-aos-duration="1200">
                                                                 <div class="card-audio2">
                                                                     <div class="audiobox2">
-                                                                        <img src="{{ asset('dist_frontend/img/audiopic.png') }}"
-                                                                            alt="">
+                                                                        <div class="music">
+                                                                            <span class="bar"></span>
+                                                                            <span class="bar"></span>
+                                                                            <span class="bar"></span>
+                                                                            <span class="bar"></span>
+                                                                            <span class="bar"></span>
+                                                                            <span class="bar"></span>
+                                                                            <span class="bar"></span>
+                                                                            <span class="bar"></span>
+                                                                            <span class="bar"></span>
+                                                                            <span class="bar"></span>
+                                                                        </div>
                                                                     </div>
                                                                     <div class="contentaudio2 mt-2">
+                                                                        <h5 class="mt-2 mx-auto blue6 teks2">
+                                                                            {{ $item->name }}
+                                                                        </h5>
                                                                         @if ($extaudio == 'mp3')
                                                                             <audio src="{{ $path_audio }}"
                                                                                 type="audio/mp3" controls
@@ -208,34 +215,28 @@
                                                                                 type="audio/m4a" controls
                                                                                 class="waudio"></audio>
                                                                         @endif
-                                                                        <h5 class="mt-2 blue6 teks2">
-                                                                            {{ $item->name }}
-                                                                        </h5>
                                                                         {{-- <p>{{ $item->body }}</p> --}}
                                                                         <a href="{{ route('detail', [$item->slug]) }}"
-                                                                            class="btn btn-primary mt-3 btn-blue6 btn-sm">Detail</a>
+                                                                            class="btn btn-primary mt-1 btn-blue6 btn-sm">Detail</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        @elseif ($item->urlgd)
-                                                            @if ($item->category_id == '5')
-                                                                <div class="col col-12 col-md-4 my-2 d-flex justify-content-center"
-                                                                    data-aos="fade-up" data-aos-duration="1200">
-                                                                    <div class="card-vid2">
-                                                                        <div class="vidbox2">
-                                                                            <iframe src="{{ $item->urlgd }}"
-                                                                                width="640" height="480"
-                                                                                allow="autoplay"></iframe>
-                                                                        </div>
-                                                                        <div class="contentvid2">
-                                                                            <h5 class="blue6 teks2">{{ $item->name }}
-                                                                            </h5>
-                                                                            <a href="{{ route('detail', [$item->slug]) }}"
-                                                                                class="btn btn-primary mt-2 btn-blue6 btn-sm">Detail</a>
-                                                                        </div>
+                                                        @elseif ($item->urlgd && $item->category_id == '5')
+                                                            <div class="col col-12 col-md-4 my-2 d-flex justify-content-center"
+                                                                data-aos="fade-up" data-aos-duration="1200">
+                                                                <div class="card-vid2">
+                                                                    <div class="vidbox2">
+                                                                        <iframe src="{{ $item->urlgd }}" width="640"
+                                                                            height="480" allow="autoplay"></iframe>
+                                                                    </div>
+                                                                    <div class="contentvid2">
+                                                                        <h5 class="blue6 teks2">{{ $item->name }}
+                                                                        </h5>
+                                                                        <a href="{{ route('detail', [$item->slug]) }}"
+                                                                            class="btn btn-primary mt-2 btn-blue6 btn-sm">Detail</a>
                                                                     </div>
                                                                 </div>
-                                                            @endif
+                                                            </div>
                                                         @endif
                                                     @endforeach
                                                 </div>

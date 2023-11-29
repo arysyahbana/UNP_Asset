@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg menu-color2 shadow-lg">
+<nav class="navbar sticky-top navbar-expand-lg menu-color2 shadow-lg">
     <div class="container justify-content-center text-center p-3">
         <div class="col col-12 col-lg-3 pt-2 pt-md-0 pt-lg-0">
             <a href="{{ route('home') }}" class="text-decoration-none fs-5 {{ Request::is('/') ? 'white' : 'blue5' }}"><i

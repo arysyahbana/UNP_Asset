@@ -1,6 +1,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
 </script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 {{-- dark mode --}}
 <script>
     /*!
@@ -313,32 +314,47 @@
 {{-- end upload link --}}
 
 {{-- Ajax Jquery --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
     integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 {{-- end Ajax Jquery --}}
 
 {{-- Progress bar --}}
-{{-- <script>
-    $(document).ready(function() {
-        var bar = $('.bar');
-        var percent = $('.percent');
+<script>
+    $(function() {
+        $('#uploadForm').on('submit', function(e) {
+            e.preventDefault();
 
-        $('form').ajaxForm({
-            beforeSend: function() {
-                var percentVal = '0%';
-                bar.width(percentVal);
-                percent.html(percentVal);
-            },
-            uploadProgress: function(event, position, total, percentComplete) {
-                var percentVal = percentComplete + '%';
-                bar.width(percentVal);
-                percent.html(percentVal);
-            },
-            complete: function() {
-                alert('File telah diupload');
-            }
+            var formData = new FormData();
+            formData.append('title', $('input[name="title"]').val());
+            formData.append('body', $('input[name="body"]').val());
+            formData.append('file', $('input[name="file"]')[0].files[0]);
+
+            axios.post("{{ route('post_store') }}", formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    },
+                    onUploadProgress: function(progressEvent) {
+                        var percentCompleted = Math.round((progressEvent.loaded * 100) /
+                            progressEvent.total);
+                        $('.progress-bar').attr('style', 'width:' + percentCompleted + '%');
+                    }
+                })
+                .then(response => {
+                    console.log(response);
+                    let src = response.data.file_url;
+                })
+                .catch(error => {
+                    console.error(error);
+                    if (error.response && error.response.status == 422) {
+                        alert("Terjadi kesalahan validasi. Periksa kembali input Anda.");
+                        console.log(error.response.data.errors);
+                    } else {
+                        alert("Terjadi kesalahan saat mengunggah file.");
+                    }
+                });
+
         });
     });
-</script> --}}
+</script>
 {{-- end Progress bar --}}

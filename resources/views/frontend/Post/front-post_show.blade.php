@@ -19,7 +19,8 @@
                 @endphp
                 {{-- Photo --}}
                 @if ($extphoto == 'jpg' || $extphoto == 'png' || $extphoto == 'jpeg')
-                    <div class="col col-12 col-md-6 col-lg-3 my-2" data-aos="fade-up" data-aos-duration="1200">
+                    <div class="col col-12 col-md-6 col-lg-3 my-2 d-flex justify-content-center" data-aos="fade-up"
+                        data-aos-duration="1200">
                         <div class="card-img">
                             <div class="imgbox">
                                 <img src="{{ $path_photo }}" alt="" class="img-fluid">
@@ -41,7 +42,8 @@
 
                 {{-- Video --}}
                 @if ($extvideo == 'jpg')
-                    <div class="col col-12 col-md-6 col-lg-3 my-2" data-aos="fade-up" data-aos-duration="1200">
+                    <div class="col col-12 col-md-6 col-lg-3 my-2 d-flex justify-content-center" data-aos="fade-up"
+                        data-aos-duration="1200">
                         <div class="card-vid">
                             <div class="vidbox">
                                 <img src="{{ $path_video }}" alt="" class="img-fluid">
@@ -71,19 +73,32 @@
 
                 {{-- Audio --}}
                 @if ($extaudio == 'mp3' || $extaudio == 'm4a')
-                    <div class="col col-12 col-md-6 col-lg-3 my-2" data-aos="fade-up" data-aos-duration="1200">
+                    <div class="col col-12 col-md-6 col-lg-3 my-2 d-flex justify-content-center" data-aos="fade-up"
+                        data-aos-duration="1200">
                         <div class="card-audio">
                             <div class="audiobox">
-                                <img src="{{ asset('dist_frontend/img/audiopic.png') }}" alt="">
+                                {{-- <img src="{{ asset('dist_frontend/img/audiopic.png') }}" alt=""> --}}
+                                <div class="music">
+                                    <span class="bar"></span>
+                                    <span class="bar"></span>
+                                    <span class="bar"></span>
+                                    <span class="bar"></span>
+                                    <span class="bar"></span>
+                                    <span class="bar"></span>
+                                    <span class="bar"></span>
+                                    <span class="bar"></span>
+                                    <span class="bar"></span>
+                                    <span class="bar"></span>
+                                </div>
                             </div>
                             <div class="contentaudio my-2">
+                                <h5 class="blue6 mx-auto teks">{{ $item->name }}</h5>
                                 @if ($extaudio == 'mp3')
-                                    <audio src="{{ $path_audio }}" type="audio/mp3" controls></audio>
+                                    <audio src="{{ $path_audio }}" type="audio/mp3" controls class="waudio"></audio>
                                 @endif
                                 @if ($extaudio == 'm4a')
-                                    <audio src="{{ $path_audio }}" type="audio/m4a" controls></audio>
+                                    <audio src="{{ $path_audio }}" type="audio/m4a" controls class="waudio"></audio>
                                 @endif
-                                <h5 class="blue6 teks">{{ $item->name }}</h5>
                                 {{-- <p>{{ $item->body }}</p> --}}
                                 <a href="{{ route('detail', [$item->slug]) }}" class="btn btn-primary btn-sm mt-3">View</a>
                                 <a href="{{ route('post_edit', $item->slug) }}"
@@ -99,7 +114,8 @@
 
                 {{-- Youtube --}}
                 @if ($item->url)
-                    <div class="col col-12 col-md-6 col-lg-3 my-2" data-aos="fade-up" data-aos-duration="1200">
+                    <div class="col col-12 col-md-6 col-lg-3 my-2 d-flex justify-content-center" data-aos="fade-up"
+                        data-aos-duration="1200">
                         <div class="card-vid">
                             <div class="vidbox">
                                 <x-embed url="{{ $item->url }}" aspect-ratio="4:3"
@@ -120,7 +136,8 @@
                 {{-- end Youtube --}}
                 {{-- GoogleDrive --}}
                 @if ($item->urlgd)
-                    <div class="col col-12 col-md-6 col-lg-3 my-2" data-aos="fade-up" data-aos-duration="1200">
+                    <div class="col col-12 col-md-6 col-lg-3 my-2 d-flex justify-content-center" data-aos="fade-up"
+                        data-aos-duration="1200">
                         <div class="card-vid">
                             <div class="vidbox">
                                 <iframe src="{{ $item->urlgd }}" width="640" height="480" allow="autoplay"></iframe>

@@ -19,7 +19,8 @@
                                     src="{{ asset('dist_frontend/img/drive.png') }}" alt=""
                                     class="iconps me-3">Sematkan Link Googledrive</p>
                             <hr>
-                            <form action="{{ route('post_store') }}" method="post" enctype="multipart/form-data">
+                            <form action="{{ route('post_store') }}" method="post" enctype="multipart/form-data"
+                                id="uploadForm">
                                 @csrf
 
                                 <div class="mb-4 icon" id="uplink">
@@ -36,33 +37,33 @@
 
                                 <div class="mb-4">
                                     <label for="exampleFormControlInput1" class="form-label">Judul</label>
-                                    <input class="form-control form-control-md" type="text"
+                                    <input class="form-control form-control-sm" type="text"
                                         aria-label=".form-control-lg example" name="title">
                                 </div>
 
                                 <div class="mb-4" id="input1">
                                     <label for="" class="form-label">Masukkan file</label>
-                                    <input class="form-control" type="file" name="file">
+                                    <input class="form-control form-control-sm" type="file" name="file">
                                 </div>
 
                                 <div class="mb-4" id="input2" style="display: none">
                                     <label for="" class="form-label">Masukkan link youtube</label>
-                                    <input class="form-control" type="text" name="linkyt">
+                                    <input class="form-control form-control-sm" type="text" name="linkyt">
                                 </div>
 
                                 <div class="mb-4" id="input3" style="display: none">
                                     <label for="" class="form-label">Masukkan link googledrive</label>
-                                    <input class="form-control" type="text" name="linkgd">
+                                    <input class="form-control form-control-sm" type="text" name="linkgd">
                                 </div>
 
                                 <div class="mb-4" id="input4">
                                     <label for="" class="form-label">Masukkan file project</label>
-                                    <input class="form-control" type="file" name="file2">
+                                    <input class="form-control form-control-sm" type="file" name="file2">
                                 </div>
 
                                 <div class="form-group mb-3" id="input5">
                                     <label>Kategori</label>
-                                    <select name="category_menu" class="form-select" id="category_menu">
+                                    <select name="category_menu" class="form-select form-select-sm" id="category_menu">
                                         <option>Pilih Menu...</option>
                                         @foreach ($category as $item)
                                             <option value="{{ $item->id }}">
@@ -74,38 +75,15 @@
 
                                 <div class="mt-4">
                                     <label for="" class="form-label">Deskripsi</label>
-                                    <textarea class="form-control" id="" rows="3" name="body"></textarea>
+                                    <textarea class="form-control form-control-lg" id="" rows="3" name="body"></textarea>
                                 </div>
 
-                                {{-- <div class="progress mt-4">
-                                    <div class="bar"></div>
-                                    <div class="percent">0%</div>
-                                </div> --}}
-
-                                <!-- Add a button to trigger the modal -->
-
-                                <!-- The modal -->
-                                <div class="modal fade" id="progressModal" tabindex="-1" role="dialog"
-                                    aria-labelledby="progressModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="progressModalLabel">Upload Progress</h5>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div id="progress">
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-bar-striped active"
-                                                            role="progressbar" style="width: 0%;">
-                                                        </div>
-                                                    </div>
-                                                    <div id="progress-status">0%</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="clearfif"></div>
+                                <div class="progress mt-3" role="progressbar" aria-label="Animated striped example"
+                                    aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"></div>
                                 </div>
-
+                                <div class="clearfix"></div>
 
                                 <div class="text-end mt-4">
                                     <input type="submit" class="btn btn-success px-4 py-2" value="Uploads">

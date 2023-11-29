@@ -60,20 +60,22 @@ class FrontProfileController extends Controller
                 $file = $request->file('foto_profil');
                 $ext = $file->getClientOriginalExtension();
 
-                if (storage_path('app/public/uploads/photo/profil/' . $update->file == '')) {
-                    if ($ext == 'png' || $ext == 'jpg' || $ext == 'jpeg') {
-                        $ext = $request->file('foto_profil')->extension();
-                        $final = 'photo' . time() . '.' . $ext;
+                if ($update->foto_profil == '') {
+                    if (storage_path('app/public/uploads/photo/profil')) {
+                        if ($ext == 'png' || $ext == 'jpg' || $ext == 'jpeg') {
+                            $ext = $request->file('foto_profil')->extension();
+                            $final = 'profil' . time() . '.' . $ext;
 
-                        // menyimpan gambar asli
-                        $request->file('foto_profil')->move(storage_path('app/public/uploads/photo/profil/'), $final);
-                        $update->foto_profil = $final;
+                            // menyimpan gambar asli
+                            $request->file('foto_profil')->move(storage_path('app/public/uploads/photo/profil/'), $final);
+                            $update->foto_profil = $final;
+                        }
                     }
-                } elseif (storage_path('app/public/uploads/photo/profil/' . $update->file)) {
-                    unlink(storage_path('app/public/uploads/photo/profil/' . $update->file));
+                } elseif ($update->foto_profil) {
+                    unlink(storage_path('app/public/uploads/photo/profil/' . $update->foto_profil));
                     if ($ext == 'png' || $ext == 'jpg' || $ext == 'jpeg') {
                         $ext = $request->file('foto_profil')->extension();
-                        $final = 'photo' . time() . '.' . $ext;
+                        $final = 'profil' . time() . '.' . $ext;
 
                         // menyimpan gambar asli
                         $request->file('foto_profil')->move(storage_path('app/public/uploads/photo/profil'), $final);

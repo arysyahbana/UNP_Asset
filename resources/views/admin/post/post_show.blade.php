@@ -20,7 +20,7 @@
                                         <th>Category Name</th>
                                         <th>Username</th>
                                         <th>Postname</th>
-                                        <th>image</th>
+                                        <th>Post</th>
 
                                         <th>Action</th>
                                     </tr>
@@ -44,6 +44,10 @@
                                             <td>{{ $post->rUser->name }}</td>
                                             <td>{{ $post->name }}</td>
                                             <td>
+                                                {{-- <x-embed url="{{ $post->url }}" aspect-ratio="4:3"
+                                                    style="width: 400px; height: 300px;" /> --}}
+                                                <iframe src="{{ $post->urlgd }}" width="640" height="480"
+                                                    allow="autoplay"></iframe>
                                                 <img src="{{ $path_photo }}" alt="" class="img-fluid">
                                                 <img src="{{ $path_video }}" alt="" class="img-fluid">
                                                 @if ($extaudio == 'mp3')
